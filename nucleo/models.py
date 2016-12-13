@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from autoslug import AutoSlugField
 
 # Create your models here.
 
 class Tag(models.Model):
     tag = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = AutoSlugField(populate_from='tag')
     help_text = 'Etiqueta para configuraciòn de URL.'
-
 
     def __str__(self):
         return self.tag
@@ -18,9 +18,8 @@ class Tag(models.Model):
 
 class Pais(models.Model):
     pais = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='pais')
     codigo = models.SlugField(max_length=2, unique=True)
-
 
     def __str__(self):
         return self.pais
@@ -33,9 +32,8 @@ class Pais(models.Model):
 
 class Estado(models.Model):
     estado = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
+    slug = AutoSlugField(populate_from='estado')
     pais = models.ForeignKey(Pais)
-
 
     def __str__(self):
         return "{} : {}".format(self.pais, self.estado)
@@ -47,10 +45,8 @@ class Estado(models.Model):
 
 class Ciudad(models.Model):
     ciudad = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
+    slug = AutoSlugField(populate_from='ciudad')
     estado = models.ForeignKey(Estado)
-    # pais = models.ForeignKey(Pais)  # el pais se puede calcular a partir del estado
-
 
     def __str__(self):
         return "{} : {} ".format(self.estado, self.ciudad)
@@ -63,18 +59,14 @@ class Ciudad(models.Model):
 
 class Ubicacion(models.Model):
     direccion1 = models.CharField('Dirección', max_length=255)
-    direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255) #este deberia poder ser null
-    slug = models.SlugField(max_length=255)
-    # pais = models.ForeignKey(Pais)      # parece que estos dos campos se pueden calcular a partir de los padres de ciudad
-    # estado = models.ForeignKey(Estado)  # y estado respectivapente.
+    direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255)
+    slug = AutoSlugField(populate_from='direccion1')
     ciudad = models.ForeignKey(Ciudad)
     codigo_postal = models.IntegerField()
     telefono = models.SlugField(max_length=20)
 
-
     def __str__(self):
         return "{} : {} : {}".format(self.direccion1, self.direccion2, self.ciudad)
-
 
     class Meta:
         unique_together = ('direccion1', 'direccion2', 'ciudad')
@@ -82,9 +74,8 @@ class Ubicacion(models.Model):
 
 class Institucion(models.Model):
     institucion = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255)
+    slug = AutoSlugField(populate_from='institucion')
     ubicacion = models.ForeignKey(Ubicacion)
-
 
     def __str__(self):
         return self.institucion
@@ -96,10 +87,9 @@ class Institucion(models.Model):
 
 class Dependencia(models.Model):
     dependencia = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = AutoSlugField(populate_from='dependencia')
     institucion = models.ForeignKey(Institucion)
     ubicacion = models.ForeignKey(Ubicacion)
-
 
     def __str__(self):
         return "{} : {}".format(self.institucion, self.dependencia)
@@ -111,20 +101,15 @@ class Dependencia(models.Model):
 
 class Cargo(models.Model):
     cargo = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
-    #institucion = models.ForeignKey(Institucion)
-    dependencia = models.ForeignKey(Dependencia)
+    slug = AutoSlugField(populate_from='cargo')
 
     def __str__(self):
-        return "[{}] : {}".format(self.cargo, self.dependencia)
-
-    class Meta:
-        unique_together = ('cargo', 'dependencia')
+        return self.cargo
 
 
 class Entidad(models.Model):
     entidad = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = AutoSlugField(populate_from='entidad')
     dependencia = models.ForeignKey(Dependencia)
 
     def __str__(self):
@@ -135,30 +120,31 @@ class Entidad(models.Model):
         verbose_name_plural = 'Entidades'
 
 
-class ComisionAcademica(models.Model):
-    comision_academica = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True)
-    dependencia = models.ForeignKey(Dependencia)
+class Comision(models.Model):
+    comision = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='comision')
 
     def __str__(self):
-        return "[{}] : {}".format(self.comision_academica, self.dependencia)
+        return self.comision
 
     class Meta:
-        verbose_name_plural = 'Comisiones académicas'
+        verbose_name_plural = 'Comisiones'
 
 
-class ComisionEvaluacion(models.Model):
-    comision_evaluacion = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True)
-    dependencia = models.ForeignKey(Dependencia)
-
-    def __str__(self):
-        return "[{}] : {}".format(self.comision_evaluacion, self.dependencia)
-
-    class Meta:
-        verbose_name_plural = 'Comisiones de evaluación'
 
 
+
+
+
+
+
+
+
+
+
+
+
+"""
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -174,3 +160,4 @@ class Usuario(models.Model):
 
     def __str__(self):
         return "{} : {} {} {}".format(self.user, self.nombre, self.nombre, self.apellido_paterno, self.apellido_materno)
+"""

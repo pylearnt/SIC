@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from autoslug import AutoSlugField
+from datetime import datetime, date, time
 from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo, Entidad, \
-    ComisionAcademica, ComisionEvaluacion
+    Comision
+
 
 # Create your models here.
 
@@ -20,49 +23,43 @@ class Actividad(models.Model):
         return "[{}] : {}".format(self.actividad, self.ubicacion)
 
     class Meta:
-        verbose_name_plural = 'Actividades'
+        verbose_name_plural = 'Actividades de Apoyo Institucional'
 
 
-class CargoApoyoInstitucional(models.Model):
+class CargoAcademicoAdministrativo(models.Model):
     cargo = models.ForeignKey(Cargo)
-    slug = models.SlugField(max_length=255)
     user = models.ForeignKey(User)
+    dependencia = models.ForeignKey(Dependencia)
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
 
+    slug = AutoSlugField(populate_from='cargo', unique_with=('cargo', 'user', 'dependencia', 'cargo_inicio'), unique=True)
+
     def __str__(self):
-        return "[{}] : {} : {} : {}".format(self.user, self.cargo, self.cargo_inicio, self.cargo_fin)
+        return "[ {} : {} ] : {} : {} : {} : {}".format(self.user, self.cargo, self.dependencia.dependencia, self.dependencia.institucion, self.cargo_inicio, self.cargo_fin)
 
     class Meta:
-        verbose_name_plural = 'Cargos Apoyo Institucional'
+        verbose_name_plural = 'Cargos Académico-Administrativos'
+        unique_together = ('cargo', 'user', 'dependencia', 'cargo_inicio')
 
 
-class ComisionAcademicaApoyoInstitucional(models.Model):
-    comision_academica = models.ForeignKey(ComisionAcademica)
-    slug = models.SlugField(max_length=255)
+class ComisionApoyoInstitucional(models.Model):
+    comision = models.ForeignKey(Comision)
     user = models.ForeignKey(User)
-    comision_academica_inicio = models.DateField(auto_now=False)
-    comision_academica_fin = models.DateField(auto_now=False)
+    dependencia = models.ForeignKey(Dependencia)
+    es_academica = models.BooleanField(default=False)
+    comision_inicio = models.DateField(auto_now=False)
+    comision_fin = models.DateField(auto_now=False)
+
+    slug = AutoSlugField(populate_from='comision', unique_with=('comision', 'user', 'dependencia', 'comision_inicio'), unique =True)
 
     def __str__(self):
-        return "[{}] : {} : {} : {}".format(self.user, self.comision_academica, self.comision_academica_inicio, self.comision_academica_fin)
+        return "[{}] : {} : {} : {}".format(self.user, self.comision, self.comision_inicio, self.comision_fin)
 
     class Meta:
-        verbose_name_plural = 'Comisiónes Académicas de Apoyo Institucional'
+        verbose_name_plural = 'Comisiones de Apoyo Institucional'
+        unique_together = ('comision', 'user', 'dependencia', 'comision_inicio')
 
-
-class ComisionEvaluacionApoyoInstitucional(models.Model):
-    comision_evaluacion = models.ForeignKey(ComisionEvaluacion)
-    slug = models.SlugField(max_length=255)
-    user = models.ForeignKey(User)
-    comision_evaluacion_inicio = models.DateField(auto_now=False)
-    comision_evaluacion_fin = models.DateField(auto_now=False)
-
-    def __str__(self):
-        return "[{}] : {} : {} : {}".format(self.user, self.comision_evaluacion, self.comision_evaluacion_inicio, self.comision_evaluacion_fin)
-
-    class Meta:
-        verbose_name_plural = 'Comisiónes de Evaluación de Apoyo Institucional'
 
 class Representante(models.Model):
     cargo = models.ForeignKey(Cargo)
