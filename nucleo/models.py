@@ -108,13 +108,16 @@ class Dependencia(models.Model):
 
 
 class Cargo(models.Model):
-    cargo = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True)
+    cargo = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
     #institucion = models.ForeignKey(Institucion)
     dependencia = models.ForeignKey(Dependencia)
 
     def __str__(self):
         return "[{}] : {}".format(self.cargo, self.dependencia)
+
+    class Meta:
+        unique_together = ('cargo', 'slug', 'dependencia')
 
 class ComisionAcademica(models.Model):
     comision_academica = models.CharField(max_length=255)
