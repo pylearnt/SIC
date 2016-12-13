@@ -101,21 +101,43 @@ class Dependencia(models.Model):
 
 
     def __str__(self):
-        return self.dependencia
+        return "{} : {}".format(self.institucion, self.dependencia)
 
     class Meta:
         unique_together = ('dependencia', 'slug', 'institucion')
 
 
 class Cargo(models.Model):
-    cargo = models.CharField(max_length=255)
-    slug = models.SlugField()
-    institucion = models.ForeignKey(Institucion)
+    cargo = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
+    #institucion = models.ForeignKey(Institucion)
     dependencia = models.ForeignKey(Dependencia)
 
     def __str__(self):
-        return self.cargo
+        return "[{}] : {}".format(self.cargo, self.dependencia)
 
+class ComisionAcademica(models.Model):
+    comision_academica = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "[{}] : {}".format(self.comision_academica, self.dependencia)
+
+    class Meta:
+        verbose_name_plural = 'Comisiones de académicas'
+
+
+class ComisionEvaluacion(models.Model):
+    comision_evaluacion = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "[{}] : {}".format(self.comision_evaluacion, self.dependencia)
+
+    class Meta:
+        verbose_name_plural = 'Comisiones de evaluación'
 
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
