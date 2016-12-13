@@ -2,7 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from . models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Usuario, Cargo, ComisionAcademica, ComisionEvaluacion
+from . models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Usuario, Cargo, Entidad,\
+    ComisionAcademica, ComisionEvaluacion
 
 admin.site.register(Tag)
 admin.site.register(Pais)
@@ -13,6 +14,7 @@ admin.site.register(Institucion)
 admin.site.register(Dependencia)
 admin.site.register(Usuario)
 admin.site.register(Cargo)
+admin.site.register(Entidad)
 admin.site.register(ComisionAcademica)
 admin.site.register(ComisionEvaluacion)
 

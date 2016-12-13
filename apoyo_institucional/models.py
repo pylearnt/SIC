@@ -1,13 +1,13 @@
 from django.db import models
-
-from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo, ComisionAcademica, ComisionEvaluacion
 from django.contrib.auth.models import User
+from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo, Entidad, \
+    ComisionAcademica, ComisionEvaluacion
 
 # Create your models here.
 
 class Actividad(models.Model):
     actividad = models.CharField(max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=255)
     descripcion = models.TextField()
     ubicacion = models.ForeignKey(Ubicacion)
 
@@ -25,6 +25,7 @@ class Actividad(models.Model):
 
 class CargoApoyoInstitucional(models.Model):
     cargo = models.ForeignKey(Cargo)
+    slug = models.SlugField(max_length=255)
     user = models.ForeignKey(User)
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
@@ -38,6 +39,7 @@ class CargoApoyoInstitucional(models.Model):
 
 class ComisionAcademicaApoyoInstitucional(models.Model):
     comision_academica = models.ForeignKey(ComisionAcademica)
+    slug = models.SlugField(max_length=255)
     user = models.ForeignKey(User)
     comision_academica_inicio = models.DateField(auto_now=False)
     comision_academica_fin = models.DateField(auto_now=False)
@@ -51,6 +53,7 @@ class ComisionAcademicaApoyoInstitucional(models.Model):
 
 class ComisionEvaluacionApoyoInstitucional(models.Model):
     comision_evaluacion = models.ForeignKey(ComisionEvaluacion)
+    slug = models.SlugField(max_length=255)
     user = models.ForeignKey(User)
     comision_evaluacion_inicio = models.DateField(auto_now=False)
     comision_evaluacion_fin = models.DateField(auto_now=False)
@@ -61,3 +64,16 @@ class ComisionEvaluacionApoyoInstitucional(models.Model):
     class Meta:
         verbose_name_plural = 'Comisiónes de Evaluación de Apoyo Institucional'
 
+class Representante(models.Model):
+    cargo = models.ForeignKey(Cargo)
+    entidad = models.ForeignKey(Entidad)
+    slug = models.SlugField(max_length=255)
+    user = models.ForeignKey(User)
+    cargo_inicio = models.DateField(auto_now=False)
+    cargo_fin = models.DateField(auto_now=False)
+
+    def __str__(self):
+        return "[{}] : {} : {} : {}".format(self.user, self.cargo, self.cargo_inicio, self.cargo_fin)
+
+    class Meta:
+        verbose_name_plural = 'Representantes Apoyo Institucional'

@@ -28,6 +28,7 @@ class Pais(models.Model):
     class Meta:
         ordering = ['pais']
         verbose_name_plural = 'Paises'
+        verbose_name = 'País'
 
 
 class Estado(models.Model):
@@ -40,7 +41,7 @@ class Estado(models.Model):
         return "{} : {}".format(self.pais, self.estado)
 
     class Meta:
-        unique_together = ('estado', 'slug', 'pais')
+        unique_together = ('estado', 'pais')
         ordering = ['pais', 'estado']
 
 
@@ -55,7 +56,7 @@ class Ciudad(models.Model):
         return "{} : {} ".format(self.estado, self.ciudad)
 
     class Meta:
-        unique_together = ('ciudad', 'slug', 'estado')
+        unique_together = ('ciudad', 'estado')
         ordering = ['estado', 'ciudad']
         verbose_name_plural = 'Ciudades'
 
@@ -76,7 +77,7 @@ class Ubicacion(models.Model):
 
 
     class Meta:
-        unique_together = ('direccion1', 'direccion2', 'slug', 'ciudad')
+        unique_together = ('direccion1', 'direccion2', 'ciudad')
         verbose_name_plural = 'Ubicaciones'
 
 class Institucion(models.Model):
@@ -104,7 +105,8 @@ class Dependencia(models.Model):
         return "{} : {}".format(self.institucion, self.dependencia)
 
     class Meta:
-        unique_together = ('dependencia', 'slug', 'institucion')
+        unique_together = ('dependencia', 'institucion')
+
 
 
 class Cargo(models.Model):
@@ -117,7 +119,21 @@ class Cargo(models.Model):
         return "[{}] : {}".format(self.cargo, self.dependencia)
 
     class Meta:
-        unique_together = ('cargo', 'slug', 'dependencia')
+        unique_together = ('cargo', 'dependencia')
+
+
+class Entidad(models.Model):
+    entidad = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "[{}] : {}".format(self.entidad, self.dependencia)
+
+    class Meta:
+        unique_together = ('entidad', 'dependencia')
+        verbose_name_plural = 'Entidades'
+
 
 class ComisionAcademica(models.Model):
     comision_academica = models.CharField(max_length=255)
@@ -128,7 +144,7 @@ class ComisionAcademica(models.Model):
         return "[{}] : {}".format(self.comision_academica, self.dependencia)
 
     class Meta:
-        verbose_name_plural = 'Comisiones de académicas'
+        verbose_name_plural = 'Comisiones académicas'
 
 
 class ComisionEvaluacion(models.Model):
