@@ -48,14 +48,14 @@ class Ciudad(models.Model):
     ciudad = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     estado = models.ForeignKey(Estado)
-    pais = models.ForeignKey(Pais)
+    # pais = models.ForeignKey(Pais)  # el pais se puede calcular a partir del estado
 
 
     def __str__(self):
         return "{} : {} ".format(self.estado, self.ciudad)
 
     class Meta:
-        unique_together = ('ciudad', 'slug', 'estado', 'pais')
+        unique_together = ('ciudad', 'slug', 'estado')
         ordering = ['estado', 'ciudad']
         verbose_name_plural = 'Ciudades'
 
@@ -64,8 +64,8 @@ class Ubicacion(models.Model):
     direccion1 = models.CharField('Dirección', max_length=255)
     direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255) #este deberia poder ser null
     slug = models.SlugField(max_length=255)
-    pais = models.ForeignKey(Pais)
-    estado = models.ForeignKey(Estado)
+    # pais = models.ForeignKey(Pais)      # parece que estos dos campos se pueden calcular a partir de los padres de ciudad
+    # estado = models.ForeignKey(Estado)  # y estado respectivapente.
     ciudad = models.ForeignKey(Ciudad)
     codigo_postal = models.IntegerField()
     telefono = models.SlugField(max_length=20)
@@ -76,7 +76,7 @@ class Ubicacion(models.Model):
 
 
     class Meta:
-        unique_together = ('direccion1', 'direccion2', 'slug', 'ciudad', 'estado', 'pais')
+        unique_together = ('direccion1', 'direccion2', 'slug', 'ciudad')
         verbose_name_plural = 'Ubicaciones'
 
 class Institucion(models.Model):
