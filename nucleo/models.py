@@ -142,6 +142,7 @@ class ComisionEvaluacion(models.Model):
     class Meta:
         verbose_name_plural = 'Comisiones de evaluación'
 
+
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
