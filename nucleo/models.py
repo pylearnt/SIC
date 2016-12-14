@@ -60,13 +60,13 @@ class Ciudad(models.Model):
 class Ubicacion(models.Model):
     direccion1 = models.CharField('Dirección', max_length=255)
     direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255)
-    slug = AutoSlugField(populate_from='direccion1')
     ciudad = models.ForeignKey(Ciudad)
-    codigo_postal = models.IntegerField()
-    telefono = models.SlugField(max_length=20)
+    codigo_postal = models.IntegerField(blank=True)
+    telefono = models.SlugField(max_length=20, blank=True)
+    slug = AutoSlugField(populate_from='direccion1', unique=True)
 
     def __str__(self):
-        return "{} : {} : {}".format(self.direccion1, self.direccion2, self.ciudad)
+        return "{} : {} : {} : {} : {}".format(self.direccion1, self.direccion2, self.ciudad.ciudad, self.ciudad.estado.estado, self.ciudad.estado.pais)
 
     class Meta:
         unique_together = ('direccion1', 'direccion2', 'ciudad')
@@ -79,7 +79,6 @@ class Institucion(models.Model):
 
     def __str__(self):
         return self.institucion
-
 
     class Meta:
         verbose_name_plural = 'Instituciones'
@@ -107,28 +106,10 @@ class Cargo(models.Model):
         return self.cargo
 
 
-class Entidad(models.Model):
-    entidad = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='entidad')
-    dependencia = models.ForeignKey(Dependencia)
-
-    def __str__(self):
-        return "[{}] : {}".format(self.entidad, self.dependencia)
-
-    class Meta:
-        unique_together = ('entidad', 'dependencia')
-        verbose_name_plural = 'Entidades'
 
 
-class Comision(models.Model):
-    comision = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='comision')
 
-    def __str__(self):
-        return self.comision
 
-    class Meta:
-        verbose_name_plural = 'Comisiones'
 
 
 
