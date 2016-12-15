@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nucleo.apps.NucleoConfig',
-    'SIC.apps.MyApoyoInstitucionalConfig',
+    'apoyo_institucional.apps.ApoyoInstitucionalConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
+    'publicacion.apps.PublicacionConfig',
+    'difusion_cientifica.apps.DifusionCientificaConfig',
 ]
 
 MIDDLEWARE = [
