@@ -39,7 +39,7 @@ class Estado(models.Model):
         return "{} : {}".format(self.pais, self.estado)
 
     class Meta:
-        unique_together = ('estado', 'pais')
+        unique_together = ['estado', 'pais']
         ordering = ['pais', 'estado']
 
 
@@ -52,7 +52,7 @@ class Ciudad(models.Model):
         return "{} : {} ".format(self.estado, self.ciudad)
 
     class Meta:
-        unique_together = ('ciudad', 'estado')
+        unique_together = ['ciudad', 'estado']
         ordering = ['estado', 'ciudad']
         verbose_name_plural = 'Ciudades'
 
@@ -69,8 +69,11 @@ class Ubicacion(models.Model):
         return "{} : {} : {} : {} : {}".format(self.direccion1, self.direccion2, self.ciudad.ciudad, self.ciudad.estado.estado, self.ciudad.estado.pais)
 
     class Meta:
-        unique_together = ('direccion1', 'direccion2', 'ciudad')
+        ordering = ['ciudad', 'direccion1']
+        unique_together = ['direccion1', 'direccion2', 'ciudad']
+        verbose_name = 'Ubicación'
         verbose_name_plural = 'Ubicaciones'
+
 
 class Institucion(models.Model):
     institucion = models.CharField(max_length=255, unique=True)
@@ -79,8 +82,9 @@ class Institucion(models.Model):
 
     def __str__(self):
         return self.institucion
-
     class Meta:
+        ordering = ['institucion']
+        verbose_name = 'Institución'
         verbose_name_plural = 'Instituciones'
 
 
@@ -95,11 +99,12 @@ class Dependencia(models.Model):
 
     class Meta:
         unique_together = ('dependencia', 'institucion')
-
+        ordering = ['dependencia']
 
 
 class Cargo(models.Model):
     cargo = models.CharField(max_length=255)
+    descripcion = models.TextField(blank=True)
     slug = AutoSlugField(populate_from='cargo')
 
     def __str__(self):

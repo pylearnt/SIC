@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
     'publicacion.apps.PublicacionConfig',
     'difusion_cientifica.apps.DifusionCientificaConfig',
+    'formacion_academica.apps.FormacionAcademicaConfig',
 ]
 
 MIDDLEWARE = [
