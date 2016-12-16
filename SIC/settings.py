@@ -25,7 +25,7 @@ SECRET_KEY = 'e&#jhulegv#2ddxr7x_ub=41l@jr8^f*v)4-bu+we(8v&93hi^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.10.2.203', '10.1.11.2', '201.144.41.229']
 
 
 # Application definition
@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nucleo.apps.NucleoConfig',
+    'formacion_academica.apps.FormacionAcademicaConfig',
+    'experiencia_laboral.apps.ExperienciaLaboralConfig',
     'apoyo_institucional.apps.ApoyoInstitucionalConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
     'publicacion.apps.PublicacionConfig',
     'difusion_cientifica.apps.DifusionCientificaConfig',
-    'formacion_academica.apps.FormacionAcademicaConfig',
+
 ]
 
 MIDDLEWARE = [

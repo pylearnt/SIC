@@ -121,6 +121,9 @@ class TipoCargo(models.Model):
 
     def __str__(self):
         return self.tipo_cargo
+    class Meta:
+        verbose_name = "Tipo de cargo"
+        verbose_name_plural = "Tipos de cargos"
 
 
 class Cargo(models.Model):
@@ -131,6 +134,7 @@ class Cargo(models.Model):
 
     def __str__(self):
         return self.cargo
+
 
 
 
