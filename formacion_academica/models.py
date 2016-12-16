@@ -75,15 +75,12 @@ class Licenciatura(models.Model):
     institucion = models.ForeignKey(Institucion)
     fecha_inicio = models.DateField('Fecha de inicio de licenciatura', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de licenciatura', auto_now=False, blank=True)
-    fecha_grado = models.DateField('Fecha de obtención de grado', auto_now=False, blank=True)
+    fecha_grado = models.DateField('Fecha de obtención de grado licenciatura', auto_now=False, blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.institucion, self.carrera, self.tesis)
     class Meta:
         ordering = ['fecha_grado', 'carrera']
-
-
-
 
 
 class Maestria(models.Model):
@@ -92,9 +89,9 @@ class Maestria(models.Model):
     agradecimientos = models.ManyToManyField(User, related_name='maestrias', blank=True)
     area_conocimiento = models.ForeignKey(AreaConocimiento, verbose_name='Área de conocimiento')
     institucion = models.ForeignKey(Institucion)
-    fecha_inicio = models.DateField('Fecha de inicio de licenciatura', auto_now=False)
-    fecha_fin = models.DateField('Fecha de terminación de licenciatura', auto_now=False, blank=True)
-    fecha_grado = models.DateField('Fecha de obtención de grado', auto_now=False, blank=True)
+    fecha_inicio = models.DateField('Fecha de inicio de maestría', auto_now=False)
+    fecha_fin = models.DateField('Fecha de terminación de maestría', auto_now=False, blank=True)
+    fecha_grado = models.DateField('Fecha de obtención de grado de maestría', auto_now=False, blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.institucion, self.carrera, self.tesis)
@@ -102,3 +99,33 @@ class Maestria(models.Model):
         ordering = ['fecha_grado', 'tesis']
 
 
+class Doctorado(models.Model):
+    tesis = models.CharField(max_length=255)
+    autor = models.ForeignKey(User)
+    agradecimientos = models.ManyToManyField(User, related_name='doctorados', blank=True)
+    area_conocimiento = models.ForeignKey(AreaConocimiento, verbose_name='Área de conocimiento')
+    institucion = models.ForeignKey(Institucion)
+    fecha_inicio = models.DateField('Fecha de inicio de doctorado', auto_now=False)
+    fecha_fin = models.DateField('Fecha de terminación de doctorado', auto_now=False, blank=True)
+    fecha_grado = models.DateField('Fecha de obtención de grado de doctorado', auto_now=False, blank=True)
+
+    def __str__(self):
+        return "{} : {} : {}".format(self.institucion, self.carrera, self.tesis)
+    class Meta:
+        ordering = ['fecha_grado', 'tesis']
+
+
+class PostDoctorado(models.Model):
+    tesis = models.CharField(max_length=255)
+    autor = models.ForeignKey(User)
+    agradecimientos = models.ManyToManyField(User, related_name='postdoctorados', blank=True)
+    area_conocimiento = models.ForeignKey(AreaConocimiento, verbose_name='Área de conocimiento')
+    institucion = models.ForeignKey(Institucion)
+    fecha_inicio = models.DateField('Fecha de inicio de postdoctorado', auto_now=False)
+    fecha_fin = models.DateField('Fecha de terminación de postdoctorado', auto_now=False, blank=True)
+    fecha_grado = models.DateField('Fecha de obtención de grado de postdoctorado', auto_now=False, blank=True)
+
+    def __str__(self):
+        return "{} : {} : {}".format(self.institucion, self.carrera, self.tesis)
+    class Meta:
+        ordering = ['fecha_grado', 'tesis']

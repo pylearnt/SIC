@@ -96,16 +96,38 @@ class Dependencia(models.Model):
 
     def __str__(self):
         return "{} : {}".format(self.institucion, self.dependencia)
-
     class Meta:
         unique_together = ('dependencia', 'institucion')
         ordering = ['dependencia']
 
 
-class Cargo(models.Model):
-    cargo = models.CharField(max_length=255)
+class Departamento(models.Model):
+    departamento = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='dependencia')
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "{} : {}".format(self.dependencia, self.departamento)
+
+    class Meta:
+        unique_together = ('departamento', 'dependencia')
+        ordering = ['departamento']
+
+
+class TipoCargo(models.Model):
+    tipo_cargo = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
-    slug = AutoSlugField(populate_from='cargo')
+    slug = AutoSlugField(populate_from='tipo_cargo', unique=True)
+
+    def __str__(self):
+        return self.tipo_cargo
+
+
+class Cargo(models.Model):
+    cargo = models.CharField(max_length=255, unique=True)
+    descripcion = models.TextField(blank=True)
+    tipo_cargo = models.ForeignKey(TipoCargo)
+    slug = AutoSlugField(populate_from='cargo', unique=True)
 
     def __str__(self):
         return self.cargo
