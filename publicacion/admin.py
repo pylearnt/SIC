@@ -2,8 +2,10 @@ from django.contrib import admin
 
 # Register your models here.
 
-from . models import Editorial, StatusPublicacion, Libro, Revista, CapituloLibro, PrologoLibro, ResenaLibro
+from . models import TipoDocumento, Indice, Editorial, StatusPublicacion, Libro, Revista, CapituloLibro, PrologoLibro, ResenaLibro
 
+admin.site.register(TipoDocumento)
+admin.site.register(Indice)
 admin.site.register(Editorial)
 admin.site.register(StatusPublicacion)
 admin.site.register(Libro)

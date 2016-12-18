@@ -5,6 +5,31 @@ from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais
 # Create your models here.
 
+
+class TipoDocumento(models.Model):
+    tipo = models.CharField(max_length=50, unique=True)
+    slug = AutoSlugField(populate_from=titulo, unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.tipo
+    class Meta:
+        ordering = ['tipo']
+        verbose_name = 'Tipo de documento'
+        verbose_name_plural = 'Tipos de documentos'
+
+
+class Indice(models.Model):
+    indice = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from=indice, unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.indice
+    class Meta:
+        ordering = ['indice']
+
+
 class Editorial(models.Model):
     editorial = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='editorial', unique=True)
