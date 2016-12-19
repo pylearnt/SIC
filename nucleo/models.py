@@ -61,7 +61,7 @@ class Ubicacion(models.Model):
     direccion1 = models.CharField('Dirección', max_length=255)
     direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255)
     ciudad = models.ForeignKey(Ciudad)
-    codigo_postal = models.IntegerField(blank=True)
+    codigo_postal = models.CharField(max_length=7, blank=True)
     telefono = models.SlugField(max_length=20, blank=True)
     slug = AutoSlugField(populate_from='direccion1', unique=True)
 
