@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'nucleo.apps.NucleoConfig',
     'formacion_academica.apps.FormacionAcademicaConfig',
     'experiencia_laboral.apps.ExperienciaLaboralConfig',
+    'investigacion.apps.InvestigacionConfig',
     'apoyo_institucional.apps.ApoyoInstitucionalConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
     'publicacion.apps.PublicacionConfig',

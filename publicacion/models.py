@@ -8,7 +8,7 @@ from nucleo.models import Tag, Pais
 
 class TipoDocumento(models.Model):
     tipo = models.CharField(max_length=50, unique=True)
-    slug = AutoSlugField(populate_from=titulo, unique=True)
+    slug = AutoSlugField(populate_from='tipo', unique=True)
     descripcion = models.TextField(blank=True)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class TipoDocumento(models.Model):
 
 class Indice(models.Model):
     indice = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from=indice, unique=True)
+    slug = AutoSlugField(populate_from='indice', unique=True)
     descripcion = models.TextField(blank=True)
 
     def __str__(self):
@@ -53,6 +53,7 @@ class StatusPublicacion(models.Model):
 
 class Libro(models.Model):
     libro = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='libro', unique=True)
     autores = models.ManyToManyField(User, related_name='libro_autores')
     editores = models.ManyToManyField(User, related_name='libro_editores')
     editorial = models.ForeignKey(Editorial)
@@ -62,7 +63,6 @@ class Libro(models.Model):
     isbn = models.SlugField(max_length=20)
     tags = models.ManyToManyField(Tag, related_name='libro_tags')
     status = models.ForeignKey(StatusPublicacion)
-    slug = AutoSlugField(populate_from='libro', unique=True)
 
     def __str__(self):
         return "{} : {} : {} : {}".format(self.libro, self.editorial, self.pais, self.isbn)

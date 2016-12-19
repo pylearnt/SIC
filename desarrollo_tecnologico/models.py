@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag
-
+from publicacion.models import Indice
 # Create your models here.
 
 class TipoDesarrollo(models.Model):
@@ -21,13 +21,18 @@ class TipoDesarrollo(models.Model):
 
 class Proyecto(models.Model):
     proyecto = models.CharField(max_length=255, unique=True)
-    descripcion = models.TextField()
     slug = AutoSlugField(populate_from='proyecto', unique=True)
+    descripcion = models.TextField(blank=True)
+    nombre_wos = models.CharField(max_length=255, unique=True, blank=True)
+    autores = models.ManyToManyField(User, related_name='proyecto_autores')
+    indices = models.ManyToManyField(Indice, related_name='proyecto_indices', blank=True)
+    fecha = models.DateField(auto_now=False)
+
 
     def __str__(self):
-        return self.proyecto
+        return "{} : {}".format(self.tipo, self.tipo)
     class Meta:
-        ordering = ['proyecto']
+        ordering = ['fecha', 'proyecto']
 
 
 class Licencia(models.Model):
