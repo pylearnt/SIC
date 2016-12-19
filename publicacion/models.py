@@ -61,6 +61,35 @@ class StatusPublicacion(models.Model):
         verbose_name_plural = 'Status de publicaciones'
 
 
+class AreaWOS(models.Model):
+    area_wos = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='area_wos', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.area_wos
+
+    class Meta:
+        ordering = ['area_wos']
+        verbose_name = 'Área General de WOS'
+        verbose_name_plural = 'Áreas Generales de WOS'
+
+
+class Especialidad(models.Model):
+    especialidad = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='especialidad', unique=True)
+    descripcion = models.TextField(blank=True)
+    area_wos = models.ForeignKey(AreaWOS, blank=True)
+
+    def __str__(self):
+        return self.area_wos
+
+    class Meta:
+        ordering = ['especialidad']
+        verbose_name = 'Área de especialidad de WOS y otras entidades'
+        verbose_name_plural = 'Áreas de especialidades de WOS y otras entidades'
+
+
 class Libro(models.Model):
     libro = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='libro', unique=True)

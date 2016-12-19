@@ -57,9 +57,28 @@ class Ciudad(models.Model):
         verbose_name_plural = 'Ciudades'
 
 
+class Region(models.Model):
+    region = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='region')
+    descripcion = models.TextField(blank=True)
+    paises = models.ForeignKey(Pais, related_name='region_paises')
+    estados = models.ForeignKey(Estado, related_name='region_estados', blank=True)
+    ciudades = models.ForeignKey(Ciudad, related_name='region_ciudades', blank=True)
+
+    def __str__(self):
+        return "{} : {} ".format(self.estado, self.ciudad)
+
+    class Meta:
+        unique_together = ['region', 'paises']
+        ordering = ['region']
+        verbose_name = 'Región'
+        verbose_name_plural = 'Regiones'
+
+
 class Ubicacion(models.Model):
     direccion1 = models.CharField('Dirección', max_length=255)
     direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255)
+    descripcion = models.TextField(blank=True)
     ciudad = models.ForeignKey(Ciudad)
     codigo_postal = models.CharField(max_length=7, blank=True)
     telefono = models.SlugField(max_length=20, blank=True)
@@ -78,10 +97,12 @@ class Ubicacion(models.Model):
 class Institucion(models.Model):
     institucion = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='institucion')
+    descripcion = models.TextField(blank=True)
     ubicacion = models.ForeignKey(Ubicacion)
 
     def __str__(self):
         return self.institucion
+
     class Meta:
         ordering = ['institucion']
         verbose_name = 'Institución'
@@ -90,12 +111,14 @@ class Institucion(models.Model):
 
 class Dependencia(models.Model):
     dependencia = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='dependencia')
+    slug = AutoSlugField(populate_from='dependencia', unique=True)
+    descripcion = models.TextField(blank=True)
     institucion = models.ForeignKey(Institucion)
     ubicacion = models.ForeignKey(Ubicacion)
 
     def __str__(self):
         return "{} : {}".format(self.institucion, self.dependencia)
+
     class Meta:
         unique_together = ('dependencia', 'institucion')
         ordering = ['dependencia']
@@ -103,15 +126,43 @@ class Dependencia(models.Model):
 
 class Departamento(models.Model):
     departamento = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='dependencia')
+    slug = AutoSlugField(populate_from='dependencia', unique=True)
+    descripcion = models.TextField(blank=True)
     dependencia = models.ForeignKey(Dependencia)
+
 
     def __str__(self):
         return "{} : {}".format(self.dependencia, self.departamento)
 
     class Meta:
         unique_together = ('departamento', 'dependencia')
-        ordering = ['departamento']
+        ordering = ['departamento', 'dependencia']
+
+
+class Programa(models.Model):
+    programa = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='programa', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.programa
+
+    class Meta:
+        ordering = ['programa']
+
+
+class ImpactoSocial(models.Model):
+    impacto_social = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='impacto_social', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.impacto_social
+
+    class Meta:
+        ordering = ['impacto_social']
+        verbose_name = 'Impacto social'
+        verbose_name_plural = 'Impactos sociales'
 
 
 class TipoCargo(models.Model):

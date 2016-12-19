@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais, Ubicacion
+from publicacion.models import Memoria, Indice
 # Create your models here.
 
 
