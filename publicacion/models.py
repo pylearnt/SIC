@@ -115,21 +115,16 @@ class Revista(models.Model):
     revista = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='revista', unique=True)
     descripcion = models.TextField(blank=True)
-    numero = models.CharField(max_length=50, unique=True)
     editorial = models.ForeignKey(Editorial)
     pais = models.ForeignKey(Pais)
-    fecha = models.DateField(auto_now=False)
     url = models.URLField(blank=True)
-    issn = models.SlugField(max_length=20)
     tags = models.ManyToManyField(Tag, related_name='revista_tags')
-    status = models.ForeignKey(StatusPublicacion)
-
 
     def __str__(self):
         return "{} : {} : {}".format(self.revista, self.editorial, self.pais)
+
     class Meta:
         ordering = ['revista']
-        get_latest_by = ['fecha', 'revista', 'editorial']
 
 
 class CapituloLibro(models.Model):

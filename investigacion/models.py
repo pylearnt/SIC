@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo
-from publicacion.models import TipoDocumento, Revista, Indice, Libro
+from publicacion.models import TipoDocumento, Revista, Indice, Libro, StatusPublicacion
 from desarrollo_tecnologico.models import Proyecto
 # Create your models here.
 
@@ -30,19 +30,21 @@ class ArticuloCientifico(models.Model):
     descripcion = models.TextField(blank=True)
     tipo = models.ForeignKey(TipoDocumento)
     revista = models.ForeignKey(Revista)
-    nombre_wos = models.CharField(max_length=255, unique=True)
-    autores = models.ManyToManyField(User, related_name='articulo_cientifico_autores')
-    indices = models.ManyToManyField(Indice, related_name='articulo_cientifico_indices')
-    solo_electronico = models.BooleanField(default=False)
-    fecha = models.DateField(auto_now=False)
     volumen = models.CharField(max_length=100, blank=True)
     numero = models.PositiveIntegerField()
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
+    issn = models.SlugField(max_length=20)
+    fecha = models.DateField(auto_now=False)
+    status = models.ForeignKey(StatusPublicacion)
+    nombre_wos = models.CharField(max_length=255, unique=True)
+    autores = models.ManyToManyField(User, related_name='articulo_cientifico_autores')
+    indices = models.ManyToManyField(Indice, related_name='articulo_cientifico_indices')
+    solo_electronico = models.BooleanField(default=False)
     id_doi = models.CharField(max_length=100, unique=True) # Es posible que ese pueda ser de tipo slug
     id_wos = models.CharField(max_length=100, unique=True) # Es posible que ese pueda ser de tipo slug
     id_isi = models.CharField(max_length=100, unique=True) # Es posible que ese pueda ser de tipo slug
-    proyectos = models.ManyToManyField(Proyecto, related_name='articulo_cientifico_proyectos')
+    proyectos = models.ManyToManyField(Proyecto, related_name='articulo_cientifico_proyectos', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.revista, self.tipo)
