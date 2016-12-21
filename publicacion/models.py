@@ -2,7 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Pais
+from nucleo.models import Tag, Pais, Ciudad
 # Create your models here.
 
 
@@ -47,7 +47,21 @@ class Editorial(models.Model):
     def __str__(self):
         return self.editorial
     class Meta:
+        ordering = ['editorial']
         verbose_name_plural = 'Editoriales'
+
+
+class Coleccion(models.Model):
+    coleccion = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='coleccion', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.editorial
+    class Meta:
+        ordering = ['coleccion']
+        verbose_name = 'Colección'
+        verbose_name_plural = 'Colecciones'
 
 
 class StatusPublicacion(models.Model):
@@ -62,24 +76,29 @@ class StatusPublicacion(models.Model):
 
 
 class Libro(models.Model):
-    libro = models.CharField(max_length=255, unique=True)
+    nombre_libro = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='libro', unique=True)
     descripcion = models.TextField(blank=True)
     autores = models.ManyToManyField(User, related_name='libro_autores')
-    editores = models.ManyToManyField(User, related_name='libro_editores')
+    editores = models.ManyToManyField(User, related_name='libro_editores', blank=True)
+    coordinadores = models.ManyToManyField(User, related_name='libro_coordinadores', blank=True)
     editorial = models.ForeignKey(Editorial)
-    pais = models.ForeignKey(Pais)
+    ciudad = models.ForeignKey(Ciudad)
     fecha = models.DateField(auto_now=False)
+    numero_edicion = models.PositiveIntegerField(default=1)
+    numero_paginas = models.PositiveIntegerField(default=0)
+    coleccion = models.ForeignKey(Coleccion, blank=True)
+    volumen = models.CharField(max_length=255, blank=True)
+    isbn = models.SlugField(max_length=30)
     url = models.URLField(blank=True)
-    isbn = models.SlugField(max_length=20)
     tags = models.ManyToManyField(Tag, related_name='libro_tags')
     status = models.ForeignKey(StatusPublicacion)
 
     def __str__(self):
-        return "{} : {} : {} : {}".format(self.libro, self.editorial, self.pais, self.isbn)
+        return "{} : {} : {} : {}".format(self.nombre_libro, self.editorial, self.pais, self.isbn)
     class Meta:
-        ordering = ['libro']
-        get_latest_by = ['fecha', 'libro', 'editorial']
+        ordering = ['nombre_libro']
+        get_latest_by = ['fecha', 'nombre_libro', 'editorial']
 
 
 class Revista(models.Model):

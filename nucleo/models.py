@@ -59,17 +59,16 @@ class Ciudad(models.Model):
 
 class Region(models.Model):
     region = models.CharField(max_length=200)
-    slug = AutoSlugField(populate_from='region')
+    slug = AutoSlugField(populate_from='region', unique=True)
     descripcion = models.TextField(blank=True)
-    paises = models.ForeignKey(Pais, related_name='region_paises')
-    estados = models.ForeignKey(Estado, related_name='region_estados', blank=True)
-    ciudades = models.ForeignKey(Ciudad, related_name='region_ciudades', blank=True)
+    paises = models.ManyToManyField(Pais, related_name='region_paises', blank=True)
+    estados = models.ManyToManyField(Estado, related_name='region_estados', blank=True)
+    ciudades = models.ManyToManyField(Ciudad, related_name='region_ciudades', blank=True)
 
     def __str__(self):
         return "{} : {} ".format(self.estado, self.ciudad)
 
     class Meta:
-        unique_together = ['region', 'paises']
         ordering = ['region']
         verbose_name = 'Región'
         verbose_name_plural = 'Regiones'
