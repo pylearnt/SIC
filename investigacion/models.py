@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo
-from publicacion.models import TipoDocumento, Revista, Indice, Libro, StatusPublicacion
+from publicacion.models import TipoDocumento, Revista, Indice, Libro
 from desarrollo_tecnologico.models import Proyecto
 # Create your models here.
 
@@ -24,30 +24,34 @@ class ProyectoInvestigacion(models.Model):
         verbose_name_plural = "Proyectos de investigación"
         ordering = ['proyecto']
 
+
 class ArticuloCientifico(models.Model):
     titulo = models.CharField(max_length=255, unique=True)
+    documento_articulo = models.FileField()
     slug = AutoSlugField(populate_from='titulo', unique=True)
     descripcion = models.TextField(blank=True)
-    tipo = models.ForeignKey(TipoDocumento)
+    tipo = models.CharField(max_length=16, choices=(('ARTICULO', 'Artículo'), ('ACTA', 'Acta'), ('CARTA', 'Carta'), ('RESENA', 'Reseña'), ('OTRO', 'Otro')))
     revista = models.ForeignKey(Revista)
+    status = models.CharField(max_length=20, choices=(('PUBLICADO', 'Publicado'), ('EN_PRENSA', 'En prensa'), ('ACEPTADO', 'Aceptado'), ('ENVIADO', 'Enviado'), ('OTRO', 'Otro')))
+    indizado = models.BooleanField(default=False)
+    nombre_abreviado_wos = models.CharField(max_length=255, blank=True)
+    autores = models.ManyToManyField(User, related_name='articulo_cientifico_autores')
+    alumnos = models.ManyToManyField(User, related_name='articulo_cientifico_alumnos')
+    indices = models.ManyToManyField(Indice, related_name='articulo_cientifico_indices', blank=True)
+    solo_electronico = models.BooleanField(default=False)
+    fecha = models.DateField(auto_now=False)
     volumen = models.CharField(max_length=100, blank=True)
-    numero = models.PositiveIntegerField()
+    numero = models.CharField(max_length=100, blank=True)
+    issn = models.CharField(max_length=30, blank=True)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
-    issn = models.SlugField(max_length=20)
-    fecha = models.DateField(auto_now=False)
-    status = models.ForeignKey(StatusPublicacion)
-    nombre_wos = models.CharField(max_length=255, unique=True)
-    autores = models.ManyToManyField(User, related_name='articulo_cientifico_autores')
-    indices = models.ManyToManyField(Indice, related_name='articulo_cientifico_indices')
-    solo_electronico = models.BooleanField(default=False)
-    id_doi = models.CharField(max_length=100, unique=True) # Es posible que ese pueda ser de tipo slug
-    id_wos = models.CharField(max_length=100, unique=True) # Es posible que ese pueda ser de tipo slug
-    id_isi = models.CharField(max_length=100, unique=True) # Es posible que ese pueda ser de tipo slug
+    id_doi = models.CharField(max_length=100, blank=True) # Es posible que ese pueda ser de tipo slug
+    id_wos = models.CharField(max_length=100, blank=True) # Es posible que ese pueda ser de tipo slug
+    id_isi = models.CharField(max_length=100, blank=True) # Es posible que ese pueda ser de tipo slug
     proyectos = models.ManyToManyField(Proyecto, related_name='articulo_cientifico_proyectos', blank=True)
 
     def __str__(self):
-        return "{} : {}".format(self.revista, self.tipo)
+        return "{} : {} : {}".format(self.titulo, self.tipo.title(), self.revista)
     class Meta:
         verbose_name = "Artículo científico"
         verbose_name_plural = "Artículos científicos"

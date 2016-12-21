@@ -2,8 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Ubicacion, Region, Dependencia, Programa, ImpactoSocial
-from publicacion.models import Indice, AreaWOS, Especialidad
+from nucleo.models import Tag, Ubicacion, Region, Dependencia, Programa, ImpactoSocial, AreaWOS, AreaEspecialidad
+from publicacion.models import Indice
 # Create your models here.
 
 class TipoDesarrollo(models.Model):
@@ -221,7 +221,7 @@ class Proyecto(models.Model):
     financiamientos_externo = models.ManyToManyField(FinanciamientoExterno, blank=True)
     metodologias = models.ManyToManyField(Metodologia, related_name='proyecto_investigacion_metodologias')
     areas_wos = models.ManyToManyField(AreaWOS, related_name='proyecto_investigacion_areas_wos')
-    especialidades = models.ManyToManyField(Especialidad, related_name='proyecto_investigacion_especialidades')
+    especialidades = models.ManyToManyField(AreaEspecialidad, related_name='proyecto_investigacion_especialidades')
     impactos_sociales = models.ManyToManyField(ImpactoSocial, related_name='proyecto_investigacion_impactos_sociales')
     tecnicos = models.ManyToManyField(User, related_name='proyecto_investigacion_impactos_tecnicos')
     alumnos_doctorado = models.ManyToManyField(User, related_name='proyecto_investigacion_alumnos_doctorado')
