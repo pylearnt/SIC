@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'experiencia_laboral.apps.ExperienciaLaboralConfig',
     'investigacion.apps.InvestigacionConfig',
     'difusion_cientifica.apps.DifusionCientificaConfig',
+    'divulgacion_cientifica.apps.DivulgacionCientificaConfig',
+    'vinculacion.apps.VinculacionConfig',
     'apoyo_institucional.apps.ApoyoInstitucionalConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
 
