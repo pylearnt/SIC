@@ -1,10 +1,16 @@
 from django.db import models
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais, Ubicacion, Institucion, Dependencia, AreaConocimiento, AreaEspecialidad
+
+CURSO_ESPECIALIZACION_TIPO = getattr(settings, 'CURSO_ESPECIALIZACION_TIPO', (('CURSO', 'Curso'), ('DIPLOMADO', 'Diplomado'), ('CERTIFICACION', 'Certificación'), ('OTRO', 'Otro')))
+CURSO_ESPECIALIZACION_MODALIDAD = getattr(settings, 'CURSO_ESPECIALIZACION_MODALIDAD', (('PRESENCIAL', 'Presencial'), ('EN_LINEA', 'En línea'), ('MIXTO', 'Mixto'), ('OTRO', 'Otro')))
+
 # Create your models here.
 
+"""
 class TipoCurso(models.Model):
     tipo = models.CharField(verbose_name='Tipo de curso', max_length=255, unique=True)
     descripcion = models.TextField(verbose_name='Descripición', blank=True)
@@ -17,7 +23,7 @@ class TipoCurso(models.Model):
         ordering = ['tipo']
         verbose_name = 'Tipo de curso'
         verbose_name_plural = 'Tipos de curso (no usado ya)'
-
+"""
 
 class CursoEspecializacion(models.Model):
     curso = models.CharField(max_length=255)
@@ -26,8 +32,8 @@ class CursoEspecializacion(models.Model):
     instructores = models.ManyToManyField(User, related_name='cursos_especializacion_instructores')
     enrolados = models.ManyToManyField(User, related_name='cursos_especializacion_enrolados')
     agradecimientos = models.ManyToManyField(User, related_name='cursos_especializacion_agradecimientos', blank=True)
-    tipo = models.CharField(max_length=16, choices=(('CURSO', 'Curso'), ('DIPLOMADO', 'Diplomado'), ('CERTIFICACION', 'Certificación'), ('OTRO', 'Otro')))
-    modalidad = models.CharField(max_length=16, choices=(('PRESENCIAL', 'Presencial'), ('EN_LINEA', 'En línea'), ('MIXTO', 'Mixto'), ('OTRO', 'Otro')))
+    tipo = models.CharField(max_length=16, choices=CURSO_ESPECIALIZACION_TIPO)
+    modalidad = models.CharField(max_length=16, choices=CURSO_ESPECIALIZACION_MODALIDAD)
     inicio = models.DateField('Fecha de inicio', auto_now=False)
     fin = models.DateField('Fecha de finalización', blank=True)
     horas = models.PositiveIntegerField()

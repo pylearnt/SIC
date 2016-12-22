@@ -10,7 +10,7 @@ ORGANIZACION_PROYECTO = getattr(settings, 'ORGANIZACION_PROYECTO', (('INDIVIDUAL
 MODALIDAD_PROYECTO = getattr(settings, 'MODALIDAD_PROYECTO', (('DISCIPLINARIO', 'Disciplinario'), ('MULTIDISCIPLINARIO', 'Multidisciplinario'), ('INTERDISCIPLINARIO', 'Interisciplinario'), ('TRANSDISCIPLINARIO', 'Transdisciplinario'), ('OTRA', 'Otra')))
 FINANCIAMIENTO_UNAM = getattr(settings, 'FINANCIAMIENTO_UNAM', (('ASIGNADO', 'Presupuesto asignado a la entidad'), ('CONCURSADO', 'Presupuesto concursado por la entidad'), ('AUTOGENERADO', 'Recursos autogenerados (extraordinarios)'), ('OTRO', 'Otro')))
 FINANCIAMIENTO_EXTERNO = getattr(settings, 'FINANCIAMIENTO_UNAM', (('ESTATAL', 'Gubernamental Estatal'), ('FEDERAL', 'Gubernamental Federal'), ('LUCRATIVO', 'Privado lucrativo'), ('NO_LUCRATIVO', 'Privado no lucrativo'), ('EXTRANJERO', 'Recursos del extranjero')))
-
+CARGO__TIPO_CARGO  = getattr(settings, 'CARGO__TIPO_CARGO', (('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo')))
 
 # Create your models here.
 
@@ -217,6 +217,7 @@ class ImpactoSocial(models.Model):
         verbose_name_plural = 'Impactos sociales'
 
 
+"""
 class TipoCargo(models.Model):
     tipo_cargo = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
@@ -227,12 +228,12 @@ class TipoCargo(models.Model):
     class Meta:
         verbose_name = "Tipo de cargo"
         verbose_name_plural = "Tipos de cargos"
+"""
 
 
 class Cargo(models.Model):
     cargo = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
-    tipo_cargo = models.ForeignKey(TipoCargo)
     slug = AutoSlugField(populate_from='cargo', unique=True)
 
     def __str__(self):

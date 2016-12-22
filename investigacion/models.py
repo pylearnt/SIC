@@ -87,14 +87,14 @@ class ArticuloCientifico(models.Model):
 
 class LibroPublicado(models.Model):
     libro = models.ForeignKey(Libro)
-    slug = AutoSlugField(populate_from='libro.nombre_libro', unique=True)
+    slug = AutoSlugField(populate_from='libro', unique=True)
     descripcion = models.TextField(blank=True)
-    nombre_wos = models.CharField(max_length=255, unique=True)
+    #nombre_wos = models.CharField(max_length=255, unique=True)
     status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
     proyectos = models.ManyToManyField(Proyecto, related_name='libro_publicado_proyectos')
 
     def __str__(self):
-        return self.libro
+        return str(self.libro)
     class Meta:
         verbose_name = "Libro publicado"
         verbose_name_plural = "Libros publicados"
@@ -116,10 +116,10 @@ class CapituloLibroInvestigacion(models.Model):
     proyectos = models.ManyToManyField(Proyecto, related_name='capitulo_libro_investigacion_proyectos')
 
     def __str__(self):
-        return "{} : {}".format(self.titulo, self.tipo)
+        return "{} : {}".format(self.titulo, self.libro)
     class Meta:
-        verbose_name = "Capítulo de libro"
-        verbose_name_plural = "Capítulos de libros"
+        verbose_name = "Capítulo en libro"
+        verbose_name_plural = "Capítulos en libros"
         ordering = ['titulo']
 
 
@@ -127,6 +127,7 @@ class MapaArbitrado(models.Model):
     titulo = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='titulo', unique=True)
     descripcion = models.TextField(blank=True)
+    escala = models.CharField(max_length=30)
     autores = models.ManyToManyField(User, related_name='mapa_arbitrado_autores')
     editores = models.ManyToManyField(User, related_name='mapa_arbitrado_editores', blank=True)
     coordinadores = models.ManyToManyField(User, related_name='mapa_arbitrado_coordinadores', blank=True)
@@ -143,7 +144,7 @@ class MapaArbitrado(models.Model):
     proyectos = models.ManyToManyField(Proyecto, related_name='mapa_arbitrado_proyectos')
 
     def __str__(self):
-        return "{} : {}".format(self.titulo, self.tipo)
+        return "{} : ({}) : {}".format(self.titulo, self.escala, self.fecha)
     class Meta:
         verbose_name = "Mapa arbitrado"
         verbose_name_plural = "Mapas arbitrados"
@@ -162,7 +163,7 @@ class InformeTecnico(models.Model):
     proyectos = models.ManyToManyField(Proyecto, related_name='informe_tecnico_proyectos')
 
     def __str__(self):
-        return "{} : {}".format(self.tipo, self.tipo)
+        return "{} : {}".format(self.titulo, self.fecha)
     class Meta:
         verbose_name = "Informe técnico de acceso público"
         verbose_name_plural = "Informes técnicos de acceso público"
