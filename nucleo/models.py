@@ -314,6 +314,35 @@ class Metodologia(models.Model):
         ordering = ['metodologia']
 
 
+class TipoEvento(models.Model):
+    tipo_evento = models.CharField(max_length=100, unique=True)
+    slug = AutoSlugField(populate_from='tipo_evento')
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.tipo_evento
+    class Meta:
+        verbose_name = 'Tipo de evento'
+        verbose_name_plural = 'Tipos de eventos'
+
+
+class Evento(models.Model):
+    evento = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='evento', unique=True)
+    descripcion = models.TextField(blank=True)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    dependencias = models.ManyToManyField(Dependencia, related_name='_evento_dependencias')
+    ubicacion = models.ForeignKey(Ubicacion)
+
+    def __str__(self):
+        return "{} : {}".format(self.evento, self.fecha_inicio)
+
+    class Meta:
+        ordering = ['fecha_inicio', 'evento']
+        unique_together = ['fecha_inicio', 'evento']
+
+
 class Proyecto(models.Model):
     nombre_proyecto = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
@@ -334,7 +363,7 @@ class Proyecto(models.Model):
     dependencias_internacionales = models.ManyToManyField(Dependencia, related_name='proyecto_dependencias_internacionales', blank=True)
     financiamientos_unam = models.ManyToManyField(FinanciamientoUNAM, blank=True)
     financiamientos_externo = models.ManyToManyField(FinanciamientoExterno, blank=True)
-    metodologias = models.ManyToManyField(Metodologia, related_name='proyecto_metodologias')
+    metodologias = models.ManyToManyField(Metodologia, related_name='proyecto_metodologias', blank=True)
     areas_wos = models.ManyToManyField(AreaWOS, related_name='proyecto_areas_wos')
     especialidades = models.ManyToManyField(AreaEspecialidad, related_name='proyecto_especialidades')
     impactos_sociales = models.ManyToManyField(ImpactoSocial, related_name='proyecto_impactos_sociales', blank=True)

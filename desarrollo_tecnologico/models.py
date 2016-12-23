@@ -97,9 +97,6 @@ class ModalidadProyecto(models.Model):
 """
 
 
-
-
-
 class DesarrolloTecnologico(models.Model):
     nombre_desarrollo_tecnologico = models.CharField(max_length=255, unique=True)
     tipo_desarrollo_tecnologico = models.ForeignKey(TipoDesarrollo)
