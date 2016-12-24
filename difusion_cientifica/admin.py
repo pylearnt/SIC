@@ -4,7 +4,6 @@ from django.contrib import admin
 
 from . models import MemoriaInExtenso, PrologoLibro, Resena, OrganizacionEventoAcademico, ParticipacionEventoAcademico
 
-
 admin.site.register(MemoriaInExtenso)
 admin.site.register(PrologoLibro)
 admin.site.register(Resena)
