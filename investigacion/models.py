@@ -39,19 +39,6 @@ class ProblemaNacional(models.Model):
         verbose_name_plural = 'Problemas nacionales'
 
 
-class ProyectoInvestigacion(models.Model):
-    proyecto = models.ForeignKey(Proyecto)
-    descripcion = models.TextField(blank=True)
-    problema_nacional = models.ManyToManyField(ProblemaNacional, related_name='proyecto_investigacion_problemas_nacionales')
-
-    def __str__(self):
-        return self.proyecto
-    class Meta:
-        verbose_name = "Proyecto de investigación"
-        verbose_name_plural = "Proyectos de investigación"
-        ordering = ['proyecto']
-
-
 class ArticuloCientifico(models.Model):
     titulo = models.CharField(max_length=255, unique=True)
     documento_articulo = models.FileField()
@@ -170,3 +157,14 @@ class InformeTecnico(models.Model):
         ordering = ['fecha', 'titulo']
 
 
+class ProyectoInvestigacion(models.Model):
+    proyecto = models.ForeignKey(Proyecto)
+    descripcion = models.TextField(blank=True)
+    problema_nacional = models.ManyToManyField(ProblemaNacional, related_name='proyecto_investigacion_problemas_nacionales')
+
+    def __str__(self):
+        return self.proyecto
+    class Meta:
+        verbose_name = "Proyecto de investigación"
+        verbose_name_plural = "Proyectos de investigación"
+        ordering = ['proyecto']

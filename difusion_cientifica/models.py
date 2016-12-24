@@ -1,9 +1,14 @@
 from django.db import models
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais, Ciudad, Ubicacion, Proyecto, TipoEvento, Evento
 from publicacion.models import Libro, Revista, Indice
+
+EVENTO__AMBITO = getattr(settings, 'EVENTO__AMBITO', (('INSTITUCIONAL', 'Institucional'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro')))
+EVENTO__RESPONSABILIDAD = getattr(settings, 'EVENTO__RESPONSABILIDAD', (('COORDINADOR', 'Coordinador general'), ('COMITE', 'Comité organizador'), ('AYUDANTE', 'Ayudante'), ('TECNICO', 'Apoyo técnico'), ('OTRO', 'Otro')))
+
 # Create your models here.
 
 
@@ -14,10 +19,10 @@ class MemoriaInExtenso(models.Model):
     ciudad = models.ForeignKey(Ciudad)
     fecha = models.DateField()
     evento = models.ForeignKey(Evento)
-    autores = models.ManyToManyField(User, related_name='_memoria_in_extenso_autores_externos')
-    editores = models.ManyToManyField(User, related_name='_memoria_in_extenso_editores', blank=True)
-    indices = models.ManyToManyField(Indice, related_name='_memoria_in_extenso_indices', blank=True)
-    agradecimientos = models.ManyToManyField(User, related_name='_memoria_in_extenso_agradecimientos', blank=True)
+    autores = models.ManyToManyField(User, related_name='memoria_in_extenso_autores_externos')
+    editores = models.ManyToManyField(User, related_name='memoria_in_extenso_editores', blank=True)
+    indices = models.ManyToManyField(Indice, related_name='memoria_in_extenso_indices', blank=True)
+    agradecimientos = models.ManyToManyField(User, related_name='memoria_in_extenso_agradecimientos', blank=True)
     pais_origen = models.ForeignKey(Pais)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
@@ -35,10 +40,10 @@ class MemoriaInExtenso(models.Model):
 class PrologoLibro(models.Model):
     descipcion = models.TextField(blank=True)
     autor_prologo = models.ForeignKey(User)
-    autores = models.ManyToManyField(User, related_name='_prologo_libro_autores', blank=True)
-    editores = models.ManyToManyField(User, related_name='_prologo_libro_editores', blank=True)
-    coordinadores = models.ManyToManyField(User, related_name='_prologo_libro_coordinadores', blank=True)
-    libro = models.ForeignKey(Libro, related_name='_prologo_libro_libro')
+    autores = models.ManyToManyField(User, related_name='prologo_libro_autores', blank=True)
+    editores = models.ManyToManyField(User, related_name='prologo_libro_editores', blank=True)
+    coordinadores = models.ManyToManyField(User, related_name='prologo_libro_coordinadores', blank=True)
+    libro = models.ForeignKey(Libro, related_name='prologo_libro_libro')
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
     url = models.URLField(blank=True)
@@ -54,21 +59,20 @@ class PrologoLibro(models.Model):
 class Resena(models.Model):
     titulo_resena = models.CharField(max_length=255, unique=True)
     tipo_publicacion = models.CharField(max_length=20, choices=(('LIBRO', 'Libro'), ('REVISTA', 'Revista'), ('OTRO', 'Otro')))
-    libro = models.ForeignKey(Libro, null=True, related_name='_resena_libro')
-    revista = models.ForeignKey(Revista, related_name='_resena_revista', null=True)
+    libro = models.ForeignKey(Libro, null=True, related_name='resena_libro')
+    revista = models.ForeignKey(Revista, related_name='resena_revista', null=True)
     volumen = models.CharField(max_length=10, blank=True)
     slug = AutoSlugField(populate_from='titulo_resena', unique=True)
     descipcion = models.TextField(blank=True)
-    revistas = models.ManyToManyField(Revista, related_name='_resena_revistas', blank=True)
-    libros = models.ManyToManyField(Libro, related_name='_resena_libros', blank=True)
+    revistas = models.ManyToManyField(Revista, related_name='resena_revistas', blank=True)
+    libros = models.ManyToManyField(Libro, related_name='resena_libros', blank=True)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
 
     autor_resena = models.ForeignKey(User)
-    autores = models.ManyToManyField(User, related_name='_resena_autores', blank=True)
-    editores = models.ManyToManyField(User, related_name='_resena_editores', blank=True)
-    coordinadores = models.ManyToManyField(User, related_name='_resena_coordinadores', blank=True)
-
+    autores = models.ManyToManyField(User, related_name='resena_autores', blank=True)
+    editores = models.ManyToManyField(User, related_name='resena_editores', blank=True)
+    coordinadores = models.ManyToManyField(User, related_name='resena_coordinadores', blank=True)
 
     url = models.URLField(blank=True)
 
@@ -81,9 +85,42 @@ class Resena(models.Model):
 
 
 class OrganizacionEventoAcademico(models.Model):
-    nombre_evento = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='nombre_evento', unique=True)
-    tipo = models.ForeignKey(TipoEvento)
+    evento = models.ForeignKey(Evento)
+    descipcion = models.TextField(blank=True)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField
+    responsabilidad = models.CharField(max_length=30, choices=EVENTO__RESPONSABILIDAD)
+    numero_ponentes = models.PositiveIntegerField()
+    numero_asistentes = models.PositiveIntegerField()
+    ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
 
     def __str__(self):
-        return self.nombre_evento
+        return self.evento
+
+    class Meta:
+        ordering = ['fecha_inicio']
+        verbose_name = 'Organización de evento académico'
+        verbose_name_plural= 'Organización de eventos académicos'
+
+
+class ParticipacionEventoAcademico(models.Model):
+    titulo = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='titulo', unique=True)
+    descipcion = models.TextField(blank=True)
+    evento = models.ForeignKey(Evento)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField
+    resumen_publicado = models.BooleanField(default=False)
+    autores = models.ManyToManyField(User, related_name='participacion_evento_academico_autores')
+    ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
+    por_invitacion = models.BooleanField(default=False)
+    ponencia_magistral = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{} : {}".format(self.titulo, self.evento)
+
+    class Meta:
+        ordering = ['fecha_inicio']
+        verbose_name = 'Participación en evento académico'
+        verbose_name_plural= 'Participación en eventos académicos'
+

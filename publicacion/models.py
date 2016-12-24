@@ -122,59 +122,5 @@ class Revista(models.Model):
         get_latest_by = ['fecha', 'nombre_revista', 'editorial']
 
 
-class CapituloLibro(models.Model):
-    titulo = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='titulo', unique=True)
-    descripcion = models.TextField(blank=True)
-    libro = models.ForeignKey(Libro)
-    autores = models.ManyToManyField(User, related_name='capitulo_libro_autores')
-    agradecimientos = models.ManyToManyField(User, related_name='capitulo_libro_agradecimientos')
-    fecha = models.DateField(auto_now=False)
-    pagina_inicio = models.PositiveIntegerField()
-    pagina_fin = models.PositiveIntegerField()
-
-    def __str__(self):
-        return "{} : {}".format(self.titulo, self.libro, )
-    class Meta:
-        ordering = ['libro', 'titulo']
-        get_latest_by = ['fecha', 'libro', 'titulo']
-        verbose_name = 'Capítulo de libro'
-        verbose_name_plural = 'Capítulos de libros'
 
 
-class PrologoLibro(models.Model):
-    libro = models.ForeignKey(Libro)
-    slug = AutoSlugField(populate_from='libro', unique=True)
-    descripcion = models.TextField(blank=True)
-    autores = models.ManyToManyField(User, related_name='prologo_libro_autores')
-    agradecimientos = models.ManyToManyField(User, related_name='prologo_libro_agradecimientos')
-    fecha = models.DateField(auto_now=False)
-    pagina_inicio = models.PositiveIntegerField()
-    pagina_fin = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.libro
-    class Meta:
-        ordering = ['libro']
-        get_latest_by = ['fecha', 'libro']
-        verbose_name = 'Prólogo de libro'
-        verbose_name_plural = 'Prólogos de libros'
-
-
-class ResenaLibro(models.Model):
-    libro = models.ForeignKey(Libro)
-    descripcion = models.TextField(blank=True)
-    slug = AutoSlugField(populate_from='libro', unique=True)
-    autores = models.ManyToManyField(User, related_name='resena_libro_autores')
-    agradecimientos = models.ManyToManyField(User, related_name='resena_libro_agradecimientos')
-    fecha = models.DateField(auto_now=False)
-    pagina_inicio = models.PositiveIntegerField()
-    pagina_fin = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.libro
-    class Meta:
-        ordering = ['libro']
-        get_latest_by = ['fecha', 'libro']
-        verbose_name = 'Reseña de libro'
-        verbose_name_plural = 'Reseñas de libros'
