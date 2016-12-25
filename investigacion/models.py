@@ -3,9 +3,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo
+from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo, Proyecto
 from publicacion.models import TipoDocumento, Revista, Indice, Libro, Editorial, Coleccion
-from desarrollo_tecnologico.models import Proyecto
 
 STATUS_PUBLICACION = getattr(settings, 'STATUS_PUBLICACION', (('PUBLICADO', 'Publicado'), ('EN_PRENSA', 'En prensa'), ('ACEPTADO', 'Aceptado'), ('ENVIADO', 'Enviado'), ('OTRO', 'Otro')))
 
@@ -50,9 +49,10 @@ class ArticuloCientifico(models.Model):
     indizado = models.BooleanField(default=False)
     nombre_abreviado_wos = models.CharField(max_length=255, blank=True)
     autores = models.ManyToManyField(User, related_name='articulo_cientifico_autores')
-    alumnos = models.ManyToManyField(User, related_name='articulo_cientifico_alumnos')
+    alumnos = models.ManyToManyField(User, related_name='articulo_cientifico_alumnos', blank=True)
     indices = models.ManyToManyField(Indice, related_name='articulo_cientifico_indices', blank=True)
     solo_electronico = models.BooleanField(default=False)
+    url = models.URLField(blank=True)
     fecha = models.DateField(auto_now=False)
     volumen = models.CharField(max_length=100, blank=True)
     numero = models.CharField(max_length=100, blank=True)
@@ -77,8 +77,8 @@ class LibroPublicado(models.Model):
     slug = AutoSlugField(populate_from='libro', unique=True)
     descripcion = models.TextField(blank=True)
     #nombre_wos = models.CharField(max_length=255, unique=True)
-    status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
-    proyectos = models.ManyToManyField(Proyecto, related_name='libro_publicado_proyectos')
+    #status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
+    proyectos = models.ManyToManyField(Proyecto, related_name='libro_publicado_proyectos', blank=True)
 
     def __str__(self):
         return str(self.libro)
@@ -97,7 +97,7 @@ class CapituloLibroInvestigacion(models.Model):
     editores = models.ManyToManyField(User, related_name='capitulo_libro_investigacion_editores', blank=True)
     coordinadores = models.ManyToManyField(User, related_name='capitulo_libro_investigacion_coordinadores', blank=True)
     libro = models.ForeignKey(Libro)
-    status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
+    #status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
     proyectos = models.ManyToManyField(Proyecto, related_name='capitulo_libro_investigacion_proyectos')

@@ -26,7 +26,7 @@ class MemoriaInExtenso(models.Model):
     pais_origen = models.ForeignKey(Pais)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
-    issn = models.SlugField(max_length=20)
+    issn = models.SlugField(max_length=20, blank=True)
     proyectos = models.ForeignKey(Proyecto)
     url = models.URLField(blank=True)
 
@@ -87,18 +87,15 @@ class Resena(models.Model):
 class OrganizacionEventoAcademico(models.Model):
     evento = models.ForeignKey(Evento)
     descipcion = models.TextField(blank=True)
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField
     responsabilidad = models.CharField(max_length=30, choices=EVENTO__RESPONSABILIDAD)
     numero_ponentes = models.PositiveIntegerField()
     numero_asistentes = models.PositiveIntegerField()
     ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
 
     def __str__(self):
-        return self.evento
+        return str(self.evento)
 
     class Meta:
-        ordering = ['fecha_inicio']
         verbose_name = 'Organización de evento académico'
         verbose_name_plural= 'Organización de eventos académicos'
 
@@ -108,8 +105,6 @@ class ParticipacionEventoAcademico(models.Model):
     slug = AutoSlugField(populate_from='titulo', unique=True)
     descipcion = models.TextField(blank=True)
     evento = models.ForeignKey(Evento)
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField
     resumen_publicado = models.BooleanField(default=False)
     autores = models.ManyToManyField(User, related_name='participacion_evento_academico_autores')
     ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
@@ -120,7 +115,6 @@ class ParticipacionEventoAcademico(models.Model):
         return "{} : {}".format(self.titulo, self.evento)
 
     class Meta:
-        ordering = ['fecha_inicio']
         verbose_name = 'Participación en evento académico'
         verbose_name_plural= 'Participación en eventos académicos'
 

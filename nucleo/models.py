@@ -328,17 +328,16 @@ class TipoEvento(models.Model):
 
 class Evento(models.Model):
     nombre_evento = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='evento', unique=True)
+    slug = AutoSlugField(populate_from='nombre_evento', unique=True)
     descripcion = models.TextField(blank=True)
     tipo = models.ForeignKey(TipoEvento)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     dependencias = models.ManyToManyField(Dependencia, related_name='_evento_dependencias')
     ubicacion = models.ForeignKey(Ubicacion)
-    ciudad = models.ForeignKey(Ciudad)
 
     def __str__(self):
-        return "{} : {} : {}".format(self.nombre_evento, self.fecha_inicio, self.ciudad)
+        return "{} : {} : {}".format(self.nombre_evento, self.fecha_inicio, self.ubicacion.ciudad)
 
     class Meta:
         ordering = ['fecha_inicio', 'nombre_evento']
