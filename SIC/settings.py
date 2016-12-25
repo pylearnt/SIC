@@ -25,8 +25,21 @@ SECRET_KEY = 'e&#jhulegv#2ddxr7x_ub=41l@jr8^f*v)4-bu+we(8v&93hi^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.10.2.203', '10.1.11.2', '201.144.41.229']
 
+STATUS_PUBLICACION = (('PUBLICADO', 'Publicado'), ('EN_PRENSA', 'En prensa'), ('ACEPTADO', 'Aceptado'), ('ENVIADO', 'Enviado'), ('OTRO', 'Otro'))
+STATUS_PROYECTO = (('NUEVO', 'Nuevo'), ('EN_PROCESO', 'En proceso'), ('CONCLUIDO', 'Concluído'), ('OTRO', 'Otro'))
+CLASIFICACION_PROYECTO = (('BASICO', 'Básico'), ('APLICADO', 'Aplicado'), ('DESARROLLO_TECNOLOGICO', 'Desarrollo tecnológico'), ('INNOVACION', 'Innovación'), ('INVESTIGACION_FRONTERA', 'Investigación de frontera'), ('OTRA', 'Otra'))
+ORGANIZACION_PROYECTO = (('INDIVIDUAL', 'Individual'), ('COLECTIVO', 'Colectivo'))
+MODALIDAD_PROYECTO = (('DISCIPLINARIO', 'Disciplinario'), ('MULTIDISCIPLINARIO', 'Multidisciplinario'), ('INTERDISCIPLINARIO', 'Interisciplinario'), ('TRANSDISCIPLINARIO', 'Transdisciplinario'), ('OTRA', 'Otra'))
+FINANCIAMIENTO_UNAM = (('ASIGNADO', 'Presupuesto asignado a la entidad'), ('CONCURSADO', 'Presupuesto concursado por la entidad'), ('AUTOGENERADO', 'Recursos autogenerados (extraordinarios)'), ('OTRO', 'Otro'))
+FINANCIAMIENTO_EXTERNO = (('ESTATAL', 'Gubernamental Estatal'), ('FEDERAL', 'Gubernamental Federal'), ('LUCRATIVO', 'Privado lucrativo'), ('NO_LUCRATIVO', 'Privado no lucrativo'), ('EXTRANJERO', 'Recursos del extranjero'))
+CURSO_ESPECIALIZACION_TIPO = (('CURSO', 'Curso'), ('DIPLOMADO', 'Diplomado'), ('CERTIFICACION', 'Certificación'), ('OTRO', 'Otro'))
+CURSO_ESPECIALIZACION_MODALIDAD = (('PRESENCIAL', 'Presencial'), ('EN_LINEA', 'En línea'), ('MIXTO', 'Mixto'), ('OTRO', 'Otro'))
+
+CARGO__TIPO_CARGO = (('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo'))
+EVENTO__AMBITO = (('INSTITUCIONAL', 'Institucional'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro'))
+EVENTO__RESPONSABILIDAD = (('COORDINADOR', 'Coordinador general'), ('COMITE', 'Comité organizador'), ('AYUDANTE', 'Ayudante'), ('TECNICO', 'Apoyo técnico'), ('OTRO', 'Otro'))
 
 # Application definition
 
@@ -37,8 +50,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'nucleo.apps.NucleoConfig',
+    'publicacion.apps.PublicacionConfig',
+    'formacion_academica.apps.FormacionAcademicaConfig',
+    'experiencia_laboral.apps.ExperienciaLaboralConfig',
+    'investigacion.apps.InvestigacionConfig',
+    'difusion_cientifica.apps.DifusionCientificaConfig',
+    'divulgacion_cientifica.apps.DivulgacionCientificaConfig',
+    'vinculacion.apps.VinculacionConfig',
     'apoyo_institucional.apps.ApoyoInstitucionalConfig',
-    'base.apps.BaseConfig',
+    'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -78,10 +100,19 @@ WSGI_APPLICATION = 'SIC.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'cigasic',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': '',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
+
 
 
 # Password validation
