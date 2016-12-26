@@ -41,6 +41,9 @@ CARGO__TIPO_CARGO = (('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administra
 EVENTO__AMBITO = (('INSTITUCIONAL', 'Institucional'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro'))
 EVENTO__RESPONSABILIDAD = (('COORDINADOR', 'Coordinador general'), ('COMITE', 'Comité organizador'), ('AYUDANTE', 'Ayudante'), ('TECNICO', 'Apoyo técnico'), ('OTRO', 'Otro'))
 
+RED_ACADEMICA__CLASIFICACION = (('LOCAL', 'Local'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro'))
+ENTIDAD_NO_ACADEMICA__CLASIFICACION = (('FEDERAL', 'Gubernamental federal'), ('ESTATAL', 'Gubernamental estatal'), ('PRIVADO', 'Sector privado'), ('NO_LUCRATIVO', 'Sector privado no lucrativo'), ('EXTRANJERO', 'Extranjero'), ('OTRO', 'Otro'))
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -88,7 +88,6 @@ class LibroPublicado(models.Model):
         ordering = ['libro']
 
 
-
 class CapituloLibroInvestigacion(models.Model):
     titulo = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='titulo', unique=True)
@@ -100,7 +99,7 @@ class CapituloLibroInvestigacion(models.Model):
     #status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
-    proyectos = models.ManyToManyField(Proyecto, related_name='capitulo_libro_investigacion_proyectos')
+    proyectos = models.ManyToManyField(Proyecto, related_name='capitulo_libro_investigacion_proyectos', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.titulo, self.libro)
