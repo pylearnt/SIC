@@ -13,9 +13,9 @@ class ExperienciaLaboral(models.Model):
     tipo_cargo = models.CharField(max_length=16, choices=(('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo')))
     es_permanente = models.BooleanField(default=False)
     departamento = models.ForeignKey(Departamento)
-    tags = models.ManyToManyField(Tag, related_name='experiencia_laboral_tags', blank=True)
     inicio = models.DateField()
     fin = models.DateField()
+    tags = models.ManyToManyField(Tag, related_name='experiencia_laboral_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.user, self.departamento, self.cargo)
@@ -31,9 +31,9 @@ class LineaInvestigacion(models.Model):
     linea_investigacion = models.CharField(max_length=255)
     descripcion = models.TextField(blank=True)
     es_permanente = models.BooleanField(default=False)
-    tags = models.ManyToManyField(Tag, related_name='linea_investigacion_tags', blank=True)
     inicio = models.DateField()
     fin = models.DateField()
+    tags = models.ManyToManyField(Tag, related_name='linea_investigacion_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.user, self.linea_investigacion)
@@ -49,9 +49,9 @@ class CapacidadPotencialidad(models.Model):
     competencia = models.CharField(max_length=255)
     descripcion = models.TextField(blank=True)
     es_permanente = models.BooleanField(default=False)
-    tags = models.ManyToManyField(Tag, related_name='capacidad_potencialidad_tags', blank=True)
     inicio = models.DateField()
     fin = models.DateField()
+    tags = models.ManyToManyField(Tag, related_name='capacidad_potencialidad_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.user, self.competencia)

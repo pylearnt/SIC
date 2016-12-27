@@ -40,7 +40,7 @@ class CursoEspecializacion(models.Model):
     area_conocimiento = models.ForeignKey(AreaConocimiento, verbose_name='Área de conocimiento')
     dependencias = models.ManyToManyField(Dependencia, related_name='cursos_especializacion')
     ubicacion = models.ForeignKey(Ubicacion, verbose_name='Ubicación')
-    tags = models.ManyToManyField(Tag, related_name='cursos_especializacion', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='curso_especializacion_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.area_conocimiento, self.curso, self.inicio)
@@ -76,6 +76,7 @@ class Licenciatura(models.Model):
     fecha_inicio = models.DateField('Fecha de inicio de licenciatura', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de licenciatura', auto_now=False, blank=True)
     fecha_grado = models.DateField('Fecha de obtención de grado licenciatura', auto_now=False, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='licenciatura_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.dependencia, self.carrera, self.titulo_tesis)
@@ -96,6 +97,7 @@ class Maestria(models.Model):
     fecha_inicio = models.DateField('Fecha de inicio de maestría', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de maestría', auto_now=False, blank=True)
     fecha_grado = models.DateField('Fecha de obtención de grado de maestría', auto_now=False, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='maestria_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.dependencia, self.area_conocimiento, self.titulo_tesis)
@@ -116,6 +118,7 @@ class Doctorado(models.Model):
     fecha_inicio = models.DateField('Fecha de inicio de doctorado', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de doctorado', auto_now=False, blank=True, null=True)
     fecha_grado = models.DateField('Fecha de obtención de grado de doctorado', auto_now=False, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='doctorado_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.dependencia, self.area_conocimiento, self.titulo_tesis)
@@ -130,6 +133,7 @@ class PostDoctorado(models.Model):
     dependencia = models.ForeignKey(Dependencia)
     fecha_inicio = models.DateField('Fecha de inicio de postdoctorado', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de postdoctorado', auto_now=False)
+    tags = models.ManyToManyField(Tag, related_name='post_doctorado_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.investigador, self.dependencia, self.area_conocimiento)
