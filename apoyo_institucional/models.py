@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Cargo
+from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dependencia, Departamento, Cargo
 
 
 # Create your models here.
@@ -26,14 +26,16 @@ class Actividad(models.Model):
         verbose_name_plural = 'Actividades'
 
 
-class Representante(models.Model):
-    representante = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='representante', unique=True)
+class Representacion(models.Model):
+    representacion = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='representacion', unique=True)
 
     def __str__(self):
-        return self.representante
+        return self.representacion
     class Meta:
-        verbose_name_plural = 'Representantes'
+        ordering = ['representacion']
+        verbose_name = 'Representación'
+        verbose_name_plural = 'Representaciones'
 
 
 class OrganoColegiado(models.Model):
@@ -46,30 +48,10 @@ class OrganoColegiado(models.Model):
         verbose_name_plural = 'Organos Colegiados'
 
 
-class RepresentanteAnteOrganoColegiado(models.Model):
-    representante = models.ForeignKey(Representante)
-    organo_colegiado = models.ForeignKey(OrganoColegiado)
-    user = models.ForeignKey(User)
-    dependencia = models.ForeignKey(Dependencia)
-    ubicacion = models.ForeignKey(Ubicacion)
-    cargo_inicio = models.DateField(auto_now=False)
-    cargo_fin = models.DateField(auto_now=False)
-    slug = AutoSlugField(populate_from='representante', unique=True)
-
-    def __str__(self):
-        return "[ {} : {} : {} ] : {} : {} : {} : {}".format(self.user, self.representante, self.organo_colegiado, self.dependencia.dependencia, self.dependencia.institucion, self.cargo_inicio, self.cargo_fin)
-    class Meta:
-        verbose_name_plural = 'Representantes Ante Organos Colegiados'
-        unique_together = ('representante', 'organo_colegiado', 'user', 'dependencia', 'cargo_inicio')
-        ordering = ['-cargo_inicio']
-        get_latest_by = ['user', 'organo_colegiado', 'representante']
-
-
 class CargoAcademicoAdministrativo(models.Model):
     cargo = models.ForeignKey(Cargo)
     user = models.ForeignKey(User)
     dependencia = models.ForeignKey(Dependencia)
-    ubicacion = models.ForeignKey(Ubicacion)
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
     slug = AutoSlugField(populate_from='cargo', unique=True)
@@ -81,6 +63,22 @@ class CargoAcademicoAdministrativo(models.Model):
         unique_together = ('cargo', 'user', 'dependencia', 'cargo_inicio')
         ordering = ['-cargo_inicio']
         get_latest_by = ['user', 'cargo']
+
+
+class RepresentanteAnteOrganoColegiado(models.Model):
+    representante = models.ForeignKey(User)
+    representacion = models.ForeignKey(Representacion)
+    ante = models.ForeignKey(Departamento)
+    dependencia = models.ForeignKey(Dependencia)
+    cargo_inicio = models.DateField(auto_now=False)
+    cargo_fin = models.DateField(auto_now=False)
+
+    def __str__(self):
+        return "{} : {} : {} : {} : {} - {}".format(self.representante, self.representacion, self.ante, self.dependencia, self.cargo_inicio, self.cargo_fin)
+    class Meta:
+        verbose_name_plural = 'Representantes Ante Organos Colegiados'
+        unique_together = ('representante', 'organo_colegiado', 'user', 'dependencia', 'cargo_in    icio')
+        ordering = ['-cargo_inicio']
 
 
 class ComisionAcademica(models.Model):

@@ -70,7 +70,6 @@ class RedAcademica(models.Model):
     nombre = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='nombre', unique=True)
     descripcion = models.TextField(blank=True)
-    es_agradecimiento = models.BooleanField(blank=True)
     clasificacion = models.CharField(max_length=20, choices=RED_ACADEMICA__CLASIFICACION)
     regiones = models.ManyToManyField(Region, related_name='red_academica_regiones', blank=True)
     paises = models.ManyToManyField(Pais, related_name='red_academica_paises', blank=True)
@@ -125,8 +124,7 @@ class ClasificacionServicio(models.Model):
 
 class ServicioExternoEntidadNoAcademica(models.Model):
     nombre_servicio = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='nombre', unique=True)
-    es_agradecimiento = models.BooleanField(blank=True)
+    slug = AutoSlugField(populate_from='nombre_servicio', unique=True)
     clasificacion_servicio = models.ForeignKey(ClasificacionServicio)
     descripcion = models.TextField(blank=True)
     dependencia = models.ForeignKey(Dependencia)
@@ -146,13 +144,12 @@ class ServicioExternoEntidadNoAcademica(models.Model):
 
 class OtroProgramaVinculacion(models.Model):
     nombre_servicio = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='nombre', unique=True)
-    es_agradecimiento = models.BooleanField(blank=True)
+    slug = AutoSlugField(populate_from='nombre_servicio', unique=True)
     fecha = models.DateField()
     tipo = models.CharField(max_length=20, choices=(('VINCULLACION', 'Vinculación'), ('COLABORACION', 'Colaboración'), ('COOPERACION', 'Cooperación'), ('OTRO', 'Otro')))
     descripcion = models.TextField()
     dependencias = models.ManyToManyField(Dependencia)
-    resultados = models.TextField()
+    resultados = models.TextField(blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.nombre_servicio, self.fecha)
