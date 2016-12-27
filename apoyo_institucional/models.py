@@ -9,6 +9,7 @@ from nucleo.models import Tag, Pais, Estado, Ciudad, Ubicacion, Institucion, Dep
 class Comision(models.Model):
     comision = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='comision', unique=True)
+    descripcion = models.TextField(blank=True)
 
     def __str__(self):
         return self.comision
@@ -19,6 +20,7 @@ class Comision(models.Model):
 class Actividad(models.Model):
     actividad = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='actividad', unique=True)
+    descripcion = models.TextField(blank=True)
 
     def __str__(self):
         return self.actividad
@@ -29,6 +31,7 @@ class Actividad(models.Model):
 class Representacion(models.Model):
     representacion = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='representacion', unique=True)
+    descripcion = models.TextField(blank=True)
 
     def __str__(self):
         return self.representacion
@@ -37,7 +40,7 @@ class Representacion(models.Model):
         verbose_name = 'Representación'
         verbose_name_plural = 'Representaciones'
 
-
+"""
 class OrganoColegiado(models.Model):
     organo_colegiado = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='organo_colegiado', unique=True)
@@ -46,11 +49,12 @@ class OrganoColegiado(models.Model):
         return self.organo_colegiado
     class Meta:
         verbose_name_plural = 'Organos Colegiados'
-
+"""
 
 class CargoAcademicoAdministrativo(models.Model):
     cargo = models.ForeignKey(Cargo)
     user = models.ForeignKey(User)
+    descripcion = models.TextField(blank=True)
     dependencia = models.ForeignKey(Dependencia)
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
@@ -69,28 +73,32 @@ class RepresentanteAnteOrganoColegiado(models.Model):
     representante = models.ForeignKey(User)
     representacion = models.ForeignKey(Representacion)
     ante = models.ForeignKey(Departamento)
-    dependencia = models.ForeignKey(Dependencia)
+    descripcion = models.TextField(blank=True)
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
+    tags = models.ManyToManyField(Tag, related_name='representante_ante_organo_colegiado_tags', blank=True)
+
 
     def __str__(self):
-        return "{} : {} : {} : {} : {} - {}".format(self.representante, self.representacion, self.ante, self.dependencia, self.cargo_inicio, self.cargo_fin)
+        return "{} : {} : {} : {} - {}".format(self.representante, self.representacion, self.ante, self.cargo_inicio, self.cargo_fin)
     class Meta:
         verbose_name_plural = 'Representantes Ante Organos Colegiados'
-        unique_together = ('representante', 'organo_colegiado', 'user', 'dependencia', 'cargo_in    icio')
+        unique_together = ('representante', 'representacion', 'cargo_inicio')
         ordering = ['-cargo_inicio']
 
 
 class ComisionAcademica(models.Model):
     comision_academica = models.ForeignKey(Comision)
-    descripcion = models.TextField()
+    slug = AutoSlugField(populate_from='comision_academica', unique=True)
+    descripcion = models.TextField(blank=True)
     user = models.ForeignKey(User)
+    es_evaluacion = models.BooleanField(default=False)
     dependencia = models.ForeignKey(Dependencia)
     ubicacion = models.ForeignKey(Ubicacion)
     comision_inicio = models.DateField(auto_now=False)
     comision_fin = models.DateField(auto_now=False)
-    tags = models.ManyToManyField(Tag)
-    slug = AutoSlugField(populate_from='comision_academica', unique=True)
+    tags = models.ManyToManyField(Tag, related_name='comision_academica_tags', blank=True)
+
 
     def __str__(self):
         return "[{}] : {} : {} : {}".format(self.user, self.comision_academica, self.comision_inicio, self.comision_fin)
@@ -100,7 +108,7 @@ class ComisionAcademica(models.Model):
         ordering = ['-comision_inicio']
         get_latest_by = ['user', 'comision_academica']
 
-
+"""
 class ComisionEvaluacion(models.Model):
     comision_evaluacion = models.ForeignKey(Comision)
     descripcion = models.TextField()
@@ -120,7 +128,7 @@ class ComisionEvaluacion(models.Model):
         unique_together = ('comision_evaluacion', 'user', 'dependencia', 'comision_inicio')
         ordering = ['-comision_inicio']
         get_latest_by = ['user', 'comision_evaluacion']
-
+"""
 
 class ApoyoTecnico(models.Model):
     apoyo_tecnico = models.ForeignKey(Actividad)
