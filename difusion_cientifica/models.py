@@ -47,6 +47,7 @@ class PrologoLibro(models.Model):
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
     url = models.URLField(blank=True)
+    tags = models.ManyToManyField(Tag, related_name='prologo_libro_tags', blank=True)
 
     def __str__(self):
         return '{} : {}'.format(self.autor_prologo, self.libro)
@@ -68,13 +69,12 @@ class Resena(models.Model):
     libros = models.ManyToManyField(Libro, related_name='resena_libros', blank=True)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
-
     autor_resena = models.ForeignKey(User)
     autores = models.ManyToManyField(User, related_name='resena_autores', blank=True)
     editores = models.ManyToManyField(User, related_name='resena_editores', blank=True)
     coordinadores = models.ManyToManyField(User, related_name='resena_coordinadores', blank=True)
-
     url = models.URLField(blank=True)
+    tags = models.ManyToManyField(Tag, related_name='resena_tags', blank=True)
 
     def __str__(self):
         return '{} : {}'.format(self.autor_resena, self.titulo_resena)
@@ -91,6 +91,7 @@ class OrganizacionEventoAcademico(models.Model):
     numero_ponentes = models.PositiveIntegerField()
     numero_asistentes = models.PositiveIntegerField()
     ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
+    tags = models.ManyToManyField(Tag, related_name='organizacion_evento_academico_tags', blank=True)
 
     def __str__(self):
         return str(self.evento)
@@ -110,6 +111,7 @@ class ParticipacionEventoAcademico(models.Model):
     ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
     por_invitacion = models.BooleanField(default=False)
     ponencia_magistral = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tag, related_name='participacion_evento_academico_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.titulo, self.evento)

@@ -34,6 +34,7 @@ class ArticuloDivulgacion(models.Model):
     pagina_fin = models.PositiveIntegerField()
     id_doi = models.CharField(max_length=100, blank=True)
     proyectos = models.ManyToManyField(Proyecto, related_name='articulo_divulgracion_proyectos', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='articulo_divulgacion_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.titulo, self.tipo.title(), self.revista)
@@ -50,6 +51,7 @@ class LibroDivulgacion(models.Model):
     descripcion = models.TextField(blank=True)
     #status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
     proyectos = models.ManyToManyField(Proyecto, related_name='libro_divulgracion_proyectos', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='libro_divulgacion_tags', blank=True)
 
     def __str__(self):
         return str(self.libro)
@@ -68,11 +70,11 @@ class CapituloLibroDivulgacion(models.Model):
     autores = models.ManyToManyField(User, related_name='capitulo_libro_divulgracion_autores')
     editores = models.ManyToManyField(User, related_name='capitulo_libro_divulgracion_editores', blank=True)
     coordinadores = models.ManyToManyField(User, related_name='capitulo_libro_divulgracion_coordinadores', blank=True)
-
     #status = models.CharField(max_length=20, choices=STATUS_PUBLICACION)
     pagina_inicio = models.PositiveIntegerField()
     pagina_fin = models.PositiveIntegerField()
     proyectos = models.ManyToManyField(Proyecto, related_name='capitulo_libro_divulgracion_proyectos', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='capitulo_libro_divulgacion_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.titulo, self.libro)
@@ -89,6 +91,7 @@ class OrganizacionEvento(models.Model):
     numero_ponentes = models.PositiveIntegerField()
     numero_asistentes = models.PositiveIntegerField()
     ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
+    tags = models.ManyToManyField(Tag, related_name='organizacion_evento_tags', blank=True)
 
     def __str__(self):
         return str(self.evento)
@@ -108,6 +111,7 @@ class ParticipacionEvento(models.Model):
     ambito = models.CharField(max_length=20, choices=EVENTO__AMBITO)
     por_invitacion = models.BooleanField(default=False)
     ponencia_magistral = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tag, related_name='participacion_evento_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.titulo, self.evento)
@@ -124,6 +128,7 @@ class MedioDivulgacion(models.Model):
     slug = AutoSlugField(populate_from='nombre_medio', unique=True)
     canal = models.CharField(max_length=255)
     ubicacion = models.ForeignKey(Ubicacion)
+    tags = models.ManyToManyField(Tag, related_name='medio_divulgacion_tags', blank=True)
 
     def __str__(self):
         return self.nombre_medio
@@ -143,6 +148,7 @@ class ProgramaRadioTelevisionInternet(models.Model):
     medio = models.CharField(max_length=20, choices=(('PERIODICO', 'Periódico'), ('RADIO', 'Radio'), ('TV', 'Televisión'), ('INTERNET', 'Internet'), ('OTRO', 'Otro')))
     nombre_medio = models.ForeignKey(MedioDivulgacion)
     partiticipantes = models.ManyToManyField(User, related_name='programa_radio_television_internet_participantes')
+    tags = models.ManyToManyField(Tag, related_name='programa_radio_television_internet_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.nombre_medio, self.tema, self.fecha)

@@ -59,6 +59,7 @@ class CargoAcademicoAdministrativo(models.Model):
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
     slug = AutoSlugField(populate_from='cargo', unique=True)
+    tags = models.ManyToManyField(Tag, related_name='cargo_academico_administrativo_tags', blank=True)
 
     def __str__(self):
         return "[ {} : {} ] : {} : {} : {} : {}".format(self.user, self.cargo, self.dependencia.dependencia, self.dependencia.institucion, self.cargo_inicio, self.cargo_fin)
@@ -77,7 +78,6 @@ class RepresentanteAnteOrganoColegiado(models.Model):
     cargo_inicio = models.DateField(auto_now=False)
     cargo_fin = models.DateField(auto_now=False)
     tags = models.ManyToManyField(Tag, related_name='representante_ante_organo_colegiado_tags', blank=True)
-
 
     def __str__(self):
         return "{} : {} : {} : {} - {}".format(self.representante, self.representacion, self.ante, self.cargo_inicio, self.cargo_fin)
@@ -98,7 +98,6 @@ class ComisionAcademica(models.Model):
     comision_inicio = models.DateField(auto_now=False)
     comision_fin = models.DateField(auto_now=False)
     tags = models.ManyToManyField(Tag, related_name='comision_academica_tags', blank=True)
-
 
     def __str__(self):
         return "[{}] : {} : {} : {}".format(self.user, self.comision_academica, self.comision_inicio, self.comision_fin)
@@ -140,6 +139,7 @@ class ApoyoTecnico(models.Model):
     apoyo_fin = models.DateField(auto_now=False)
     tags = models.ManyToManyField(Tag)
     slug = AutoSlugField(populate_from='apoyo_tecnico', unique=True)
+    tags = models.ManyToManyField(Tag, related_name='apoyo_tecnico_tags', blank=True)
 
     def __str__(self):
         return "[{}] : {} : {} : {}".format(self.user, self.apoyo_tecnico, self.apoyo_inicio, self.apoyo_fin)
@@ -157,8 +157,8 @@ class ApoyoOtraActividad(models.Model):
     ubicacion = models.ForeignKey(Ubicacion)
     apoyo_inicio = models.DateField(auto_now=False)
     apoyo_fin = models.DateField(auto_now=False)
-    tags = models.ManyToManyField(Tag)
-    slug = AutoSlugField(populate_from='apoyo_actividad', unique=True)
+    slug = AutoSlugField(populate_from='apoyo_otra_actividad_tags', unique=True)
+    tags = models.ManyToManyField(Tag, related_name='apoyo_otra_actividad_tags', blank=True)
 
     def __str__(self):
         return "[{}] : {} : {} : {}".format(self.user, self.apoyo_actividad, self.apoyo_inicio, self.apoyo_fin)

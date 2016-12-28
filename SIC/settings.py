@@ -62,7 +62,10 @@ INSTALLED_APPS = [
     'divulgacion_cientifica.apps.DivulgacionCientificaConfig',
     'vinculacion.apps.VinculacionConfig',
     'apoyo_institucional.apps.ApoyoInstitucionalConfig',
+    'movilidad_academica.apps.MovilidadAcademicaConfig',
+    'docencia.apps.DocenciaConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
+
 
 ]
 

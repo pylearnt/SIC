@@ -21,6 +21,7 @@ class ArbitrajePublicacionAcademica(models.Model):
     capitulo_libro = models.ForeignKey(CapituloLibroInvestigacion, blank=True)
     fecha_dictamen = models.DateField()
     participantes = models.ManyToManyField(User, related_name='arbitraje_publicacion_participantes', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='arbitraje_publicacion_academica_tags', blank=True)
 
     def __str__(self):
         lista_titulos = [self.revista, self.libro, self.capitulo_libro]
@@ -39,6 +40,7 @@ class ArbitrajeProyectoInvestigacion(models.Model):
     descripcion = models.TextField(blank=True)
     proyecto = models.ForeignKey(Proyecto)
     participantes = models.ManyToManyField(User, related_name='arbitraje_proyecto_investigacion_participantes', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='arbitraje_proyecto_investigacion_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(str(self.proyecto), self.fecha)
@@ -56,6 +58,7 @@ class ArbitrajeOtrasActividades(models.Model):
     dependencia = models.ForeignKey(Dependencia)
     fecha = models.DateField()
     participantes = models.ManyToManyField(User, related_name='arbitraje_otras_actividades_participantes', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='arbitraje_otras_actividades_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.actividad, self.dependencia)
@@ -78,6 +81,7 @@ class RedAcademica(models.Model):
     vigente = models.BooleanField(default=False)
     academicos = models.ManyToManyField(User, related_name='red_academica_academicos')
     proyectos = models.ManyToManyField(Proyecto, related_name='red_academica_proyectos', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='red_academica_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.nombre, self.fecha_constitucion)
@@ -100,6 +104,7 @@ class ConvenioEntidadNoAcademica(models.Model):
     fecha_fin = models.DateField()
     es_renovacion = models.BooleanField(default=False)
     incluye_financiamiento = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tag, related_name='convenio_entidad_academica_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.nombre, self.fecha_inicio)
@@ -132,6 +137,7 @@ class ServicioExternoEntidadNoAcademica(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     incluye_financiamiento = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tag, related_name='servicio_externo_entidad_academica_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.nombre_servicio, self.fecha_inicio)
@@ -150,6 +156,7 @@ class OtroProgramaVinculacion(models.Model):
     descripcion = models.TextField()
     dependencias = models.ManyToManyField(Dependencia)
     resultados = models.TextField(blank=True)
+    tags = models.ManyToManyField(Tag, related_name='otro_programa_vinculacion_tags', blank=True)
 
     def __str__(self):
         return "{} : {}".format(self.nombre_servicio, self.fecha)

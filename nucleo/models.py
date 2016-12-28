@@ -254,22 +254,6 @@ class TipoFinanciamientoUNAM(models.Model):
         verbose_name_plural = 'Tipos de Presupuesto UNAM'
 """
 
-class FinanciamientoUNAM(models.Model):
-    financiamiento = models.CharField(max_length=80, choices=FINANCIAMIENTO_UNAM)
-    descripcion = models.TextField(blank=True)
-    programas_financiamiento = models.ManyToManyField(Programa, related_name='financiamiento_unam_programas_financiamiento', blank=True)
-    dependencias_financiamiento = models.ManyToManyField(Dependencia, related_name='financiamiento_unam_dependencias_financiamiento', blank=True)
-    clave_proyecto = models.CharField(max_length=255)
-
-    def __str__(self):
-        return "{} : {}".format(self.financiamiento, self.clave_proyecto)
-
-    class Meta:
-        ordering = ['financiamiento']
-        verbose_name = 'Financiamiento UNAM'
-        verbose_name_plural = 'Financiamientos UNAM'
-
-
 """
 class TipoFinanciamientoExterno(models.Model):
     tipo_financiamiento = models.CharField(max_length=255, unique=True)
@@ -286,6 +270,22 @@ class TipoFinanciamientoExterno(models.Model):
 """
 
 
+class FinanciamientoUNAM(models.Model):
+    financiamiento = models.CharField(max_length=80, choices=FINANCIAMIENTO_UNAM)
+    descripcion = models.TextField(blank=True)
+    programas_financiamiento = models.ManyToManyField(Programa, related_name='financiamiento_unam_programas_financiamiento', blank=True)
+    dependencias_financiamiento = models.ManyToManyField(Dependencia, related_name='financiamiento_unam_dependencias_financiamiento', blank=True)
+    clave_proyecto = models.CharField(max_length=255)
+
+    def __str__(self):
+        return "{} : {}".format(self.financiamiento, self.clave_proyecto)
+
+    class Meta:
+        ordering = ['financiamiento']
+        verbose_name = 'Financiamiento UNAM'
+        verbose_name_plural = 'Financiamientos UNAM'
+
+
 class FinanciamientoExterno(models.Model):
     financiamiento = models.CharField(max_length=80, choices=FINANCIAMIENTO_EXTERNO)
     descripcion = models.TextField(blank=True)
@@ -300,7 +300,6 @@ class FinanciamientoExterno(models.Model):
         ordering = ['financiamiento']
         verbose_name = 'Financiamiento (externo)'
         verbose_name_plural = 'Financiamientos (externos)'
-
 
 class Metodologia(models.Model):
     metodologia = models.CharField(max_length=255, unique=True)
