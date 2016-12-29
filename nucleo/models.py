@@ -306,11 +306,22 @@ class Metodologia(models.Model):
     slug = AutoSlugField(populate_from='metodologia', unique=True)
     descripcion = models.TextField(blank=True)
 
+
     def __str__(self):
         return self.metodologia
 
     class Meta:
         ordering = ['metodologia']
+
+
+class Beca(models.Model):
+    beca = models.CharField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='beca', unique=True)
+    descripcion = models.TextField(blank=True)
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "{} : {}".format(self.beca, str(self.dependencia.dependencia))
 
 
 class TipoEvento(models.Model):
