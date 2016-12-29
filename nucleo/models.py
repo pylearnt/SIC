@@ -324,6 +324,48 @@ class Beca(models.Model):
         return "{} : {}".format(self.beca, str(self.dependencia.dependencia))
 
 
+class ProgramaLicenciatura(models.Model):
+    programa = models.CharField(max_length=255, unique=True)
+    descripcion = models.TextField(blank=True)
+    slug = AutoSlugField(populate_from='programa', unique=True)
+
+    def __str__(self):
+        return self.programa
+
+    class Meta:
+        ordering = 'programa'
+        verbose_name = 'Programa de licenciatura'
+        ordering = ['Programas de licenciatura']
+
+
+class ProgramaMaestria(models.Model):
+    programa = models.CharField(max_length=255, unique=True)
+    descripcion = models.TextField(blank=True)
+    slug = AutoSlugField(populate_from='programa', unique=True)
+
+    def __str__(self):
+        return self.programa
+
+    class Meta:
+        ordering = 'programa'
+        verbose_name = 'Programa de maestria'
+        ordering = ['Programas de maestria']
+
+
+class ProgramaDoctorado(models.Model):
+    programa = models.CharField(max_length=255, unique=True)
+    descripcion = models.TextField(blank=True)
+    slug = AutoSlugField(populate_from='programa', unique=True)
+
+    def __str__(self):
+        return self.programa
+
+    class Meta:
+        ordering = 'programa'
+        verbose_name = 'Programa de doctorado'
+        ordering = ['Programas de doctorado']
+
+
 class TipoEvento(models.Model):
     tipo_evento = models.CharField(max_length=100, unique=True)
     slug = AutoSlugField(populate_from='tipo_evento')
