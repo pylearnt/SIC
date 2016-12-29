@@ -5,7 +5,7 @@ from django.contrib import admin
 from . models import Tag, Pais, Estado, Ciudad, Region, Ubicacion, Institucion, Dependencia, Departamento, \
     Programa, AreaConocimiento, AreaWOS, AreaEspecialidad, ImpactoSocial, Cargo, \
     FinanciamientoUNAM, FinanciamientoExterno, Metodologia, TipoEvento, Evento, Proyecto, ProgramaLicenciatura, \
-    ProgramaMaestria, ProgramaDoctorado
+    ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion
 
 admin.site.register(Tag)
 admin.site.register(Pais)
@@ -31,3 +31,4 @@ admin.site.register(Proyecto)
 admin.site.register(ProgramaLicenciatura)
 admin.site.register(ProgramaMaestria)
 admin.site.register(ProgramaDoctorado)
+admin.site.register(ProgramaEspecializacion)

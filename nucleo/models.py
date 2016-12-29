@@ -333,9 +333,9 @@ class ProgramaLicenciatura(models.Model):
         return self.programa
 
     class Meta:
-        ordering = 'programa'
+        ordering = ['programa']
         verbose_name = 'Programa de licenciatura'
-        ordering = ['Programas de licenciatura']
+        verbose_name_plural = 'Programas de licenciatura'
 
 
 class ProgramaMaestria(models.Model):
@@ -347,9 +347,9 @@ class ProgramaMaestria(models.Model):
         return self.programa
 
     class Meta:
-        ordering = 'programa'
+        ordering = ['programa']
         verbose_name = 'Programa de maestria'
-        ordering = ['Programas de maestria']
+        verbose_name_plural = 'Programas de maestria'
 
 
 class ProgramaDoctorado(models.Model):
@@ -361,9 +361,23 @@ class ProgramaDoctorado(models.Model):
         return self.programa
 
     class Meta:
-        ordering = 'programa'
+        ordering = ['programa']
         verbose_name = 'Programa de doctorado'
-        ordering = ['Programas de doctorado']
+        verbose_name_plural = 'Programas de doctorado'
+
+
+class ProgramaEspecializacion(models.Model):
+    programa = models.CharField(max_length=255, unique=True)
+    descripcion = models.TextField(blank=True)
+    slug = AutoSlugField(populate_from='programa', unique=True)
+
+    def __str__(self):
+        return self.programa
+
+    class Meta:
+        ordering = ['programa']
+        verbose_name = 'Programa de especialización'
+        verbose_name_plural = 'Programas de especialización'
 
 
 class TipoEvento(models.Model):
@@ -394,6 +408,7 @@ class Evento(models.Model):
     class Meta:
         ordering = ['fecha_inicio', 'nombre_evento']
         unique_together = ['fecha_inicio', 'nombre_evento']
+
 
 
 class Proyecto(models.Model):

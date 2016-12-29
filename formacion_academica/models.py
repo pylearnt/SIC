@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Pais, Ubicacion, Institucion, Dependencia, AreaConocimiento, AreaEspecialidad, \
-    ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado
+    ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion
 
 CURSO_ESPECIALIZACION_TIPO = getattr(settings, 'CURSO_ESPECIALIZACION_TIPO', (('CURSO', 'Curso'), ('DIPLOMADO', 'Diplomado'), ('CERTIFICACION', 'Certificación'), ('OTRO', 'Otro')))
 CURSO_ESPECIALIZACION_MODALIDAD = getattr(settings, 'CURSO_ESPECIALIZACION_MODALIDAD', (('PRESENCIAL', 'Presencial'), ('EN_LINEA', 'En línea'), ('MIXTO', 'Mixto'), ('OTRO', 'Otro')))
@@ -29,6 +29,7 @@ class TipoCurso(models.Model):
 class CursoEspecializacion(models.Model):
     curso = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='curso', unique=True)
+    programa = models.ForeignKey(ProgramaEspecializacion)
     descripcion = models.TextField(verbose_name='Descripición', blank=True)
     instructores = models.ManyToManyField(User, related_name='cursos_especializacion_instructores')
     enrolados = models.ManyToManyField(User, related_name='cursos_especializacion_enrolados')
@@ -52,9 +53,6 @@ class CursoEspecializacion(models.Model):
         unique_together = ['area_conocimiento', 'curso', 'inicio']
 
 
-
-
-
 class Licenciatura(models.Model):
     titulo_tesis = models.CharField(max_length=255)
     programa = models.ForeignKey(ProgramaLicenciatura)
@@ -71,9 +69,9 @@ class Licenciatura(models.Model):
     tags = models.ManyToManyField(Tag, related_name='licenciatura_tags', blank=True)
 
     def __str__(self):
-        return "{} : {} : {}".format(self.dependencia, self.programa, self.titulo_tesis)
+        return "{} : {} : {}".format(self.dependencia, str(self.programa), self.titulo_tesis)
     class Meta:
-        ordering = ['fecha_grado', 'dependencia', 'programa']
+        ordering = ['fecha_grado', 'dependencia']
 
 
 class Maestria(models.Model):

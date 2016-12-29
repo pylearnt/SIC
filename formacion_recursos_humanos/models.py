@@ -37,6 +37,7 @@ class AsesorEstancia(models.Model):
 
 class DireccionTesis(models.Model):
     grado_academico = models.CharField(max_length=20, choices=GRADO_ACADEMICO)
+    fecha_inicio = models.DateField()
     fecha_examen = models.DateField()
     asesorado = models.ForeignKey(User, related_name='asesor_estancia_asesorado')
     tesis = models.ForeignKey(Tesis)
