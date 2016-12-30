@@ -1,6 +1,5 @@
 from django.db import models
 
-from django.db import models
 from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from nucleo.models import Tag, Dependencia, FinanciamientoUNAM, FinanciamientoExterno

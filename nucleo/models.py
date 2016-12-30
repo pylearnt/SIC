@@ -432,7 +432,7 @@ class Evento(models.Model):
         unique_together = ['fecha_inicio', 'nombre_evento']
 
 
-class distincion(models.Model):
+class Distincion(models.Model):
     nombre_distincion = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='nombre_distincion', unique=True)
     descripcion = models.TextField(blank=True)
