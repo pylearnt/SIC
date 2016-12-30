@@ -11,46 +11,32 @@ CURSO_ESPECIALIZACION_MODALIDAD = getattr(settings, 'CURSO_ESPECIALIZACION_MODAL
 
 # Create your models here.
 
-"""
-class TipoCurso(models.Model):
-    tipo = models.CharField(verbose_name='Tipo de curso', max_length=255, unique=True)
-    descripcion = models.TextField(verbose_name='Descripición', blank=True)
-    slug = AutoSlugField(populate_from='tipo', unique=True)
-
-    def __str__(self):
-        return self.tipo
-
-    class Meta:
-        ordering = ['tipo']
-        verbose_name = 'Tipo de curso'
-        verbose_name_plural = 'Tipos de curso (no usado ya)'
-"""
 
 class CursoEspecializacion(models.Model):
-    curso = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='curso', unique=True)
-    programa = models.ForeignKey(ProgramaEspecializacion)
-    descripcion = models.TextField(verbose_name='Descripición', blank=True)
-    instructores = models.ManyToManyField(User, related_name='cursos_especializacion_instructores')
-    enrolados = models.ManyToManyField(User, related_name='cursos_especializacion_enrolados')
-    agradecimientos = models.ManyToManyField(User, related_name='cursos_especializacion_agradecimientos', blank=True)
-    tipo = models.CharField(max_length=16, choices=CURSO_ESPECIALIZACION_TIPO)
-    modalidad = models.CharField(max_length=16, choices=CURSO_ESPECIALIZACION_MODALIDAD)
-    inicio = models.DateField('Fecha de inicio', auto_now=False)
-    fin = models.DateField('Fecha de finalización', blank=True)
-    horas = models.PositiveIntegerField()
+    nombre_curso = models.CharField(max_length=255, verbose_name='Nombre del curso')
+    slug = AutoSlugField(populate_from='nombre_curso', unique=True)
+    descripcion = models.TextField(verbose_name='Descripción', blank=True)
+    fecha_inicio = models.DateField('Fecha de inicio')
+    fecha_fin = models.DateField('Fecha de finalización', blank=True, null=True)
     area_conocimiento = models.ForeignKey(AreaConocimiento, verbose_name='Área de conocimiento')
-    dependencias = models.ManyToManyField(Dependencia, related_name='cursos_especializacion')
-    ubicacion = models.ForeignKey(Ubicacion, verbose_name='Ubicación')
-    tags = models.ManyToManyField(Tag, related_name='curso_especializacion_tags', blank=True)
+    #programa_especializacion = models.ForeignKey(ProgramaEspecializacion, verbose_name='Programa de especialización')
+    instructores = models.ManyToManyField(User, related_name='_curso_especializacion_instructores')
+    enrolados = models.ManyToManyField(User, related_name='_curso_especializacion_enrolados', blank=True)
+    dependencias = models.ManyToManyField(Dependencia, related_name='_curso_especializacion_dependencias', blank=True)
+    ubicacion = models.ForeignKey(Ubicacion, verbose_name='Ubicación', blank=True, null=True)
+    tipo = models.CharField(max_length=20, choices=CURSO_ESPECIALIZACION_TIPO, verbose_name='Tipo de curso')
+    modalidad = models.CharField(max_length=20, choices=CURSO_ESPECIALIZACION_MODALIDAD)
+    horas = models.PositiveIntegerField(verbose_name='Número de horas')
+    tags = models.ManyToManyField(Tag, related_name='_curso_especializacion_tags', blank=True)
 
     def __str__(self):
-        return "{} : {} : {}".format(self.area_conocimiento, self.curso, self.inicio)
+        return "{} : {} : {}".format(self.area_conocimiento, self.nombre_curso, self.fecha_inicio)
+
     class Meta:
-        ordering = ['area_conocimiento', 'curso', 'inicio']
+        ordering = ['-fecha_inicio']
         verbose_name = 'Curso de especialización'
         verbose_name_plural = 'Cursos de especialización'
-        unique_together = ['area_conocimiento', 'curso', 'inicio']
+        unique_together = ['area_conocimiento', 'nombre_curso', 'fecha_inicio']
 
 
 class Licenciatura(models.Model):
@@ -92,6 +78,7 @@ class Maestria(models.Model):
 
     def __str__(self):
         return "{} : {} : {}".format(self.dependencia, self.area_conocimiento, self.titulo_tesis)
+
     class Meta:
         ordering = ['fecha_grado', 'dependencia', 'titulo_tesis']
 

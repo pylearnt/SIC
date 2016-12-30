@@ -27,16 +27,31 @@ class Tag(models.Model):
         ordering = ['tag']
 
 
+class ZonaPais(models.Model):
+    zona = models.CharField(max_length=60, unique=True)
+    slug = AutoSlugField(populate_from='zona')
+
+    def __str__(self):
+        return self.zona
+
+    class Meta:
+        ordering = ['zona']
+        verbose_name = 'Zona de paises'
+        verbose_name_plural = 'Zonas de paises'
+
+
 class Pais(models.Model):
-    pais = models.CharField(max_length=200, unique=True)
-    slug = AutoSlugField(populate_from='pais')
+    nombre = models.CharField(max_length=60, unique=True)
+    slug = AutoSlugField(populate_from='nombre')
+    nombre_extendido = models.CharField(max_length=200, unique=True)
+    zona = models.ForeignKey(ZonaPais)
     codigo = models.SlugField(max_length=2, unique=True)
 
     def __str__(self):
-        return self.pais
+        return self.nombre
 
     class Meta:
-        ordering = ['pais']
+        ordering = ['nombre']
         verbose_name_plural = 'Paises'
         verbose_name = 'País'
 

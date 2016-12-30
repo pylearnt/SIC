@@ -2,12 +2,13 @@ from django.contrib import admin
 
 # Register your models here.
 
-from . models import Tag, Pais, Estado, Ciudad, Region, Ubicacion, Institucion, Dependencia, Departamento, \
+from . models import Tag, ZonaPais, Pais, Estado, Ciudad, Region, Ubicacion, Institucion, Dependencia, Departamento, \
     Programa, AreaConocimiento, AreaWOS, AreaEspecialidad, ImpactoSocial, Cargo, \
     FinanciamientoUNAM, FinanciamientoExterno, Metodologia, Beca, Tesis, ProgramaLicenciatura, \
     ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion, TipoEvento, Evento, Proyecto
 
 admin.site.register(Tag)
+admin.site.register(ZonaPais)
 admin.site.register(Pais)
 admin.site.register(Estado)
 admin.site.register(Ciudad)
