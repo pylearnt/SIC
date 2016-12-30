@@ -33,7 +33,7 @@ class Licencia(models.Model):
     class Meta:
         ordering = ['licencia']
 
-
+"""
 class TipoParticipacionProyecto(models.Model):
     tipo = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='tipo', unique=True)
@@ -46,7 +46,7 @@ class TipoParticipacionProyecto(models.Model):
         verbose_name = 'Tipo de participación en proyecto'
         verbose_name_plural = 'Tipos de participación en proyectos'
 
-"""
+
 class StatusProyecto(models.Model):
     status = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='status', unique=True)
@@ -114,6 +114,7 @@ class DesarrolloTecnologico(models.Model):
 
     def __str__(self):
         return self.nombre_desarrollo_tecnologico
+
     class Meta:
         ordering = ['nombre_desarrollo_tecnologico']
         get_latest_by = ['fecha', 'nombre_desarrollo_tecnologico']
