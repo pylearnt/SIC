@@ -66,7 +66,9 @@ INSTALLED_APPS = [
     'apoyo_institucional.apps.ApoyoInstitucionalConfig',
     'movilidad_academica.apps.MovilidadAcademicaConfig',
     'docencia.apps.DocenciaConfig',
+    'formacion_recursos_humanos.apps.FormacionRecursosHumanosConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
+
 
 
 ]

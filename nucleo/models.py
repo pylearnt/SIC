@@ -11,6 +11,7 @@ MODALIDAD_PROYECTO = getattr(settings, 'MODALIDAD_PROYECTO', (('DISCIPLINARIO', 
 FINANCIAMIENTO_UNAM = getattr(settings, 'FINANCIAMIENTO_UNAM', (('ASIGNADO', 'Presupuesto asignado a la entidad'), ('CONCURSADO', 'Presupuesto concursado por la entidad'), ('AUTOGENERADO', 'Recursos autogenerados (extraordinarios)'), ('OTRO', 'Otro')))
 FINANCIAMIENTO_EXTERNO = getattr(settings, 'FINANCIAMIENTO_UNAM', (('ESTATAL', 'Gubernamental Estatal'), ('FEDERAL', 'Gubernamental Federal'), ('LUCRATIVO', 'Privado lucrativo'), ('NO_LUCRATIVO', 'Privado no lucrativo'), ('EXTRANJERO', 'Recursos del extranjero')))
 CARGO__TIPO_CARGO  = getattr(settings, 'CARGO__TIPO_CARGO', (('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo')))
+GRADO_ACADEMICO = getattr(settings, 'GRADO_ACADEMICO', (('LICENCIATURA', 'licenciatura'), ('MAESTRIA', 'Maestría'), ('DOCTORADO', 'Doctorado')))
 
 # Create your models here.
 
@@ -324,6 +325,27 @@ class Beca(models.Model):
         return "{} : {}".format(self.beca, str(self.dependencia.dependencia))
 
 
+class Tesis(models.Model):
+    titulo = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='titulo')
+    descripcion = models.TextField(blank=True)
+    grado_academico = models.CharField(max_length=20, choices=GRADO_ACADEMICO)
+    documento_tesis = models.FileField()
+    alumno = models.ForeignKey(User, related_name='tesis_alumno')
+    dependencia = models.ForeignKey(Dependencia)
+    beca = models.ForeignKey(Beca)
+    reconocimiento = models.CharField(max_length=255)
+    fecha_examen = models.DateField()
+
+    def __str__(self):
+        return "{} : {}".format(self.titulo, self.alumno, self.grado_academico)
+
+    class Meta:
+        ordering = ['-fecha_examen']
+        verbose_name = 'Tesis'
+        verbose_name_plural = 'Tesis'
+
+
 class ProgramaLicenciatura(models.Model):
     programa = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
@@ -408,6 +430,21 @@ class Evento(models.Model):
     class Meta:
         ordering = ['fecha_inicio', 'nombre_evento']
         unique_together = ['fecha_inicio', 'nombre_evento']
+
+
+class distincion(models.Model):
+    nombre_distincion = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='nombre_distincion', unique=True)
+    descripcion = models.TextField(blank=True)
+    tipo = models.CharField(max_length=30, choices=(('PREMIO', 'Premio'), ('DISTINCION', 'Distinción'), ('RECONOCIMIENTO', 'Reconocimiento'), ('MEDALLA', 'Medalla'), ('GUGGENHEIM', 'Beca Guggenheim'), ('HONORIS_CAUSA', 'Doctorado Honoris Causa'), ('OTRO', 'Otro')))
+
+    def __str__(self):
+        return self.nombre_distincion
+
+    class Meta:
+        ordering = ['nombre_distincion']
+        verbose_name = 'Distinción'
+        verbose_name_plural = 'Distinciones'
 
 
 

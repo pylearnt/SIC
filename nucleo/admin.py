@@ -4,8 +4,8 @@ from django.contrib import admin
 
 from . models import Tag, Pais, Estado, Ciudad, Region, Ubicacion, Institucion, Dependencia, Departamento, \
     Programa, AreaConocimiento, AreaWOS, AreaEspecialidad, ImpactoSocial, Cargo, \
-    FinanciamientoUNAM, FinanciamientoExterno, Metodologia, TipoEvento, Evento, Proyecto, ProgramaLicenciatura, \
-    ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion
+    FinanciamientoUNAM, FinanciamientoExterno, Metodologia, Beca, Tesis, ProgramaLicenciatura, \
+    ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion, TipoEvento, Evento, Proyecto
 
 admin.site.register(Tag)
 admin.site.register(Pais)
@@ -25,10 +25,12 @@ admin.site.register(Cargo)
 admin.site.register(FinanciamientoUNAM)
 admin.site.register(FinanciamientoExterno)
 admin.site.register(Metodologia)
-admin.site.register(TipoEvento)
-admin.site.register(Evento)
-admin.site.register(Proyecto)
+admin.site.register(Beca)
+admin.site.register(Tesis)
 admin.site.register(ProgramaLicenciatura)
 admin.site.register(ProgramaMaestria)
 admin.site.register(ProgramaDoctorado)
 admin.site.register(ProgramaEspecializacion)
+admin.site.register(TipoEvento)
+admin.site.register(Evento)
+admin.site.register(Proyecto)

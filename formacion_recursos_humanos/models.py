@@ -2,17 +2,14 @@ from django.db import models
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from autoslug import AutoSlugField
-from nucleo.models import Tag, Dependencia, Beca, Proyecto, FinanciamientoUNAM, FinanciamientoExterno, \
-    Tesis, ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado
-from vinculacion.models import RedAcademica
-#from formacion_academica.models import Licenciatura, Maestria, Doctorado
+from nucleo.models import Tag, Dependencia, Beca, Proyecto, Tesis, ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado
 
 GRADO_ACADEMICO = getattr(settings, 'GRADO_ACADEMICO', (('LICENCIATURA', 'licenciatura'), ('MAESTRIA', 'Maestría'), ('DOCTORADO', 'Doctorado')))
 
 # Create your models here.
 
 class AsesorEstancia(models.Model):
+    descripcion = models.TextField(blank=True)
     asesor = models.ForeignKey(User, related_name='asesor_estancia_asesor')
     tipo = models.CharField(max_length=30, choices=(('RESIDENCIA', 'Residencia'), ('PRACTICA', 'Práctica'), ('ESTANCIA', 'Estancia'), ('SERVICIO_SOCIAL', 'Servicio Social'), ('OTRO', 'Otro')))
     asesorado = models.ForeignKey(User, related_name='asesor_estancia_asesorado')
@@ -36,8 +33,56 @@ class AsesorEstancia(models.Model):
 
 
 class DireccionTesis(models.Model):
-    grado_academico = models.CharField(max_length=20, choices=GRADO_ACADEMICO)
+    asesor = models.ForeignKey(User, related_name='direccion_tesis_asesor')
     fecha_inicio = models.DateField()
-    fecha_examen = models.DateField()
-    asesorado = models.ForeignKey(User, related_name='asesor_estancia_asesorado')
     tesis = models.ForeignKey(Tesis)
+
+    def __str__(self):
+        return "{} : {} : {}".format(self.tesis, self.asesor, self.fecha_inicio)
+
+    class Meta:
+        ordering = ['-fecha_inicio']
+        verbose_name = 'Dirección de tesis'
+        verbose_name_plural = 'Direcciones de tesis'
+
+
+class ComiteTutoral(models.Model):
+    grado_academico = models.CharField(max_length=20, choices=GRADO_ACADEMICO)
+    status = models.CharField(max_length=20, choices=(('EN_PROCESO', 'En proceso'), ('CONCLUIDO', 'Concluído')))
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    alumno = models.ForeignKey(User, related_name='_alumno')
+    asesor_principal = models.ForeignKey(User, related_name='_asesor_principal')
+    otros_asesores = models.ManyToManyField(User, related_name='_otros_asesores', blank=True)
+    sinodales = models.ManyToManyField(User, related_name='_sinodales', blank=True)
+    proyecto = models.ForeignKey(Proyecto)
+    programa_maestria = models.ForeignKey(ProgramaMaestria)
+    programa_doctorado = models.ForeignKey(ProgramaDoctorado)
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "{} : {} : {}".format(str(self.alumno), self.fecha_inicio, str(self.asesor_principal))
+
+    class Meta:
+        ordering = ['-fecha_inicio']
+        verbose_name = 'Comité tutoral'
+        verbose_name_plural = 'Comités tutorales'
+
+
+class ComiteCandidaturaDoctoral(models.Model):
+    fecha_defensa = models.DateField()
+    alumno = models.ForeignKey(User, related_name='_alumno')
+    asesor_principal = models.ForeignKey(User, related_name='_asesor_principal')
+    otros_asesores = models.ManyToManyField(User, related_name='_otros_asesores', blank=True)
+    sinodales = models.ManyToManyField(User, related_name='_sinodales', blank=True)
+    proyecto = models.ForeignKey(Proyecto)
+    programa_doctorado = models.ForeignKey(ProgramaDoctorado)
+    dependencia = models.ForeignKey(Dependencia)
+
+    def __str__(self):
+        return "{} : {} : {}".format(str(self.alumno), self.fecha_defensa, str(self.asesor_principal))
+
+    class Meta:
+        ordering = ['-fecha_defensa']
+        verbose_name = 'Comité de examen de candidatura doctoral'
+        verbose_name_plural = 'Comités de exámenes de candidatura doctoral'
