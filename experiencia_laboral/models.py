@@ -1,8 +1,8 @@
 from django.db import models
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Cargo, Departamento
+from nucleo.models import User, Tag, Cargo, Departamento
 # Create your models here.
 
 

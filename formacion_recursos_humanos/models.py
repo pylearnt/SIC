@@ -1,8 +1,7 @@
 from django.db import models
 
 from django.conf import settings
-from django.contrib.auth.models import User
-from nucleo.models import Tag, Dependencia, Beca, Proyecto, Tesis, ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado
+from nucleo.models import User, Tag, Dependencia, Beca, Proyecto, Tesis, ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado
 
 GRADO_ACADEMICO = getattr(settings, 'GRADO_ACADEMICO', (('LICENCIATURA', 'licenciatura'), ('MAESTRIA', 'Maestría'), ('DOCTORADO', 'Doctorado')))
 
@@ -51,10 +50,10 @@ class ComiteTutoral(models.Model):
     status = models.CharField(max_length=20, choices=(('EN_PROCESO', 'En proceso'), ('CONCLUIDO', 'Concluído')))
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    alumno = models.ForeignKey(User, related_name='_comite_tutoral_alumno')
-    asesor_principal = models.ForeignKey(User, related_name='_comite_tutoral_asesor_principal')
-    otros_asesores = models.ManyToManyField(User, related_name='_comite_tutoral_otros_asesores', blank=True)
-    sinodales = models.ManyToManyField(User, related_name='_comite_tutoral_sinodales', blank=True)
+    alumno = models.ForeignKey(User, related_name='comite_tutoral_alumno')
+    asesor_principal = models.ForeignKey(User, related_name='comite_tutoral_asesor_principal')
+    otros_asesores = models.ManyToManyField(User, related_name='comite_tutoral_otros_asesores', blank=True)
+    sinodales = models.ManyToManyField(User, related_name='comite_tutoral_sinodales', blank=True)
     proyecto = models.ForeignKey(Proyecto)
     programa_maestria = models.ForeignKey(ProgramaMaestria)
     programa_doctorado = models.ForeignKey(ProgramaDoctorado)
@@ -71,10 +70,10 @@ class ComiteTutoral(models.Model):
 
 class ComiteCandidaturaDoctoral(models.Model):
     fecha_defensa = models.DateField()
-    alumno = models.ForeignKey(User, related_name='_comite_candidatura_doctoral_alumno')
-    asesor_principal = models.ForeignKey(User, related_name='_comite_candidatura_doctoral_asesor_principal')
-    otros_asesores = models.ManyToManyField(User, related_name='_comite_candidatura_doctoral_otros_asesores', blank=True)
-    sinodales = models.ManyToManyField(User, related_name='_comite_candidatura_doctoral_sinodales', blank=True)
+    alumno = models.ForeignKey(User, related_name='comite_candidatura_doctoral_alumno')
+    asesor_principal = models.ForeignKey(User, related_name='comite_candidatura_doctoral_asesor_principal')
+    otros_asesores = models.ManyToManyField(User, related_name='comite_candidatura_doctoral_otros_asesores', blank=True)
+    sinodales = models.ManyToManyField(User, related_name='comite_candidatura_doctoral_sinodales', blank=True)
     proyecto = models.ForeignKey(Proyecto)
     programa_doctorado = models.ForeignKey(ProgramaDoctorado)
     dependencia = models.ForeignKey(Dependencia)

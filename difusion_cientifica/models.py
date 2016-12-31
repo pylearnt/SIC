@@ -1,9 +1,9 @@
 from django.db import models
 
 from django.conf import settings
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Pais, Ciudad, Ubicacion, Proyecto, TipoEvento, Evento
+from nucleo.models import User, Tag, Pais, Ciudad, Ubicacion, Proyecto, TipoEvento, Evento
 from publicacion.models import Libro, Revista, Indice
 
 EVENTO__AMBITO = getattr(settings, 'EVENTO__AMBITO', (('INSTITUCIONAL', 'Institucional'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro')))

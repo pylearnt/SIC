@@ -1,8 +1,9 @@
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from django.contrib.auth.models import User
 from autoslug import AutoSlugField
+
 
 STATUS_PROYECTO = getattr(settings, 'STATUS_PROYECTO', (('NUEVO', 'Nuevo'), ('EN_PROCESO', 'En proceso'), ('CONCLUIDO', 'Concluído'), ('OTRO', 'Otro')))
 CLASIFICACION_PROYECTO = getattr(settings, 'CLASIFICACION_PROYECTO', (('BASICO', 'Básico'), ('APLICADO', 'Aplicado'), ('DESARROLLO_TECNOLOGICO', 'Desarrollo tecnológico'), ('INNOVACION', 'Innovación'), ('INVESTIGACION_FRONTERA', 'Investigación de frontera'), ('OTRO', 'Otro')))
@@ -42,7 +43,7 @@ class ZonaPais(models.Model):
 
 class Pais(models.Model):
     nombre = models.CharField(max_length=60, unique=True)
-    slug = AutoSlugField(populate_from='nombre')
+    slug = AutoSlugField(populate_from='nombre', unique=True)
     nombre_extendido = models.CharField(max_length=200, unique=True)
     zona = models.ForeignKey(ZonaPais)
     codigo = models.SlugField(max_length=2, unique=True)
@@ -103,14 +104,14 @@ class Region(models.Model):
 class Ubicacion(models.Model):
     direccion1 = models.CharField('Dirección', max_length=255)
     direccion2 = models.CharField('Dirección (continuación)', blank=True, max_length=255)
+    slug = AutoSlugField(populate_from='direccion1', unique=True)
     descripcion = models.TextField(blank=True)
     ciudad = models.ForeignKey(Ciudad)
     codigo_postal = models.CharField(max_length=7, blank=True)
     telefono = models.SlugField(max_length=20, blank=True)
-    slug = AutoSlugField(populate_from='direccion1', unique=True)
 
     def __str__(self):
-        return "{} : {} : {} : {} : {}".format(self.direccion1, self.direccion2, self.ciudad.ciudad, self.ciudad.estado.estado, self.ciudad.estado.pais)
+        return "{} : {} : {}".format(self.direccion1, self.direccion2, self.ciudad)
 
     class Meta:
         ordering = ['ciudad', 'direccion1']
@@ -123,7 +124,7 @@ class Institucion(models.Model):
     institucion = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='institucion')
     descripcion = models.TextField(blank=True)
-    ubicacion = models.ForeignKey(Ubicacion)
+    ubicacion = models.ForeignKey(Ubicacion, blank=True, null=True)
 
     def __str__(self):
         return self.institucion
@@ -138,8 +139,8 @@ class Dependencia(models.Model):
     dependencia = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='dependencia', unique=True)
     descripcion = models.TextField(blank=True)
-    institucion = models.ForeignKey(Institucion)
-    ubicacion = models.ForeignKey(Ubicacion)
+    institucion = models.ForeignKey(Institucion, blank=True, null=True)
+    ubicacion = models.ForeignKey(Ubicacion, blank=True, null=True)
 
     def __str__(self):
         return "{} : {}".format(self.institucion, self.dependencia)
@@ -155,13 +156,65 @@ class Departamento(models.Model):
     descripcion = models.TextField(blank=True)
     dependencia = models.ForeignKey(Dependencia)
 
-
     def __str__(self):
         return "{} : {}".format(self.dependencia, self.departamento)
 
     class Meta:
         unique_together = ('departamento', 'dependencia')
         ordering = ['departamento', 'dependencia']
+
+
+class Cargo(models.Model):
+    cargo = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='cargo', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.cargo
+
+    class Meta:
+        ordering = ['cargo']
+
+"""
+class TipoUsuario(models.Model):
+    tipo = models.CharField(max_length=50, unique=True)
+    slug = AutoSlugField(populate_from='tipo', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.tipo
+
+    class Meta:
+        ordering = ['tipo']
+        verbose_name = 'Tipo de usuario'
+        verbose_name_plural = 'Tipos de usuario'
+"""
+
+class User(AbstractUser):
+    descripcion = models.TextField(blank=True)
+    tipo = models.CharField(max_length=30, choices=(('INVESTIGADOR', 'Investigador'), ('ADMINISTRATIVO', 'Administrativo'), ('TECNICO', 'Técnico'), ('OTRO', 'Otro')), default='OTRO')
+    fecha_nacimiento = models.DateField(null=True, blank=True)
+    pais_origen = models.ForeignKey(Pais, default=142)
+    rfc = models.CharField(max_length=20, unique=True)
+    curp = models.CharField(max_length=30, unique=True)
+    direccion1 = models.CharField(max_length=255)
+    direccion2 = models.CharField(max_length=255, blank=True)
+    ciudad = models.ForeignKey(Ciudad, default=1)
+    telefono = models.SlugField(max_length=20)
+    celular = models.SlugField(max_length=20)
+    url = models.URLField(blank=True, null=True)
+    sni = models.PositiveSmallIntegerField(default=0)
+    pride = models.CharField(max_length=2, choices=(('-', '-'), ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')), default='-')
+    ingreso_unam = models.DateField(null=True, blank=True)
+    ingreso_entidad = models.DateField(null=True, blank=True)
+
+
+    def __str__(self):
+        return "{} : {} {} : {}".format(self.username, self.first_name, self.last_name, self.rfc)
+
+
+    class Meta:
+        ordering = ['last_name']
 
 
 class Programa(models.Model):
@@ -246,15 +299,6 @@ class TipoCargo(models.Model):
         verbose_name_plural = "Tipos de cargos"
 """
 
-
-class Cargo(models.Model):
-    cargo = models.CharField(max_length=255, unique=True)
-    descripcion = models.TextField(blank=True)
-    slug = AutoSlugField(populate_from='cargo', unique=True)
-
-    def __str__(self):
-        return self.cargo
-
 """
 class TipoFinanciamientoUNAM(models.Model):
     tipo_presupuesto = models.CharField(max_length=255, unique=True)
@@ -322,7 +366,6 @@ class Metodologia(models.Model):
     slug = AutoSlugField(populate_from='metodologia', unique=True)
     descripcion = models.TextField(blank=True)
 
-
     def __str__(self):
         return self.metodologia
 
@@ -334,10 +377,22 @@ class Beca(models.Model):
     beca = models.CharField(max_length=200, unique=True)
     slug = AutoSlugField(populate_from='beca', unique=True)
     descripcion = models.TextField(blank=True)
-    dependencia = models.ForeignKey(Dependencia)
+    institucion = models.ForeignKey(Institucion)
 
     def __str__(self):
         return "{} : {}".format(self.beca, str(self.dependencia.dependencia))
+
+
+class Reconocimiento(models.Model):
+    reconocimiento = models.CharField(max_length=255, unique=True)
+    slug = AutoSlugField(populate_from='reconocimiento', unique=True)
+    descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.reconocimiento
+
+    class Meta:
+        ordering = ['reconocimiento']
 
 
 class Tesis(models.Model):
@@ -349,7 +404,7 @@ class Tesis(models.Model):
     alumno = models.ForeignKey(User, related_name='tesis_alumno')
     dependencia = models.ForeignKey(Dependencia)
     beca = models.ForeignKey(Beca)
-    reconocimiento = models.CharField(max_length=255)
+    reconocimiento = models.ForeignKey(Reconocimiento, blank=True, null=True)
     fecha_examen = models.DateField()
 
     def __str__(self):
@@ -497,4 +552,8 @@ class Proyecto(models.Model):
 
     class Meta:
         ordering = ['fecha_inicio', 'nombre_proyecto']
+
+
+
+
 

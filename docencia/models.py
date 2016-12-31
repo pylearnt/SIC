@@ -1,8 +1,8 @@
 from django.db import models
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Dependencia, FinanciamientoUNAM, FinanciamientoExterno
+from nucleo.models import User, Tag, Dependencia, FinanciamientoUNAM, FinanciamientoExterno
 from vinculacion.models import RedAcademica
 from investigacion.models import ProyectoInvestigacion
 from formacion_academica.models import Licenciatura, Maestria, Doctorado

@@ -1,9 +1,8 @@
 from django.db import models
 
 from django.conf import settings
-from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Pais, Ubicacion, Institucion, Dependencia, AreaConocimiento, AreaEspecialidad, \
+from nucleo.models import User, Tag, Pais, Ubicacion, Institucion, Dependencia, AreaConocimiento, AreaEspecialidad, \
     ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion
 
 CURSO_ESPECIALIZACION_TIPO = getattr(settings, 'CURSO_ESPECIALIZACION_TIPO', (('CURSO', 'Curso'), ('DIPLOMADO', 'Diplomado'), ('CERTIFICACION', 'Certificación'), ('OTRO', 'Otro')))

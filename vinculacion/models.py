@@ -1,9 +1,8 @@
 from django.db import models
 
 from django.conf import settings
-from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import Tag, Pais, Estado, Ciudad, Region, Ubicacion, Institucion, Dependencia, Cargo, Proyecto
+from nucleo.models import User, Tag, Pais, Estado, Ciudad, Region, Ubicacion, Institucion, Dependencia, Cargo, Proyecto
 from publicacion.models import TipoDocumento, Revista, Indice, Libro, Editorial, Coleccion
 from investigacion.models import CapituloLibroInvestigacion
 
