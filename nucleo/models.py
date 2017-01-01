@@ -194,7 +194,7 @@ class User(AbstractUser):
     descripcion = models.TextField(blank=True)
     tipo = models.CharField(max_length=30, choices=(('INVESTIGADOR', 'Investigador'), ('ADMINISTRATIVO', 'Administrativo'), ('TECNICO', 'Técnico'), ('OTRO', 'Otro')), default='OTRO')
     fecha_nacimiento = models.DateField(null=True, blank=True)
-    pais_origen = models.ForeignKey(Pais, default=142)
+    pais_origen = models.ForeignKey(Pais, default=1)
     rfc = models.CharField(max_length=20, unique=True)
     curp = models.CharField(max_length=30, unique=True)
     direccion1 = models.CharField(max_length=255)
