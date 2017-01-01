@@ -281,9 +281,79 @@ Paises = (('México', 'Estados Unidos Mexicanos', 'MX', 1), ('Abjasia', 'Repúbl
           ('Zambia', 'República de Zambia', 'ZM', 8),
           ('Zimbabue', 'República de Zimbabue', 'ZW', 8))
 
-#Paises = (('México', 'Estados Unidos Mexicanos', 'MX', 1), ('Abjasia', 'República de Abjasia', 'AB', 6))
-
 for i in Paises:
     print(i)
     p = Pais(nombre=i[0], nombre_extendido=i[1], codigo=i[2], zona=ZonaPais(pk=i[3]))
     p.save()
+
+
+Estados = ('Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Ciudad de México', 'Coahuila de Zaragoza', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Estado de México', 'Michoacán de Ocampo', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro de Arteaga', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz de Ignacio de la Llave', 'Yucatán', 'Zacatecas')
+
+for i in Estados:
+    e = Estado(estado=i, pais=Pais(pk=1))
+    e.save()
+
+
+# fa_especializacion
+
+Instituciones = (('Universidad Nacional Autónoma de México', 1),
+('Universidad Nacional de Colombia', 49), Colombia
+('University of Bern', 216), Suiza
+('Universidad de León', 67), España
+('Universidad Complutense de Madrid', 67),
+('Universidad de Camerino', 116), Italia
+('CONACYT', 1),
+('Gobierno del Estado de Michoacán de Ocampo', 1),
+('UNESCO', 74), Francia
+('El Colegio de Michoacán, A.C.', 1),
+('SEDESOL', 1),
+('Universidad Autónoma de Ciudad Juárez', 1),
+('Universidad Valladolid', 1),
+('Instituto Tecnológico de Morelia', 1),
+('Universidad Intercultural Indígena de Michoacán', 1),
+('Universidad Autónoma de San Luis Potosí', 1),
+('Universidad Autónoma de Ciudad Juárez', 1),
+('Pontificia Universidad Católica de Chile', 45), Chile
+('APPEAR', 16), Austria
+('NGS National Geographic Society', 68), EUA
+('NSF National Science Foundation', 68),
+('National Environmental Research Council (NERC)', 179),
+('Universidad Autonoma de Tamaulipas', 1),
+('Agencia Nacional de Investigación e Innovación de Uruguay (ANII)', 235),
+('Universidad Autónoma de Baja California', 1),
+('Instituto de Ecología, A.C., Xalapa', 1),
+('Universidad de California Davis', 68),
+('Universidad de Antioquia, Medellín', 49),
+('University of East Anglia', 179), Reino Unido
+('Universidad París 1 Panteón-Sorbona', 74),
+('Northwestern University', 68),
+('University of Twente', 167),
+('Universidad Autónoma de Madrid', 67),
+('Universidad de Buenos Aires', 13),
+('INECOL', 1),
+('University of Queensland', 16),
+('Universidad Autónoma de Barcelona', 67),
+('Universidad Autónoma Chapingo', 1),
+('El Colegio de México, A.C.', 1),
+('LEAD International', 68),
+('Instituto Nacional de Estadística y Geografía (INEGI)', 1),
+('SELPER México', 1),
+('Open Geospatial Consortium', 68),
+('Universidad Autónoma del Estado de México', 1),
+('Gtt Imaging, S.A. de C.V.', 1),
+('Instituto Nacional para el Federalismo y el Desarrollo Municipal', 1),
+('Instituto Nacional de Ecología', 1),
+('SEMARNAT', 1),
+('International Institute for Geo-Information Science and Earth Observation', 167), Holanda
+('Universidad Iberoamericana', 1),
+('Instituo Nacional Electoral (INE)', 1),
+('Centro de Capacitación en Calidad Sanitaria S.A. DE C.V.', 1),
+('Comisión Centroamericana de Ambiente y Desarrollo (CCAD)', 1),
+('National Aeronautics and Space Administration (NASA)', 68),
+('Banco Mundial', 68),
+('Sistemas de Información Geográfica, S.A. de C.V.', 1),
+('Centro de Información y Comunicación Ambiental de Norte América, A.C. (CICEANA)', 1),
+('Sociedad Mexicana de Geografía y Estadística, A.C.', 1),
+('Universidad Autónoma de Nayarit', 1),
+('El Colegio de Jalisco A.C.', 1))
+
