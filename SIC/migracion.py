@@ -367,7 +367,7 @@ Instituciones = (
 ('Universidad Tecmilenio', 1),
 ('La Universidad de Indiana Bloomington', 68),
 ('Centro de Levantamientos Aeroespaciales y Aplicaciones SIG para el Desarrollo Sostenible de los Recursos Naturales (CLAS-ITC)', 30),
-International Institute for Geoinformation Sciences and Earth Observation
+('International Institute for Geoinformation Sciences and Earth Observation (ITC)', 167)
 ('Institute of Hydromechanics and Water Management', 216),
 ('Faculty of Geo-Information Science and Earth Observation (ITC)', 167),
 ('Universidad de Michigan', 68),
