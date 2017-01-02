@@ -356,4 +356,3 @@ Instituciones = (('Universidad Nacional Autónoma de México', 1),
 ('Sociedad Mexicana de Geografía y Estadística, A.C.', 1),
 ('Universidad Autónoma de Nayarit', 1),
 ('El Colegio de Jalisco A.C.', 1))
-
