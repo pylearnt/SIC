@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -40,10 +39,8 @@ CURSO_ESPECIALIZACION_MODALIDAD = (('PRESENCIAL', 'Presencial'), ('EN_LINEA', 'E
 CARGO__TIPO_CARGO = (('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo'))
 EVENTO__AMBITO = (('INSTITUCIONAL', 'Institucional'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro'))
 EVENTO__RESPONSABILIDAD = (('COORDINADOR', 'Coordinador general'), ('COMITE', 'Comité organizador'), ('AYUDANTE', 'Ayudante'), ('TECNICO', 'Apoyo técnico'), ('OTRO', 'Otro'))
-
 RED_ACADEMICA__CLASIFICACION = (('LOCAL', 'Local'), ('REGIONAL', 'Regional'), ('NACIONAL', 'Nacional'), ('INTERNACIONAL', 'Internacional'), ('OTRO', 'Otro'))
 ENTIDAD_NO_ACADEMICA__CLASIFICACION = (('FEDERAL', 'Gubernamental federal'), ('ESTATAL', 'Gubernamental estatal'), ('PRIVADO', 'Sector privado'), ('NO_LUCRATIVO', 'Sector privado no lucrativo'), ('EXTRANJERO', 'Extranjero'), ('OTRO', 'Otro'))
-
 GRADO_ACADEMICO = (('LICENCIATURA', 'licenciatura'), ('MAESTRIA', 'Maestría'), ('DOCTORADO', 'Doctorado'))
 
 # Application definition
@@ -69,6 +66,7 @@ INSTALLED_APPS = [
     'formacion_recursos_humanos.apps.FormacionRecursosHumanosConfig',
     'desarrollo_tecnologico.apps.DesarrolloTecnologicoConfig',
 ]
+
 
 AUTH_USER_MODEL = 'nucleo.User'
 
