@@ -1,0 +1,443 @@
+[
+{
+    "model": "nucleo.cargo",
+    "pk": 1,
+    "fields": {
+        "cargo": "__sistema__",
+        "slug": "sistema",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 2,
+    "fields": {
+        "cargo": "Director",
+        "slug": "director",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 3,
+    "fields": {
+        "cargo": "Profesor",
+        "slug": "profesor",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 4,
+    "fields": {
+        "cargo": "Estudiante",
+        "slug": "estudiante",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 5,
+    "fields": {
+        "cargo": "Secretario Acad\u00e9mica",
+        "slug": "secretario-academica",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 6,
+    "fields": {
+        "cargo": "Secretario T\u00e9cnico",
+        "slug": "secretario-tecnico",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 7,
+    "fields": {
+        "cargo": "Representante del Personal Acad\u00e9mico",
+        "slug": "representante-del-personal-academico",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 8,
+    "fields": {
+        "cargo": "Miembro del Consejo Interno",
+        "slug": "miembro-del-consejo-interno",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 9,
+    "fields": {
+        "cargo": "Jefe de departamento de Docencia",
+        "slug": "jefe-de-departamento-de-docencia",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 10,
+    "fields": {
+        "cargo": "Responsable del Laboratorio de An\u00e1lisis de Suelos y Agua",
+        "slug": "responsable-del-laboratorio-de-analisis-de-suelos-",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 11,
+    "fields": {
+        "cargo": "Gestor de Im\u00e1genes SPOT",
+        "slug": "gestor-de-imagenes-spot",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 12,
+    "fields": {
+        "cargo": "Responsable del Centro de Documentaci\u00f3n",
+        "slug": "responsable-del-centro-de-documentacion",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 13,
+    "fields": {
+        "cargo": "Representante de los investigadores",
+        "slug": "representante-de-los-investigadores",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 14,
+    "fields": {
+        "cargo": "Organizador del proceso interno de consulta",
+        "slug": "organizador-del-proceso-interno-de-consulta",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 15,
+    "fields": {
+        "cargo": "Director de Cooperacion acad\u00e9mica",
+        "slug": "director-de-cooperacion-academica",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 16,
+    "fields": {
+        "cargo": "Investigador Titular A, Tiempo Completo",
+        "slug": "investigador-titular-a-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 17,
+    "fields": {
+        "cargo": "Investigador Titular B, Tiempo Completo",
+        "slug": "investigador-titular-b-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 18,
+    "fields": {
+        "cargo": "Investigador Titular C, Tiempo Completo",
+        "slug": "investigador-titular-c-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 19,
+    "fields": {
+        "cargo": "Investigador Asociado A, Tiempo Completo",
+        "slug": "investigador-asociado-a-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 20,
+    "fields": {
+        "cargo": "Investigador Asociado B, Tiempo Completo",
+        "slug": "investigador-asociado-b-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 21,
+    "fields": {
+        "cargo": "Investigador Asociado C, Tiempo Completo",
+        "slug": "investigador-asociado-c-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 22,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Titular A, Tiempo Completo",
+        "slug": "tecnico-academico-titular-a-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 23,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Titular B, Tiempo Completo",
+        "slug": "tecnico-academico-titular-b-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 24,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Titular C, Tiempo Completo",
+        "slug": "tecnico-academico-titular-c-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 25,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Asociado A, Tiempo Completo",
+        "slug": "tecnico-academico-asociado-a-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 26,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Asociado B, Tiempo Completo",
+        "slug": "tecnico-academico-asociado-b-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 27,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Asociado C, Tiempo Completo",
+        "slug": "tecnico-academico-asociado-c-tiempo-completo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 28,
+    "fields": {
+        "cargo": "Investigador Titular A, Medio Tiempo",
+        "slug": "investigador-titular-a-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 29,
+    "fields": {
+        "cargo": "Investigador Titular B, Medio Tiempo",
+        "slug": "investigador-titular-b-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 30,
+    "fields": {
+        "cargo": "Investigador Titular C, Medio Tiempo",
+        "slug": "investigador-titular-c-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 31,
+    "fields": {
+        "cargo": "Investigador Asociado A, Medio Tiempo",
+        "slug": "investigador-asociado-a-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 32,
+    "fields": {
+        "cargo": "Investigador Asociado B, Medio Tiempo",
+        "slug": "investigador-asociado-b-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 33,
+    "fields": {
+        "cargo": "Investigador Asociado C, Medio Tiempo",
+        "slug": "investigador-asociado-c-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 34,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Titular A, Medio Tiempo",
+        "slug": "tecnico-academico-titular-a-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 35,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Titular B, Medio Tiempo",
+        "slug": "tecnico-academico-titular-b-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 36,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Titular C, Medio Tiempo",
+        "slug": "tecnico-academico-titular-c-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 37,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Asociado A, Medio Tiempo",
+        "slug": "tecnico-academico-asociado-a-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 38,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Asociado B, Medio Tiempo",
+        "slug": "tecnico-academico-asociado-b-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 39,
+    "fields": {
+        "cargo": "T\u00e9cnico Acad\u00e9mico Asociado C, Medio Tiempo",
+        "slug": "tecnico-academico-asociado-c-medio-tiempo",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 40,
+    "fields": {
+        "cargo": "Investigador Postdoctoral",
+        "slug": "investigador-postdoctoral",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 41,
+    "fields": {
+        "cargo": "Becario Postdoctoral",
+        "slug": "becario-postdoctoral",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 42,
+    "fields": {
+        "cargo": "Catedr\u00e1tico CONACYT",
+        "slug": "catedratico-conacyt",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 43,
+    "fields": {
+        "cargo": "Investigador Ordinario de Carrera Asociado A, Tiempo Completo",
+        "slug": "investigador-ordinario-de-carrera-asociado-a-tiemp",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 44,
+    "fields": {
+        "cargo": "Investigador Ordinario de Carrera Asociado B, Tiempo Completo",
+        "slug": "investigador-ordinario-de-carrera-asociado-b-tiemp",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 45,
+    "fields": {
+        "cargo": "Investigador Ordinario de Carrera Asociado C, Tiempo Completo",
+        "slug": "investigador-ordinario-de-carrera-asociado-c-tiemp",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 46,
+    "fields": {
+        "cargo": "Investigador Ordinario de Carrera Asociado A, Medio Tiempo",
+        "slug": "investigador-ordinario-de-carrera-asociado-c-tiemp",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 47,
+    "fields": {
+        "cargo": "Investigador Ordinario de Carrera Asociado B, Medio Tiempo",
+        "slug": "investigador-ordinario-de-carrera-asociado-c-tiemp",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 48,
+    "fields": {
+        "cargo": "Investigador Ordinario de Carrera Asociado C, Medio Tiempo",
+        "slug": "investigador-ordinario-de-carrera-asociado-c-tiemp",
+        "descripcion": ""
+    }
+},
+{
+    "model": "nucleo.cargo",
+    "pk": 49,
+    "fields": {
+        "cargo": "Invitado",
+        "slug": "invitado",
+        "descripcion": ""
+    }
+}
+]
