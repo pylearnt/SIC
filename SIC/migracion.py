@@ -494,7 +494,7 @@ Instituciones = (
 ('Consejo Superior de Investigaciones Científicas', 67),
 ('Gobierno de Cataluña (Generalitat de Catalunya)', 67),
 ('Instituto del Conurbano (ICO)', 13),
-('Universidad Católica de Honduras (UNICAH)', Honduras),
+('Universidad Católica de Honduras (UNICAH)', 91),
 ('Instituto Nacional de Investigaciones Forestles, Agrícolas y Pecuarias (INIFAP)', 1),
 ('Sociedad Científica Latinoamericana de Agroecología (SOCLA)', 13),
 ('Honorable Concejo Deliberante', 13),
