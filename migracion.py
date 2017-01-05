@@ -23,7 +23,7 @@ from difusion_cientifica.models import MemoriaInExtenso, PrologoLibro, Resena, O
 
 
 
-"""
+
 
 
 
@@ -287,17 +287,53 @@ for i in Paises:
     p.save()
 
 
-Estados = ('Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Ciudad de México', 'Coahuila de Zaragoza', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Estado de México', 'Michoacán de Ocampo', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro de Arteaga', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz de Ignacio de la Llave', 'Yucatán', 'Zacatecas')
+Estados = (
+    ('Aguascalientes', 1),
+    ('Baja California', 1),
+    ('Baja California Sur', 1),
+    ('Campeche', 1),
+    ('Chiapas', 1),
+    ('Chihuahua', 1),
+    ('Ciudad de México', 1),
+    ('Coahuila de Zaragoza', 1),
+    ('Colima', 1),
+    ('Durango', 1),
+    ('Guanajuato', 1),
+    ('Guerrero', 1),
+    ('Hidalgo', 1),
+    ('Jalisco', 1),
+    ('Estado de México', 1),
+    ('Michoacán de Ocampo', 1),
+    ('Morelos', 1),
+    ('Nayarit', 1),
+    ('Nuevo León', 1),
+    ('Oaxaca', 1),
+    ('Puebla', 1),
+    ('Querétaro de Arteaga', 1),
+    ('Quintana Roo', 1),
+    ('San Luis Potosí', 1),
+    ('Sinaloa', 1),
+    ('Sonora', 1),
+    ('Tabasco', 1),
+    ('Tamaulipas', 1),
+    ('Tlaxcala', 1),
+    ('Veracruz de Ignacio de la Llave', 1),
+    ('Yucatán', 1),
+    ('Zacatecas', 1),
+    ('Bogotá', 1),  #bogota
+    ('Bern', 1), #suiza
+    ('Castilla y León', 67),
+    ('Comunidad de Madrid', 67),
+    ('Provincia de Macerata', 1) #italia
+
+
+
+)
 
 for i in Estados:
-    e = Estado(estado=i, pais=Pais(pk=1))
+    e = Estado(estado=i[0], pais=Pais(pk=i[1]))
     e.save()
 
-
-Ciudades = (
-('Ciudad de México', ), None
-)
-"""
 
 
 Instituciones = (
@@ -564,3 +600,13 @@ for i in Instituciones:
     for j in i[2]:
         f = Dependencia(dependencia=j[0], institucion=Institucion(pk=e.id), ciudad=Ciudad(pk=[1]))
     """
+
+Ciudades = (
+    ('Morelia', 16),
+    ('Ciudad de México, CDMX', 7),
+    ('Bogotá', 33),
+    ('Bern', 34),
+    ('León ', 35),
+    ('Madrid', 36),
+    ('Recanati', 37)
+)
