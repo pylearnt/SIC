@@ -23,7 +23,7 @@ from difusion_cientifica.models import MemoriaInExtenso, PrologoLibro, Resena, O
 
 
 
-
+"""
 
 
 
@@ -297,7 +297,7 @@ for i in Estados:
 Ciudades = (
 ('Ciudad de México', ), None
 )
-
+"""
 
 
 Instituciones = (
@@ -318,7 +318,6 @@ Instituciones = (
 ('Instituto Tecnológico de Morelia', 1, (())),
 ('Universidad Intercultural Indígena de Michoacán (UIIM)', 1, (())),
 ('Universidad Autónoma de San Luis Potosí', 1, (())),
-('Universidad Autónoma de Ciudad Juárez', 1, (())),
 ('Pontificia Universidad Católica de Chile', 45, (())),
 ('APPEAR', 16, (())),
 ('NGS National Geographic Society', 68, (())),
@@ -339,7 +338,6 @@ Instituciones = (
 ('INECOL', 1, (())),
 ('University of Queensland', 16, (())),
 ('Universidad Autónoma de Barcelona (UAB)', 67, (())),
-('Universidad Autónoma Chapingo', 1, (())),
 ('El Colegio de México, A.C.', 1, (())),
 ('LEAD International', 68, (())),
 ('Instituto Nacional de Estadística y Geografía (INEGI)', 1, (())),
@@ -360,8 +358,6 @@ Instituciones = (
 ('Sociedad Mexicana de Geografía y Estadística, A.C.', 1, (())),
 ('Universidad Autónoma de Nayarit', 1, (())),
 ('El Colegio de Jalisco A.C.', 1, (())),
-('Universidad Autónoma de Nayarit', 1, (())),
-('Instituto Nacional de Antropología e Historia', 1, (())),
 ('Fundación Premio Nacional de Tecnología A.C.', 1, (())),
 ('Consejo Estatal de Ciencia y Tecnología del Estado de Michoacán (CECTI)', 1, (())),
 ('Harvard Business Publishing', 68, (())),
@@ -381,7 +377,6 @@ Instituciones = (
 ('Escuela de Organización Industrial', 67, (())),
 ('Universidad de Alicante', 67, (())),
 ('Interactive Advertising Bureau ', 68, (())),
-('Instituto Tecnológico de Morelia', 1, (())),
 ('Universidad Don Vasco', 1, (())),
 ('Centro Estatal de Tecnologías de Información y Comunicaciones (CETIC)', 1, (())),
 ('Arkinet, S.A. De C.V.', 1, (())),
@@ -408,9 +403,7 @@ Instituciones = (
 ('Universidad de Lérida', 67, (())),
 ('Universidad de Brístol', 179, (())),
 ('Universidad Nacional de Córdoba', 13, (())),
-('Instituto Nacional de Antropología e Historia', 1, (())),
 ('Universidad de Sinkiang', 46, (())),
-('Universidad de Buenos Aires', 13, (())),
 ('Universidad de Sonora', 1, (())),
 ('Universidad Autónoma de Baja California Sur (UABCS)', 1, (())),
 ('Academia de Ciencias de Cuba', 56, (())),
@@ -458,7 +451,6 @@ Instituciones = (
 ('Global Water Watch (GWW)', 1, (())),
 ('Grupo Balsas para Estudio y Manejo de Ecosistemas, A.C.', 1, (())),
 ('Instituto Municipal de Planeación Morelia (IMPLAN)', 1, (())),
-('Agencia Nacional de Promoción Científica y Tecnológica', 13, (())),
 ('Centro de Investigaciones y Estudios Superiores en Antropología Social (CIESAS)', 1, (())),
 ('Colegio de Postgraduados (COLPOS)', 1, (())),
 ('Universidad Autónoma de Chiapas', 1, (())),
