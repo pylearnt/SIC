@@ -20,7 +20,6 @@ class CursoEspecializacion(models.Model):
     area_conocimiento = models.ForeignKey(AreaConocimiento, verbose_name='Área de conocimiento')
     #programa_especializacion = models.ForeignKey(ProgramaEspecializacion, verbose_name='Programa de especialización')
     instructores = models.ManyToManyField(User, related_name='_curso_especializacion_instructores')
-    enrolados = models.ManyToManyField(User, related_name='_curso_especializacion_enrolados', blank=True)
     dependencias = models.ManyToManyField(Dependencia, related_name='_curso_especializacion_dependencias', blank=True)
     ubicacion = models.ForeignKey(Ubicacion, verbose_name='Ubicación', blank=True, null=True)
     tipo = models.CharField(max_length=20, choices=CURSO_ESPECIALIZACION_TIPO, verbose_name='Tipo de curso')
