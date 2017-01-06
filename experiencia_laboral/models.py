@@ -2,13 +2,17 @@ from django.db import models
 
 #from django.contrib.auth.models import User
 from autoslug import AutoSlugField
-from nucleo.models import User, Tag, Cargo, Departamento
+from nucleo.models import User, Tag, Cargo, Nombramiento, Departamento
 # Create your models here.
 
 
 class ExperienciaLaboral(models.Model):
-    user = models.ForeignKey(User)
+    nombramiento = models.ForeignKey(Nombramiento)
+    descripcion = models.TextField(blank=True)
     cargo = models.ForeignKey(Cargo)
+
+    user = models.ForeignKey(User)
+
     descripcion = models.TextField(blank=True)
     tipo_cargo = models.CharField(max_length=16, choices=(('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo')))
     es_permanente = models.BooleanField(default=False)
