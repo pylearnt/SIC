@@ -287,6 +287,16 @@ for i in Paises:
     p.save()
 
 
+
+
+
+
+
+
+
+
+
+
 Estados = (
     ('Aguascalientes', 1),
     ('Baja California', 1),
@@ -303,7 +313,7 @@ Estados = (
     ('Hidalgo', 1),
     ('Jalisco', 1),
     ('Estado de México', 1),
-    ('Michoacán de Ocampo', 1),
+    ('Michoacán de Ocampo', 1), #16
     ('Morelos', 1),
     ('Nayarit', 1),
     ('Nuevo León', 1),
@@ -311,7 +321,7 @@ Estados = (
     ('Puebla', 1),
     ('Querétaro de Arteaga', 1),
     ('Quintana Roo', 1),
-    ('San Luis Potosí', 1),
+    ('San Luis Potosí', 1), # 24
     ('Sinaloa', 1),
     ('Sonora', 1),
     ('Tabasco', 1),
@@ -320,11 +330,23 @@ Estados = (
     ('Veracruz de Ignacio de la Llave', 1),
     ('Yucatán', 1),
     ('Zacatecas', 1),
-    ('Bogotá', 1),  #bogota
-    ('Bern', 1), #suiza
+    ('Bogotá', 49),
+    ('Bern', 216),
     ('Castilla y León', 67),
     ('Comunidad de Madrid', 67),
-    ('Provincia de Macerata', 1) #italia
+    ('Provincia de Macerata', 116),
+    ('Isla de Francia', 74),
+    ('El Cairo', 61),
+    ('Santiago', 45),
+    ('Lima', 174),
+    ('Viena', 17),
+    ('Virginia', 68),
+    ('Texas', 68),
+    ('Wiltshire', 179),
+    ('',),
+    ('',),
+    ('',),
+
 
 
 
@@ -335,11 +357,57 @@ for i in Estados:
     e.save()
 
 
+Ciudades = (
+    ('Morelia', 16),
+    ('Ciudad de México, CDMX', 7),
+    ('Bogotá D.C.', 33),
+    ('Bern', 34),
+    ('León ', 35),
+    ('Madrid', 36),
+    ('Recanati', 37),
+    ('León', 11),
+    ('Tingambato ', 16),
+    ('París', 38),
+    ('Zamora', 16),
+    ('El Cairo', 39),
+    ('Ciudad Juárez', 6),
+    ('San Luis Potosí', 24),
+    ('Santiago', 40),
+    ('Xalapa ', 30),
+    ('Lima', 41),
+    ('Camerino', 37),
+    ('Viena', 42),
+    ('Washington, D.C.', 43),
+    ('Arlington', 44),
+    ('Swindon', 45),
+)
+
+for i in Ciudades:
+    c = Ciudad(ciudad=i[0], estado=Estado(pk=i[1]))
+    c.save()
+    print("Agregada la ciudad " + i[0] + "para el estado" + Estado.objects.get(pk=i[1]))
+
+
+
+
+
+
+
+
+
+
 
 Instituciones = (
-('Universidad Nacional Autónoma de México (UNAM)', 1, (())),
+('Universidad Nacional Autónoma de México (UNAM)', 1, (('Centro de Investigaciones en Geografía Ambiental (CIGA)', 1),
+                                                       ('Dirección General de Cooperación e Internacionalización (DGECI)', 2),
+                                                       ('Instituto de Investigaciones en Ecosistemas y Sustentabilidad (IIES)', 1)
+                                                      )
+),
 ('Universidad Michoacana de San Nicolás de Hidalgo (UMSNH)', 1, (())),
-('Universidad Nacional de Colombia', 49, (())),
+('Universidad Nacional de Colombia', 49, (
+                                            ()
+)
+),
 ('University of Bern', 216, (())),
 ('Universidad de León', 67, (())),
 ('Universidad Complutense de Madrid', 67, (())),
@@ -355,9 +423,10 @@ Instituciones = (
 ('Universidad Intercultural Indígena de Michoacán (UIIM)', 1, (())),
 ('Universidad Autónoma de San Luis Potosí', 1, (())),
 ('Pontificia Universidad Católica de Chile', 45, (())),
+('International Social Science Council (ISSC)', 74),
 ('APPEAR', 16, (())),
-('NGS National Geographic Society', 68, (())),
-('NSF National Science Foundation', 68, (())),
+('National Geographic Society (NGS)', 68, (())),
+('National Science Foundation (NSF )', 68, (())),
 ('National Environmental Research Council (NERC)', 179, (())),
 ('Universidad Autonoma de Tamaulipas', 1, (())),
 ('Agencia Nacional de Investigación e Innovación de Uruguay (ANII)', 235, (())),
@@ -589,7 +658,12 @@ Instituciones = (
 ('Secretaría de Comunicaciones y Transportes (SCT)', 1, (())),
 ('Secretaría de Gobernación (SEGOB)', 1, (())),
 ('EcoLogic Development Fund', 68, (())),
-('Ecotecnologías, A.C.', 1, (())))
+('Ecotecnologías, A.C.', 1, (())),
+('Hindawi Publishing Corporation', 61, (())),
+('Universidad Nacional Agraria La Molina (UNALM)', 174, (())),
+('Fomento Regional para el Desarrollo Científico, Tecnológico y de Innovación (FORDECYT)', 1, (())),
+
+)
 
 
 for i in Instituciones:
@@ -601,12 +675,3 @@ for i in Instituciones:
         f = Dependencia(dependencia=j[0], institucion=Institucion(pk=e.id), ciudad=Ciudad(pk=[1]))
     """
 
-Ciudades = (
-    ('Morelia', 16),
-    ('Ciudad de México, CDMX', 7),
-    ('Bogotá', 33),
-    ('Bern', 34),
-    ('León ', 35),
-    ('Madrid', 36),
-    ('Recanati', 37)
-)

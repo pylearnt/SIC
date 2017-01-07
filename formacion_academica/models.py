@@ -2,8 +2,7 @@ from django.db import models
 
 from django.conf import settings
 from autoslug import AutoSlugField
-from nucleo.models import User, Tag, Pais, Ubicacion, Institucion, Dependencia, AreaWOS,AreaConocimiento, AreaEspecialidad, \
-    ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion, Proyecto
+from nucleo.models import User, Tag, Dependencia, AreaWOS, ProgramaLicenciatura, ProgramaMaestria, ProgramaDoctorado, ProgramaEspecializacion, Proyecto
 
 CURSO_ESPECIALIZACION_TIPO = getattr(settings, 'CURSO_ESPECIALIZACION_TIPO', (('CURSO', 'Curso'), ('DIPLOMADO', 'Diplomado'), ('CERTIFICACION', 'Certificación'), ('OTRO', 'Otro')))
 CURSO_ESPECIALIZACION_MODALIDAD = getattr(settings, 'CURSO_ESPECIALIZACION_MODALIDAD', (('PRESENCIAL', 'Presencial'), ('EN_LINEA', 'En línea'), ('MIXTO', 'Mixto'), ('OTRO', 'Otro')))
@@ -21,10 +20,8 @@ class CursoEspecializacion(models.Model):
     fecha_fin = models.DateField('Fecha de finalización', blank=True, null=True)
     modalidad = models.CharField(max_length=20, choices=CURSO_ESPECIALIZACION_MODALIDAD)
     area_conocimiento = models.ForeignKey(AreaWOS, verbose_name='Área de conocimiento')
-    #programa_especializacion = models.ForeignKey(ProgramaEspecializacion, verbose_name='Programa de especialización')
-    usuario = models.ForeignKey(User, related_name='curso_especializacion_usuario')
-    dependencias = models.ManyToManyField(Dependencia, related_name='_curso_especializacion_dependencias', blank=True)
-
+    dependencia = models.ForeignKey(Dependencia)
+    usuario = models.ForeignKey(User)
     tags = models.ManyToManyField(Tag, related_name='_curso_especializacion_tags', blank=True)
 
     def __str__(self):
@@ -43,17 +40,18 @@ class Licenciatura(models.Model):
     descripcion = models.TextField(verbose_name='Descripición', blank=True)
     dependencia = models.ForeignKey(Dependencia)
     titulo_tesis = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='titulo_tesis', unique=True)
     tesis = models.FileField(blank=True)
     tesis_url = models.URLField(blank=True)
-    usuario = models.ForeignKey(User, related_name='licenciatura_usuario')
-
-    fecha_inicio = models.DateField('Fecha de inicio de licenciatura', auto_now=False)
-    fecha_fin = models.DateField('Fecha de terminación de licenciatura', auto_now=False, blank=True)
-    fecha_grado = models.DateField('Fecha de obtención de grado licenciatura', auto_now=False, blank=True)
+    fecha_inicio = models.DateField('Fecha de inicio de licenciatura')
+    fecha_fin = models.DateField('Fecha de terminación de licenciatura')
+    fecha_grado = models.DateField('Fecha de obtención de grado licenciatura')
+    usuario = models.ForeignKey(User)
     tags = models.ManyToManyField(Tag, related_name='licenciatura_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.dependencia, str(self.carrera), self.titulo_tesis)
+
     class Meta:
         ordering = ['fecha_grado', 'dependencia']
 
@@ -61,20 +59,16 @@ class Licenciatura(models.Model):
 class Maestria(models.Model):
     programa = models.ForeignKey(ProgramaMaestria)
     area_conocimiento = models.ForeignKey(AreaWOS, related_name='maestria_area_conocimiento', verbose_name='Área de conocimiento')
-    slug = AutoSlugField(populate_from='titulo_tesis', unique=True)
     descripcion = models.TextField(verbose_name='Descripición', blank=True)
     dependencia = models.ForeignKey(Dependencia)
-
     titulo_tesis = models.CharField(max_length=255)
-
+    slug = AutoSlugField(populate_from='titulo_tesis', unique=True)
     tesis = models.FileField(blank=True)
     tesis_url = models.URLField(blank=True)
-
-    usuario = models.ForeignKey(User, related_name='maestria_usuario')
-
-    fecha_inicio = models.DateField('Fecha de inicio de maestría', auto_now=False)
-    fecha_fin = models.DateField('Fecha de terminación de maestría', auto_now=False, blank=True)
-    fecha_grado = models.DateField('Fecha de obtención de grado de maestría', auto_now=False, blank=True)
+    fecha_inicio = models.DateField('Fecha de inicio de maestría')
+    fecha_fin = models.DateField('Fecha de terminación de maestría')
+    fecha_grado = models.DateField('Fecha de obtención de grado de maestría')
+    usuario = models.ForeignKey(User)
     tags = models.ManyToManyField(Tag, related_name='maestria_tags', blank=True)
 
     def __str__(self):
@@ -85,23 +79,23 @@ class Maestria(models.Model):
 
 
 class Doctorado(models.Model):
+    programa = models.ForeignKey(ProgramaDoctorado)
+    area_conocimiento = models.ForeignKey(AreaWOS, related_name='doctorado_area_conocimiento', verbose_name='Área de conocimiento')
+    descripcion = models.TextField(verbose_name='Descripición', blank=True)
+    dependencia = models.ForeignKey(Dependencia)
     titulo_tesis = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='titulo_tesis', unique=True)
-    programa = models.ForeignKey(ProgramaDoctorado)
-    descripcion = models.TextField(verbose_name='Descripición', blank=True)
-    tesis = models.FileField()
-    asesor = models.ForeignKey(User, related_name='doctorado_asesor')
-    alumno = models.ForeignKey(User, related_name='doctorado_alumno')
-    agradecimientos = models.ManyToManyField(User, related_name='doctorado_agradecimientos', blank=True)
-    area_conocimiento = models.ForeignKey(AreaConocimiento, related_name='doctorado_area_conocimiento', verbose_name='Área de conocimiento')
-    dependencia = models.ForeignKey(Dependencia)
+    tesis = models.FileField(blank=True)
+    tesis_url = models.URLField(blank=True)
     fecha_inicio = models.DateField('Fecha de inicio de doctorado', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de doctorado', auto_now=False, blank=True, null=True)
     fecha_grado = models.DateField('Fecha de obtención de grado de doctorado', auto_now=False, blank=True)
+    usuario = models.ForeignKey(User)
     tags = models.ManyToManyField(Tag, related_name='doctorado_tags', blank=True)
 
     def __str__(self):
         return "{} : {} : {}".format(self.dependencia, self.area_conocimiento, self.titulo_tesis)
+
     class Meta:
         ordering = ['fecha_grado', 'dependencia', 'titulo_tesis']
 
@@ -109,10 +103,9 @@ class Doctorado(models.Model):
 class PostDoctorado(models.Model):
     titulo = models.CharField(max_length=255)
     descripcion = models.TextField(verbose_name='Descripición', blank=True)
-    investigador = models.ForeignKey(User, related_name='postdoctorado_investigador')
-    proyecto = models.ForeignKey(Proyecto)
     area_conocimiento = models.ForeignKey(AreaWOS, related_name='postdoctorado_area_conocimiento', verbose_name='Área de conocimiento')
     dependencia = models.ForeignKey(Dependencia)
+    proyecto = models.ForeignKey(Proyecto)
     fecha_inicio = models.DateField('Fecha de inicio de postdoctorado', auto_now=False)
     fecha_fin = models.DateField('Fecha de terminación de postdoctorado', auto_now=False)
     usuario = models.ForeignKey(User, related_name='postdoctorado_usuario')
@@ -120,3 +113,6 @@ class PostDoctorado(models.Model):
 
     def __str__(self):
         return "{} : {} : {}".format(self.investigador, self.dependencia, self.area_conocimiento)
+
+    class Meta:
+        ordering = ['fecha_fin', 'dependencia']

@@ -169,6 +169,7 @@ class Cargo(models.Model):
     cargo = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='cargo', unique=True)
     descripcion = models.TextField(blank=True)
+    tipo_cargo = models.CharField(max_length=20, choices=(('ACADEMICO', 'Académico'), ('ADMINISTRATIVO', 'Administrativo')))
 
     def __str__(self):
         return self.cargo
