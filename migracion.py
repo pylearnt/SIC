@@ -37,7 +37,8 @@ for i in Zonas:
     z.save()
 
 
-Paises = (('México', 'Estados Unidos Mexicanos', 'MX', 1), ('Abjasia', 'República de Abjasia', 'AB', 6),
+Paises = (('México', 'Estados Unidos Mexicanos', 'MX', 1),
+          ('Abjasia', 'República de Abjasia', 'AB', 6),
           ('Acrotiri y Dhekelia', 'Bases Soberanas de Acrotiri y Dhekelia', 'QM', 5),
           ('Afganistán', 'República Islámica de Afganistán', 'AF', 6),
           ('Albania', 'República de Albania', 'AL', 5),
@@ -342,14 +343,7 @@ Estados = (
     ('Viena', 17),
     ('Virginia', 68),
     ('Texas', 68),
-    ('Wiltshire', 179),
-    ('',),
-    ('',),
-    ('',),
-
-
-
-
+    ('Wiltshire', 179)
 )
 
 for i in Estados:
@@ -379,13 +373,13 @@ Ciudades = (
     ('Viena', 42),
     ('Washington, D.C.', 43),
     ('Arlington', 44),
-    ('Swindon', 45),
+    ('Swindon', 45)
 )
 
 for i in Ciudades:
     c = Ciudad(ciudad=i[0], estado=Estado(pk=i[1]))
     c.save()
-    print("Agregada la ciudad " + i[0] + "para el estado" + Estado.objects.get(pk=i[1]))
+    print("Agregada la ciudad " + i[0] + "para el estado " + str(Estado.objects.get(pk=i[1])))
 
 
 
@@ -398,22 +392,29 @@ for i in Ciudades:
 
 
 Instituciones = (
-('Universidad Nacional Autónoma de México (UNAM)', 1, (('Centro de Investigaciones en Geografía Ambiental (CIGA)', 1),
+('Universidad Nacional Autónoma de México (UNAM)', 1, (('Universidad Nacional Autónoma de México (UNAM)', 2),
+                                                       ('Universidad Nacional Autónoma de México, Campus Morelia (UNAM Morelia)', 1),
+                                                       ('Centro de Investigaciones en Geografía Ambiental (CIGA)', 1),
                                                        ('Dirección General de Cooperación e Internacionalización (DGECI)', 2),
-                                                       ('Instituto de Investigaciones en Ecosistemas y Sustentabilidad (IIES)', 1)
+                                                       ('Instituto de Investigaciones en Ecosistemas y Sustentabilidad (IIES)', 1),
+                                                       ('Centro de Ciencias de la Atmósfera', 2),
+                                                       ('Unidad de Posgrados', 2),
+                                                       ('Facultad de Ciencias', 2),
+                                                       ('Escuela Nacional de Estudios Superiores, Unidad Morelia (ENES Morelia)', 1),
                                                       )
 ),
+
 ('Universidad Michoacana de San Nicolás de Hidalgo (UMSNH)', 1, (())),
-('Universidad Nacional de Colombia', 49, (
-                                            ()
-)
+('Universidad Nacional de Colombia', 49, (('Instituto de Ciencias Naturales', 3))
 ),
 ('University of Bern', 216, (())),
 ('Universidad de León', 67, (())),
 ('Universidad Complutense de Madrid', 67, (())),
-('Universidad de Camerino', 116, (())),
+('Universidad de Camerino', 116, (('Departamento de Geobotánica', 18))),
 ('Consejo Nacional de Ciencia y Tecnología (CONACYT)', 1, (())),
-('Gobierno del Estado de Michoacán de Ocampo', 1, (())),
+('Gobierno del Estado de Michoacán de Ocampo', 1, (('Secretaría de Innovación, Ciencia y Desarrollo Tecnológico (SICDET)', 1)
+                                                   )
+ ),
 ('UNESCO', 74, (())),
 ('El Colegio de Michoacán, A.C. (COLMICH)', 1, (())),
 ('SEDESOL', 1, (())),

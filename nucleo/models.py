@@ -531,7 +531,6 @@ class Distincion(models.Model):
         verbose_name_plural = 'Distinciones'
 
 
-
 class Proyecto(models.Model):
     nombre_proyecto = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
