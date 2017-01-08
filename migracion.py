@@ -288,62 +288,52 @@ for i in Paises:
     p.save()
 
 
-
-
-
-
-
-
-
-
-
-
 Estados = (
-    ('Aguascalientes', 1),
-    ('Baja California', 1),
-    ('Baja California Sur', 1),
-    ('Campeche', 1),
-    ('Chiapas', 1),
-    ('Chihuahua', 1),
-    ('Ciudad de México', 1),
-    ('Coahuila de Zaragoza', 1),
-    ('Colima', 1),
-    ('Durango', 1),
-    ('Guanajuato', 1),
-    ('Guerrero', 1),
-    ('Hidalgo', 1),
-    ('Jalisco', 1),
-    ('Estado de México', 1),
-    ('Michoacán de Ocampo', 1), #16
-    ('Morelos', 1),
-    ('Nayarit', 1),
-    ('Nuevo León', 1),
-    ('Oaxaca', 1),
-    ('Puebla', 1),
-    ('Querétaro de Arteaga', 1),
-    ('Quintana Roo', 1),
-    ('San Luis Potosí', 1), # 24
-    ('Sinaloa', 1),
-    ('Sonora', 1),
-    ('Tabasco', 1),
-    ('Tamaulipas', 1),
-    ('Tlaxcala', 1),
-    ('Veracruz de Ignacio de la Llave', 1),
-    ('Yucatán', 1),
-    ('Zacatecas', 1),
-    ('Bogotá', 49),
-    ('Bern', 216),
-    ('Castilla y León', 67),
-    ('Comunidad de Madrid', 67),
-    ('Provincia de Macerata', 116),
-    ('Isla de Francia', 74),
-    ('El Cairo', 61),
-    ('Santiago', 45),
-    ('Lima', 174),
-    ('Viena', 17),
-    ('Virginia', 68),
-    ('Texas', 68),
-    ('Wiltshire', 179)
+    ('Aguascalientes', Pais.objects.get(pais='México').id),
+    ('Baja California', Pais.objects.get(pais='México').id),
+    ('Baja California Sur', Pais.objects.get(pais='México').id),
+    ('Campeche', Pais.objects.get(pais='México').id),
+    ('Chiapas', Pais.objects.get(pais='México').id),
+    ('Chihuahua', Pais.objects.get(pais='México').id),
+    ('Ciudad de México', Pais.objects.get(pais='México').id),
+    ('Coahuila de Zaragoza', Pais.objects.get(pais='México').id),
+    ('Colima', Pais.objects.get(pais='México').id),
+    ('Durango', Pais.objects.get(pais='México').id),
+    ('Guanajuato', Pais.objects.get(pais='México').id),
+    ('Guerrero', Pais.objects.get(pais='México').id),
+    ('Hidalgo', Pais.objects.get(pais='México').id),
+    ('Jalisco', Pais.objects.get(pais='México').id),
+    ('Estado de México', Pais.objects.get(pais='México').id),
+    ('Michoacán de Ocampo', Pais.objects.get(pais='México').id), #16
+    ('Morelos', Pais.objects.get(pais='México').id),
+    ('Nayarit', Pais.objects.get(pais='México').id),
+    ('Nuevo León', Pais.objects.get(pais='México').id),
+    ('Oaxaca', Pais.objects.get(pais='México').id),
+    ('Puebla', Pais.objects.get(pais='México').id),
+    ('Querétaro de Arteaga', Pais.objects.get(pais='México').id),
+    ('Quintana Roo', Pais.objects.get(pais='México').id),
+    ('San Luis Potosí', Pais.objects.get(pais='México').id), # 24
+    ('Sinaloa', Pais.objects.get(pais='México').id),
+    ('Sonora', Pais.objects.get(pais='México').id),
+    ('Tabasco', Pais.objects.get(pais='México').id),
+    ('Tamaulipas', Pais.objects.get(pais='México').id),
+    ('Tlaxcala', Pais.objects.get(pais='México').id),
+    ('Veracruz de Ignacio de la Llave', Pais.objects.get(pais='México').id),
+    ('Yucatán', Pais.objects.get(pais='México').id),
+    ('Zacatecas', Pais.objects.get(pais='México').id),
+    ('Bogotá', Pais.objects.get(pais='Colombia').id),
+    ('Bern', Pais.objects.get(pais='Suiza').id),
+    ('Provincia de León', Pais.objects.get(pais='España').id),
+    ('Comunidad de Madrid', Pais.objects.get(pais='España').id),
+    ('Provincia de Macerata', Pais.objects.get(pais='Italia').id),
+    ('Isla de Francia', Pais.objects.get(pais='Francia').id),
+    ('El Cairo', Pais.objects.get(pais='Egipto').id),
+    ('Santiago', Pais.objects.get(pais='Chile').id),
+    ('Lima', Pais.objects.get(pais='Perú').id),
+    ('Viena', Pais.objects.get(pais='Austria').id),
+    ('Virginia', Pais.objects.get(pais='Estados Unidos de América').id),
+    ('Texas', Pais.objects.get(pais='Estados Unidos de América').id),
+    ('Wiltshire', Pais.objects.get(pais='Reino Unido').id)
 )
 
 for i in Estados:
@@ -352,34 +342,35 @@ for i in Estados:
 
 
 Ciudades = (
-    ('Morelia', 16),
-    ('Ciudad de México, CDMX', 7),
-    ('Bogotá D.C.', 33),
-    ('Bern', 34),
-    ('León ', 35),
-    ('Madrid', 36),
-    ('Recanati', 37),
-    ('León', 11),
-    ('Tingambato ', 16),
-    ('París', 38),
-    ('Zamora', 16),
-    ('El Cairo', 39),
-    ('Ciudad Juárez', 6),
-    ('San Luis Potosí', 24),
-    ('Santiago', 40),
-    ('Xalapa ', 30),
-    ('Lima', 41),
-    ('Camerino', 37),
-    ('Viena', 42),
-    ('Washington, D.C.', 43),
-    ('Arlington', 44),
-    ('Swindon', 45)
+    ('Morelia', Estado.objects.get(estado='Michoacán de Ocampo').id),
+    ('Ciudad de México, CDMX', Estado.objects.get(estado='Ciudad de México').id),
+    ('Bogotá D.C.', Estado.objects.get(estado='Bogotá').id),
+    ('Bern', Estado.objects.get(estado='Bern').id),
+    ('León ', Estado.objects.get(estado='Provincia de León').id),
+    ('Madrid', Estado.objects.get(estado='Comunidad de Madrid').id),
+    ('Recanati', Estado.objects.get(estado='Provincia de Macerata').id),
+    ('León', Estado.objects.get(estado='Guanajuato').id),
+    ('Tingambato ', Estado.objects.get(estado='Michoacán de Ocampo').id),
+    ('París', Estado.objects.get(estado='Isla de Francia').id),
+    ('Zamora', Estado.objects.get(estado='Michoacán de Ocampo').id),
+    ('El Cairo', Estado.objects.get(estado='El Cairo').id),
+    ('Ciudad Juárez', Estado.objects.get(estado='Chihuahua').id),
+    ('San Luis Potosí', Estado.objects.get(estado='San Luis Potosí').id),
+    ('Santiago', Estado.objects.get(estado='Santiago').id),
+    ('Xalapa ', Estado.objects.get(estado='Veracruz de Ignacio de la Llave').id),
+    ('Lima', Estado.objects.get(estado='Lima').id),
+    ('Camerino', Estado.objects.get(estado='Provincia de Macerata').id),
+    ('Viena', Estado.objects.get(estado='Viena').id),
+    ('Washington, D.C.', Estado.objects.get(estado='Virginia').id),
+    ('Arlington', Estado.objects.get(estado='Texas').id),
+    ('Swindon', Estado.objects.get(estado='Wiltshire').id),
+    ('Pichátaro', Estado.objects.get(estado='Michoacán de Ocampo').id)
 )
 
 for i in Ciudades:
     c = Ciudad(ciudad=i[0], estado=Estado(pk=i[1]))
     c.save()
-    print("Agregada la ciudad " + i[0] + "para el estado " + str(Estado.objects.get(pk=i[1])))
+    print("Agregada la ciudad " + i[0] + "para el estado " + str(Estado.objects.get(pk=i[1]).estado))
 
 
 
@@ -392,36 +383,66 @@ for i in Ciudades:
 
 
 Instituciones = (
-('Universidad Nacional Autónoma de México (UNAM)', 1, (('Universidad Nacional Autónoma de México (UNAM)', 2),
-                                                       ('Universidad Nacional Autónoma de México, Campus Morelia (UNAM Morelia)', 1),
-                                                       ('Centro de Investigaciones en Geografía Ambiental (CIGA)', 1),
-                                                       ('Dirección General de Cooperación e Internacionalización (DGECI)', 2),
-                                                       ('Instituto de Investigaciones en Ecosistemas y Sustentabilidad (IIES)', 1),
-                                                       ('Centro de Ciencias de la Atmósfera', 2),
-                                                       ('Unidad de Posgrados', 2),
-                                                       ('Facultad de Ciencias', 2),
-                                                       ('Escuela Nacional de Estudios Superiores, Unidad Morelia (ENES Morelia)', 1),
-                                                      )
-),
+('Universidad Nacional Autónoma de México (UNAM)', Pais.objects.get(pais='México').id,
+    (
+        ('Universidad Nacional Autónoma de México (UNAM)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Universidad Nacional Autónoma de México, Campus Morelia (UNAM Morelia)', Ciudad.objects.get(ciudad='Morelia').id),
+        ('Centro de Investigaciones en Geografía Ambiental (CIGA)', Ciudad.objects.get(ciudad='Morelia').id),
+        ('Dirección General de Cooperación e Internacionalización (DGECI)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Instituto de Investigaciones en Ecosistemas y Sustentabilidad (IIES)', Ciudad.objects.get(ciudad='Morelia').id),
+        ('Centro de Ciencias de la Atmósfera', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Unidad de Posgrados', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Facultad de Ciencias', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Escuela Nacional de Estudios Superiores, Unidad Morelia (ENES Morelia)', Ciudad.objects.get(ciudad='Morelia').id),
+        ('Escuela Nacional de Estudios Superiores, Unidad León (ENES León)', Ciudad.objects.filter(ciudad='León', estado=Estado.objects.get(estado='Guanajuato').id)[0].id)
+    )
+ ),
 
 ('Universidad Michoacana de San Nicolás de Hidalgo (UMSNH)', 1, (())),
-('Universidad Nacional de Colombia', 49, (('Instituto de Ciencias Naturales', 3))
-),
+
+('Universidad de Camerino', Pais.objects.get(pais='Italia').id,
+    (
+        ('Departamento de Geobotánica', Ciudad.objects.get(ciudad='Camerino').id)
+    )
+ ),
+
+('Universidad Nacional de Colombia', Pais.objects.get(pais='Colombia').id,
+    (
+        ('Instituto de Ciencias Naturales', Ciudad.objects.get(ciudad='Bogotá D.C.').id)
+    )
+ ),
+
+('Universidad Intercultural Indígena de Michoacán (UIIM)', Pais.objects.get(pais='México').id,
+    (
+        ('UIIM Sede Pichátaro', Ciudad.objects.get(ciudad='Pichátaro').id)
+    )
+ ),
+
+('Universidad de León', 67,
+    (
+        ()
+    )
+ ),
+
+
 ('University of Bern', 216, (())),
-('Universidad de León', 67, (())),
+
 ('Universidad Complutense de Madrid', 67, (())),
-('Universidad de Camerino', 116, (('Departamento de Geobotánica', 18))),
+
 ('Consejo Nacional de Ciencia y Tecnología (CONACYT)', 1, (())),
 ('Gobierno del Estado de Michoacán de Ocampo', 1, (('Secretaría de Innovación, Ciencia y Desarrollo Tecnológico (SICDET)', 1)
                                                    )
  ),
+
+
+
 ('UNESCO', 74, (())),
 ('El Colegio de Michoacán, A.C. (COLMICH)', 1, (())),
 ('SEDESOL', 1, (())),
 ('Universidad Autónoma de Ciudad Juárez', 1, (())),
 ('Universidad Valladolid', 1, (())),
 ('Instituto Tecnológico de Morelia', 1, (())),
-('Universidad Intercultural Indígena de Michoacán (UIIM)', 1, (())),
+
 ('Universidad Autónoma de San Luis Potosí', 1, (())),
 ('Pontificia Universidad Católica de Chile', 45, (())),
 ('International Social Science Council (ISSC)', 74),
@@ -499,7 +520,6 @@ Instituciones = (
 ('Universidad de Cádiz', 67, (())),
 ('Universidad de La Habana', 56, (())),
 ('Universidad Paul Sabatier', 74, (())),
-('Universidad Intercultural Pichátaro', 1, (())),
 ('Universidad Politécnica de Valencia', 67, (())),
 ('Universidad Autónoma Chapingo', 1, (())),
 ('Universidad Mayor se San Simón', 30, (())),

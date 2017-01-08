@@ -42,17 +42,17 @@ class ZonaPais(models.Model):
 
 
 class Pais(models.Model):
-    nombre = models.CharField(max_length=60, unique=True)
-    slug = AutoSlugField(populate_from='nombre', unique=True)
+    pais = models.CharField(max_length=60, unique=True)
+    slug = AutoSlugField(populate_from='pais', unique=True)
     nombre_extendido = models.CharField(max_length=200, unique=True)
     zona = models.ForeignKey(ZonaPais)
     codigo = models.SlugField(max_length=2, unique=True)
 
     def __str__(self):
-        return self.nombre
+        return self.pais
 
     class Meta:
-        ordering = ['nombre']
+        ordering = ['pais']
         verbose_name_plural = 'Paises'
         verbose_name = 'País'
 
@@ -71,7 +71,7 @@ class Estado(models.Model):
 
 
 class Ciudad(models.Model):
-    ciudad = models.CharField(max_length=200)
+    ciudad = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='ciudad')
     estado = models.ForeignKey(Estado)
 
