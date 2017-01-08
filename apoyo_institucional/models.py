@@ -88,11 +88,11 @@ class RepresentanteAnteOrganoColegiado(models.Model):
 
 class ComisionAcademica(models.Model):
     comision_academica = models.ForeignKey(Comision)
-    slug = AutoSlugField(populate_from='comision_academica', unique=True)
+    slug = AutoSlugField(populate_from='comision_academica', unique=True, max_length=255)
     descripcion = models.TextField(blank=True)
     user = models.ForeignKey(User)
     es_evaluacion = models.BooleanField(default=False)
-    dependencia = models.ForeignKey(Dependencia)
+    dependencias = models.ManyToManyField(Dependencia)
     ubicacion = models.ForeignKey(Ubicacion)
     comision_inicio = models.DateField(auto_now=False)
     comision_fin = models.DateField(auto_now=False)
