@@ -331,6 +331,8 @@ Estados = (
     ('Leoncio Prado', Pais.objects.get(pais='Perú').id),
     ('Montevideo', Pais.objects.get(pais='Uruguay').id),
     ('California', Pais.objects.get(pais='Estados Unidos de América').id),
+    ('Illinois', Pais.objects.get(pais='Estados Unidos de América').id),
+
     ('Antioquia', Pais.objects.get(pais='Colombia').id),
 
 )
@@ -377,10 +379,8 @@ Ciudades = (
     ('Mexicali', Estado.objects.get(estado='Baja California').id),
     ('Davis', Estado.objects.get(estado='California').id),
     ('Medellín', Estado.objects.get(estado='Antioquia').id),
-    ('Norfolk', Estado.objects.get(estado='Inglaterra').id)
-
-
-
+    ('Norfolk', Estado.objects.get(estado='Inglaterra').id),
+    ('Evanston', Estado.objects.get(estado='Illinois').id)
 
 )
 
@@ -551,7 +551,7 @@ Instituciones = (
 
 ('Universidad París 1 Panteón-Sorbona', Pais.objects.get(pais='Francia').id, (('Universidad París 1 Panteón-Sorbona', Ciudad.objects.get(ciudad='París').id))),
 
-('Northwestern University', Pais.objects.get(pais='Estados Unidos de América').id, (('Northwestern University', Ciudad.objects.get(ciudad='').id))),
+('Northwestern University', Pais.objects.get(pais='Estados Unidos de América').id, (('Northwestern University', Ciudad.objects.get(ciudad='Evanston').id))),
 
 ('University of Twente', 167, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Autónoma de Madrid', 67, (('', Ciudad.objects.get(ciudad='').id))),
