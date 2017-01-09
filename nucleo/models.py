@@ -124,7 +124,7 @@ class Institucion(models.Model):
     institucion = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='institucion', max_length=255, unique=True)
     descripcion = models.TextField(blank=True)
-    pais = models.ForeignKey(Pais, blank=True, null=True)
+    pais = models.ForeignKey(Pais)
 
     def __str__(self):
         return self.institucion
@@ -140,7 +140,7 @@ class Dependencia(models.Model):
     slug = AutoSlugField(populate_from='dependencia', max_length=255)
     descripcion = models.TextField(blank=True)
     institucion = models.ForeignKey(Institucion, blank=True, null=True)
-    ciudad = models.ForeignKey(Ciudad, blank=True, null=True)
+    ciudad = models.ForeignKey(Ciudad)
 
     def __str__(self):
         return "{} : {}".format(self.institucion, self.dependencia)
