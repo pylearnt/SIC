@@ -376,8 +376,8 @@ Ciudades = (
     ('Montevideo', Estado.objects.get(estado='Montevideo').id),
     ('Mexicali', Estado.objects.get(estado='Baja California').id),
     ('Davis', Estado.objects.get(estado='California').id),
-    ('Medellín', Estado.objects.get(estado='Antioquia').id)
-
+    ('Medellín', Estado.objects.get(estado='Antioquia').id),
+    ('Norfolk', Estado.objects.get(estado='Inglaterra').id)
 
 
 
@@ -413,6 +413,7 @@ Instituciones = (
         ('Escuela Nacional de Estudios Superiores, Unidad Morelia (ENES Morelia)', Ciudad.objects.get(ciudad='Morelia').id),
         ('Escuela Nacional de Estudios Superiores, Unidad León (ENES León)', Ciudad.objects.filter(ciudad='León', estado=Estado.objects.get(estado='Guanajuato').id)[0].id),
         ('Instituto de Geografía', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Instituto de Geología', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Centro de Ciencias de la Atmósfera', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Consejo Académico de Área en Ciencias Sociales (CAACS)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Facultad de Filosofía y Letras', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
@@ -532,7 +533,7 @@ Instituciones = (
 
 ('National Science Foundation (NSF)', Pais.objects.get(pais='Estados Unidos de América').id, (('National Science Foundation (NSF)', Ciudad.objects.get(ciudad='Arlington').id))),
 
-('National Environmental Research Council (NERC)', Pais.objects.get(pais='Reino Unido').id, (('', Ciudad.objects.get(ciudad='Swindon').id))),
+('National Environmental Research Council (NERC)', Pais.objects.get(pais='Reino Unido').id, (('National Environmental Research Council (NERC)', Ciudad.objects.get(ciudad='Swindon').id))),
 
 ('Gobierno del Estado de Yucatán', Pais.objects.get(pais='México').id, (('Fondo Mixto Conacyt-Gobierno del Estado de Yucatán (FOMIX)', Ciudad.objects.get(ciudad='Mérida').id))),
 
@@ -540,15 +541,18 @@ Instituciones = (
 
 ('Agencia Nacional de Investigación e Innovación de Uruguay (ANII)', 235, (('Fondo María Viñas', Ciudad.objects.get(ciudad='Montevideo').id))),
 
-('Universidad Autónoma de Baja California', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='Mexicali').id))),
+('Universidad Autónoma de Baja California', Pais.objects.get(pais='México').id, (('Universidad Autónoma de Baja California', Ciudad.objects.get(ciudad='Mexicali').id))),
 
 ('Universidad de California Davis', Pais.objects.get(pais='Estados Unidos de América').id, (('Universidad de California Davis', Ciudad.objects.get(ciudad='Davis').id))),
 
 ('Universidad de Antioquia', Pais.objects.get(pais='Colombia').id, (('Universidad de Antioquia', Ciudad.objects.get(ciudad='Medellín').id))),
 
-('University of East Anglia', Pais.objects.get(pais='Reino Unido').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Universidad París 1 Panteón-Sorbona', Pais.objects.get(pais='Francia').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Northwestern University', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
+('University of East Anglia', Pais.objects.get(pais='Reino Unido').id, (('University of East Anglia', Ciudad.objects.get(ciudad='Norfolk').id))),
+
+('Universidad París 1 Panteón-Sorbona', Pais.objects.get(pais='Francia').id, (('Universidad París 1 Panteón-Sorbona', Ciudad.objects.get(ciudad='París').id))),
+
+('Northwestern University', Pais.objects.get(pais='Estados Unidos de América').id, (('Northwestern University', Ciudad.objects.get(ciudad='').id))),
+
 ('University of Twente', 167, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Autónoma de Madrid', 67, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad de Buenos Aires', 13, (('', Ciudad.objects.get(ciudad='').id))),
