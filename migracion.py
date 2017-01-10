@@ -350,6 +350,7 @@ for i in Estados:
 Ciudades = (
     ('Morelia', Estado.objects.get(estado='Michoacán de Ocampo').id),
     ('Ciudad de México, CDMX', Estado.objects.get(estado='Ciudad de México').id),
+    ('Texcoco de Mora', Estado.objects.get(estado='Estado de México').id),
     ('Guadalajara', Estado.objects.get(estado='Jalisco').id),
     ('Monterrey', Estado.objects.get(estado='Nuevo León').id),
     ('Bogotá D.C.', Estado.objects.get(estado='Bogotá').id),
@@ -613,7 +614,16 @@ Instituciones = (
 
 ('Centro de Capacitación en Calidad Sanitaria S.A. DE C.V.', Pais.objects.get(pais='México').id, (('Centro de Capacitación en Calidad Sanitaria S.A. DE C.V.', Ciudad.objects.get(ciudad='Monterrey').id))),
 
-('Comisión Centroamericana de Ambiente y Desarrollo (CCAD)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
+('Instituto Nacional de Antropología e Historia (INAH)', Pais.objects.get(pais='México').id,
+    (
+        ('Centro de Investigaciones y Estudios Superiores en Antropología Social (CIESAS)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
+    )
+ ),
+
+('Universidad Autónoma Chapingo', Pais.objects.get(pais='México').id, (('Universidad Autónoma Chapingo', Ciudad.objects.get(ciudad='Texcoco de Mora').id))),
+
+('Sistema de la Integración Centroamericana (SICA)', Pais.objects.get(pais='México').id, (('Comisión Centroamericana de Ambiente y Desarrollo (CCAD)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
 ('National Aeronautics and Space Administration (NASA)', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Banco Mundial', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Sistemas de Información Geográfica, S.A. de C.V.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
@@ -656,7 +666,6 @@ Instituciones = (
 ('Universidad de La Habana', 56, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Paul Sabatier', Pais.objects.get(pais='Francia').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Politécnica de Valencia', Pais.objects.get(pais='España').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Universidad Autónoma Chapingo', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Mayor se San Simón', 30, (('', Ciudad.objects.get(ciudad='').id))),
 ('International Social Science Council (ISSC)', Pais.objects.get(pais='Francia').id, ((''))),
 ('Instituo Nacional Electoral (INE)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
@@ -690,7 +699,6 @@ Instituciones = (
 ('Fundación Produce Michoacán A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Fundación Gonzalo Río Arronte I.A.P.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Inter-American Institute for Global Change Research', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
-
 ('Gobierno del Estado de Jalisco', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Unión Geográfica Internacional (UGI)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('International Union for Conservation of Nature (IUCN)', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
@@ -713,7 +721,6 @@ Instituciones = (
 ('Global Water Watch (GWW)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Grupo Balsas para Estudio y Manejo de Ecosistemas, A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Instituto Municipal de Planeación Morelia (IMPLAN)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-
 ('Colegio de Postgraduados (COLPOS)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Autónoma de Chiapas', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Nacional de la Patagonia San Juan Bosco', Pais.objects.get(pais='Argentina').id, (('', Ciudad.objects.get(ciudad='').id))),
@@ -731,13 +738,6 @@ Instituciones = (
 ('Organización de las Naciones Unidas para la Alimentación y la Agricultura', 42, (('', Ciudad.objects.get(ciudad='').id))),
 ('Dirección General de Desarrollo Institucional y Promoción', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Dirección de Manejo Integral de Cuencas Hídricas', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-
-('Instituto Nacional de Antropología e Historia (INAH)', Pais.objects.get(pais='México').id,
-    (
-        ('Centro de Investigaciones y Estudios Superiores en Antropología Social (CIESAS)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
-    )
- ),
-
 ('Comision Nacional de Vivienda (CONAVI)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad de Toulouse-Jean Jaurès', Pais.objects.get(pais='Francia').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('La Universidad de Texas A&M', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
@@ -821,7 +821,6 @@ Instituciones = (
 ('Secretaría de Gobernación (SEGOB)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('EcoLogic Development Fund', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Ecotecnologías, A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-
 ('Universidad Nacional Agraria La Molina (UNALM)', 174, (('', Ciudad.objects.get(ciudad='').id))),
 
 
