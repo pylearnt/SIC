@@ -386,6 +386,7 @@ Ciudades = (
     ('Montevideo', Estado.objects.get(estado='Montevideo').id),
     ('Mexicali', Estado.objects.get(estado='Baja California').id),
     ('Davis', Estado.objects.get(estado='California').id),
+    ('Redlands', Estado.objects.get(estado='California').id),
     ('Medellín', Estado.objects.get(estado='Antioquia').id),
     ('Norfolk', Estado.objects.get(estado='Inglaterra').id),
     ('Enschede', Estado.objects.get(estado='Overijssel').id),
@@ -394,7 +395,8 @@ Ciudades = (
     ('Bellaterra', Estado.objects.get(estado='Barcelona').id),
     ('Aguascalientes', Estado.objects.get(estado='Aguascalientes').id),
     ('Toluca', Estado.objects.get(estado='Aguascalientes').id),
-    ('Wayland', Estado.objects.get(estado='Massachusetts').id)
+    ('Wayland', Estado.objects.get(estado='Massachusetts').id),
+    ('Norcross', Estado.objects.get(estado='Georgia').id)
 
 )
 
@@ -624,9 +626,16 @@ Instituciones = (
 
 ('Sistema de la Integración Centroamericana (SICA)', Pais.objects.get(pais='México').id, (('Comisión Centroamericana de Ambiente y Desarrollo (CCAD)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
 
-('National Aeronautics and Space Administration (NASA)', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Banco Mundial', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Sistemas de Información Geográfica, S.A. de C.V.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
+('National Aeronautics and Space Administration (NASA)', Pais.objects.get(pais='Estados Unidos de América').id, (('National Aeronautics and Space Administration (NASA)', Ciudad.objects.get(ciudad='Washington, D.C.').id))),
+
+('Organización de las Naciones Unidas (ONU)', Pais.objects.get(pais='Estados Unidos de América').id, (('Banco Mundial (The World Bank)', Ciudad.objects.get(ciudad='Washington, D.C.').id))),
+
+('Environmental Systems Research Institute (ESRI)', Pais.objects.get(pais='Estados Unidos de América').id, (('Environmental Systems Research Institute (ESRI)', Ciudad.objects.get(ciudad='Redlands').id))),
+
+('Hexagon Geospatial', Pais.objects.get(pais='Estados Unidos de América').id, (('ERDAS Imagine', Ciudad.objects.get(ciudad='Norcross').id))),
+
+('Sistemas de Información Geográfica, S.A. de C.V.', Pais.objects.get(pais='México').id, (('Sistemas de Información Geográfica, S.A. de C.V.', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
 ('Centro de Información y Comunicación Ambiental de Norte América, A.C. (CICEANA)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Sociedad Mexicana de Geografía y Estadística, A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Autónoma de Nayarit', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
