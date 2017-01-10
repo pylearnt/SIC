@@ -328,6 +328,7 @@ Estados = (
     ('Texas', Pais.objects.get(pais='Estados Unidos de América').id),
     ('California', Pais.objects.get(pais='Estados Unidos de América').id),
     ('Massachusetts', Pais.objects.get(pais='Estados Unidos de América').id),
+    ('Indiana', Pais.objects.get(pais='Estados Unidos de América').id),
     ('Wiltshire', Pais.objects.get(pais='Reino Unido').id),
     ('Inglaterra', Pais.objects.get(pais='Reino Unido').id),
     ('Caracas', Pais.objects.get(pais='Venezuela').id),
@@ -336,7 +337,8 @@ Estados = (
     ('Montevideo', Pais.objects.get(pais='Uruguay').id),
     ('Overijssel', Pais.objects.get(pais='Países Bajos / Holanda').id),
     ('Buenos Aires', Pais.objects.get(pais='Argentina').id),
-    ('Queensland', Pais.objects.get(pais='Australia').id)
+    ('Queensland', Pais.objects.get(pais='Australia').id),
+    ('Cochabamba', Pais.objects.get(pais='Bolivia').id)
 
 
 
@@ -396,7 +398,11 @@ Ciudades = (
     ('Aguascalientes', Estado.objects.get(estado='Aguascalientes').id),
     ('Toluca', Estado.objects.get(estado='Aguascalientes').id),
     ('Wayland', Estado.objects.get(estado='Massachusetts').id),
-    ('Norcross', Estado.objects.get(estado='Georgia').id)
+    ('Norcross', Estado.objects.get(estado='Georgia').id),
+    ('Tepic', Estado.objects.get(estado='Nayarit').id),
+    ('Boston', Estado.objects.get(estado='Massachusetts').id),
+    ('Bloomington', Estado.objects.get(estado='Indiana').id),
+    ('Cochabamba', Estado.objects.get(estado='Cochabamba').id)
 
 )
 
@@ -420,6 +426,7 @@ Instituciones = (
     (
         ('Universidad Nacional Autónoma de México (UNAM)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Universidad Nacional Autónoma de México, Campus Morelia (UNAM Morelia)', Ciudad.objects.get(ciudad='Morelia').id),
+        ('Unidad Académica de Geografía, Morelia (UNAM Morelia)', Ciudad.objects.get(ciudad='Morelia').id),
         ('Centro de Investigaciones en Geografía Ambiental (CIGA)', Ciudad.objects.get(ciudad='Morelia').id),
         ('Dirección General de Cooperación e Internacionalización (DGECI)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Instituto de Investigaciones en Ecosistemas y Sustentabilidad (IIES)', Ciudad.objects.get(ciudad='Morelia').id),
@@ -431,13 +438,16 @@ Instituciones = (
         ('Instituto de Geografía', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Instituto de Geología', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Instituto de Geofísica', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Instituto de Geofísica, Unidad Morelia (UNAM Morelia)', Ciudad.objects.get(ciudad='Morelia').id),
         ('Centro de Ciencias de la Atmósfera', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Consejo Académico de Área en Ciencias Sociales (CAACS)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Facultad de Filosofía y Letras', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Facultad de Arquitectura', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Facultad de Filosofia y letras ', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Programa de Apoyo a Proyectos de Investigación e Innovación Tecnológica (PAPIIT)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
         ('Dirección General Asuntos del Personal Académico (DGAPA)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
-        ('Posgrado en Geografia', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
+        ('Posgrado en Geografia', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Laboratorio de Edafología "Nicolás Aguilera', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
     )
  ),
 
@@ -618,7 +628,8 @@ Instituciones = (
 
 ('Instituto Nacional de Antropología e Historia (INAH)', Pais.objects.get(pais='México').id,
     (
-        ('Centro de Investigaciones y Estudios Superiores en Antropología Social (CIESAS)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
+        ('Centro de Investigaciones y Estudios Superiores en Antropología Social (CIESAS)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Coordinación de Antropología', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
     )
  ),
 
@@ -636,17 +647,44 @@ Instituciones = (
 
 ('Sistemas de Información Geográfica, S.A. de C.V.', Pais.objects.get(pais='México').id, (('Sistemas de Información Geográfica, S.A. de C.V.', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
 
-('Centro de Información y Comunicación Ambiental de Norte América, A.C. (CICEANA)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Sociedad Mexicana de Geografía y Estadística, A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Universidad Autónoma de Nayarit', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('El Colegio de Jalisco A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Fundación Premio Nacional de Tecnología A.C.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Harvard Business Publishing', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Instituto Mexicano de la Propiedad Industrial (IMPI)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Buzan Latin America', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Universidad Tecmilenio', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('La Universidad de Indiana Bloomington', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Centro de Levantamientos Aeroespaciales y Aplicaciones SIG para el Desarrollo Sostenible de los Recursos Naturales (CLAS-ITC)', 30, (('', Ciudad.objects.get(ciudad='').id))),
+('Centro de Información y Comunicación Ambiental de Norte América, A.C. (CICEANA)', Pais.objects.get(pais='México').id, (('Centro de Información y Comunicación Ambiental de Norte América, A.C. (CICEANA)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
+('Sociedad Mexicana de Geografía y Estadística, A.C.', Pais.objects.get(pais='México').id, (('Sociedad Mexicana de Geografía y Estadística, A.C.', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
+('Dirección General de Geografía y Medio Ambiente', Pais.objects.get(pais='México').id, (('Dirección General de Geografía y Medio Ambiente', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
+('Universidad Autónoma de Nayarit', Pais.objects.get(pais='México').id, (('Universidad Autónoma de Nayarit', Ciudad.objects.get(ciudad='Tepic').id))),
+
+('El Colegio de Jalisco A.C.', Pais.objects.get(pais='México').id, (('El Colegio de Jalisco A.C.', Ciudad.objects.get(ciudad='Guadalajara').id))),
+
+('Fundación Premio Nacional de Tecnología A.C.', Pais.objects.get(pais='México').id, (('Fundación Premio Nacional de Tecnología A.C.', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
+('Universidad de Harvard', Pais.objects.get(pais='Estados Unidos de América').id,
+    (
+        ('Harvard Business Publishing', Ciudad.objects.get(ciudad='Boston').id)
+    )
+ ),
+
+('Instituto Mexicano de la Propiedad Industrial (IMPI)', Pais.objects.get(pais='México').id, (('Instituto Mexicano de la Propiedad Industrial (IMPI)', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id))),
+
+('Universidad Tecmilenio', Pais.objects.get(pais='México').id,
+    (
+        ('Universidad Tecmilenio', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id),
+        ('Buzan Latin America', Ciudad.objects.get(ciudad='Ciudad de México, CDMX').id)
+    )
+ ),
+
+('La Universidad de Indiana Bloomington', Pais.objects.get(pais='Estados Unidos de América').id,
+    (
+        ('Department of Political Science and Workshop in Political Theory and Policy Analysis', Ciudad.objects.get(ciudad='Bloomington').id),
+        ('Workshop in Political Theory and Policy Analysis', Ciudad.objects.get(ciudad='Bloomington').id),
+        ('Vincent and Elinor Ostrom Workshop in Political Theory and Policy Analysis', Ciudad.objects.get(ciudad='Bloomington').id)
+    )
+ ),
+
+('Universidad Mayor se San Simón', 30, (('Centro de Levantamientos Aeroespaciales y Aplicaciones SIG para el Desarrollo Sostenible de los Recursos Naturales (CLAS)', Ciudad.objects.get(ciudad='').id))),
+
+('', 30, (('', Ciudad.objects.get(ciudad='').id))),
 ('International Institute for Geoinformation Sciences and Earth Observation (ITC)', Pais.objects.get(pais='Países Bajos / Holanda').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Institute of Hydromechanics and Water Management', 216, (('', Ciudad.objects.get(ciudad='').id))),
 ('Faculty of Geo-Information Science and Earth Observation (ITC)', Pais.objects.get(pais='Países Bajos / Holanda').id, (('', Ciudad.objects.get(ciudad='').id))),
@@ -675,7 +713,7 @@ Instituciones = (
 ('Universidad de La Habana', 56, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Paul Sabatier', Pais.objects.get(pais='Francia').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Politécnica de Valencia', Pais.objects.get(pais='España').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Universidad Mayor se San Simón', 30, (('', Ciudad.objects.get(ciudad='').id))),
+
 ('International Social Science Council (ISSC)', Pais.objects.get(pais='Francia').id, ((''))),
 ('Instituo Nacional Electoral (INE)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad de París I Panthéon-Sorbonne', Pais.objects.get(pais='Francia').id, (('', Ciudad.objects.get(ciudad='').id))),
