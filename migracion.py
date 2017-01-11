@@ -370,6 +370,7 @@ Ciudades = (
     ('Tingambato ', Estado.objects.get(estado='Michoacán de Ocampo').id),
     ('París', Estado.objects.get(estado='Isla de Francia').id),
     ('Zamora', Estado.objects.get(estado='Michoacán de Ocampo').id),
+    ('Uruapan', Estado.objects.get(estado='Michoacán de Ocampo').id),
     ('El Cairo', Estado.objects.get(estado='El Cairo').id),
     ('Ciudad Juárez', Estado.objects.get(estado='Chihuahua').id),
     ('San Luis Potosí', Estado.objects.get(estado='San Luis Potosí').id),
@@ -521,7 +522,8 @@ Instituciones = (
         ('Secretaría de Innovación, Ciencia y Desarrollo Tecnológico (SICDET)', Ciudad.objects.get(ciudad='Morelia').id),
         ('Consejo Estatal de Ciencia y Tecnología (CECTI)', Ciudad.objects.get(ciudad='Morelia').id),
         ('Centro Estatal para el Desarrollo Municipal (CEDEMUN)', Ciudad.objects.get(ciudad='Morelia').id),
-        ('Secretaría de Urbanismo y Medio Ambiente', Ciudad.objects.get(ciudad='Morelia').id)
+        ('Secretaría de Urbanismo y Medio Ambiente', Ciudad.objects.get(ciudad='Morelia').id),
+        ('Centro Estatal de Tecnologías de Información y Comunicaciones (CETIC)', Ciudad.objects.get(ciudad='Morelia').id)
     )
  ),
 
@@ -725,9 +727,11 @@ Instituciones = (
 
 ('Interactive Advertising Bureau (IAB)', Pais.objects.get(pais='Estados Unidos de América').id, (('Interactive Advertising Bureau (IAB)', Ciudad.objects.get(ciudad='Nueva York').id))),
 
-('Universidad Don Vasco', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Centro Estatal de Tecnologías de Información y Comunicaciones (CETIC)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
-('Arkinet, S.A. De C.V.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
+('Universidad Don Vasco', Pais.objects.get(pais='México').id, (('Universidad Don Vasco', Ciudad.objects.get(ciudad='Uruapan ').id))),
+
+
+('Arkinet, S.A. De C.V.', Pais.objects.get(pais='México').id, (('Centro de capacitación de alto rendimiento', Ciudad.objects.get(ciudad='Morelia').id))),
+
 ('Corporación Universitaria para el Desarrollo de Internet, A.C. (CUDI)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Politécnica de Madrid', Pais.objects.get(pais='España').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Academia Mexicana de Impacto Ambiental', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
