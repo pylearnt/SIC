@@ -332,6 +332,7 @@ Estados = (
     ('Massachusetts', Pais.objects.get(pais='Estados Unidos de América').id),
     ('Míchigan', Pais.objects.get(pais='Estados Unidos de América').id),
     ('Indiana', Pais.objects.get(pais='Estados Unidos de América').id),
+    ('Nueva York', Pais.objects.get(pais='Estados Unidos de América').id),
     ('Wiltshire', Pais.objects.get(pais='Reino Unido').id),
     ('Inglaterra', Pais.objects.get(pais='Reino Unido').id),
     ('Caracas', Pais.objects.get(pais='Venezuela').id),
@@ -411,7 +412,8 @@ Ciudades = (
     ('Zúrich', Estado.objects.get(estado='Zúrich').id),
     ('Ann Arbor', Estado.objects.get(estado='Míchigan').id),
     ('Wurzburgo', Estado.objects.get(estado='Baviera').id),
-    ('San Vicente del Raspeig', Estado.objects.get(estado='Alicante').id)
+    ('San Vicente del Raspeig', Estado.objects.get(estado='Alicante').id),
+    ('Nueva York', Estado.objects.get(estado='Nueva York').id)
 
 )
 
@@ -721,9 +723,8 @@ Instituciones = (
 
 ('Universidad de Alicante', Pais.objects.get(pais='España').id, (('Instituto de Economía Internacional', Ciudad.objects.get(ciudad='San Vicente del Raspeig').id))),
 
+('Interactive Advertising Bureau (IAB)', Pais.objects.get(pais='Estados Unidos de América').id, (('Interactive Advertising Bureau (IAB)', Ciudad.objects.get(ciudad='Nueva York').id))),
 
-
-('Interactive Advertising Bureau ', Pais.objects.get(pais='Estados Unidos de América').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Universidad Don Vasco', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Centro Estatal de Tecnologías de Información y Comunicaciones (CETIC)', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Arkinet, S.A. De C.V.', Pais.objects.get(pais='México').id, (('', Ciudad.objects.get(ciudad='').id))),
