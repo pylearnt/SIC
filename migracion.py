@@ -682,9 +682,10 @@ Instituciones = (
     )
  ),
 
-('Universidad Mayor se San Simón', 30, (('Centro de Levantamientos Aeroespaciales y Aplicaciones SIG para el Desarrollo Sostenible de los Recursos Naturales (CLAS)', Ciudad.objects.get(ciudad='').id))),
+('Universidad Mayor se San Simón', Pais.objects.get(pais='Bolivia').id, (('Centro de Levantamientos Aeroespaciales y Aplicaciones SIG para el Desarrollo Sostenible de los Recursos Naturales (CLAS)', Ciudad.objects.get(ciudad='').id))),
 
-('', 30, (('', Ciudad.objects.get(ciudad='').id))),
+('Escuela Politécnica Federal de Zúrich (ETHZ)', Pais.objects.get(pais='Suiza').id, (('Institute of Hydromechanics and Water Management', Ciudad.objects.get(ciudad='Zúrich').id))),
+
 ('International Institute for Geoinformation Sciences and Earth Observation (ITC)', Pais.objects.get(pais='Países Bajos / Holanda').id, (('', Ciudad.objects.get(ciudad='').id))),
 ('Institute of Hydromechanics and Water Management', 216, (('', Ciudad.objects.get(ciudad='').id))),
 ('Faculty of Geo-Information Science and Earth Observation (ITC)', Pais.objects.get(pais='Países Bajos / Holanda').id, (('', Ciudad.objects.get(ciudad='').id))),
